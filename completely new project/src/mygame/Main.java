@@ -22,7 +22,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	JFrame frame;
 	public static Canvas canvas;
-	 Graphics2D g;
+	 static Graphics2D g;
 	 BufferStrategy bs;
 	int playerNo =0;
 	
@@ -42,10 +42,10 @@ public class Main   implements Runnable,KeyListener{
 	Image playerImage=null;
 	
 	static int clearRectCount =0;
+
+	static int gamecomponentinitcount =0;
 	
-	
-	
-	
+	GameComponents gc;
 	
 	
 	
@@ -102,9 +102,6 @@ public class Main   implements Runnable,KeyListener{
 		
 		frame.add(canvas);
 		frame.pack();
-		
-		
-		
 		canvas.addKeyListener(this);
 		canvas.setFocusable(true);
 		
@@ -149,65 +146,39 @@ public class Main   implements Runnable,KeyListener{
 		}
 		
 		
+		
 		g=(Graphics2D) bs.getDrawGraphics();
+		g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		
+		
+			
+			
+			
+			
+			gc.moveBall();
+			
+			g.drawImage(gc.img, gc.x, gc.y,gc.width,gc.height,null);
+		
+		
+		
+		
+		//g.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height,null);  
+		
 		g.drawRect(0, 0, canvas.getWidth()-1, canvas.getHeight()-1);
 		g.drawRect(1, 1, canvas.getWidth()-2, canvas.getHeight()-2);
 		g.drawRect(2, 2, canvas.getWidth()-3, canvas.getHeight()-3);
 		
 		
-		 if(playerNo==1)
-			{  
-				renderMainplayer(g);
-				return;
-			}
-		 
-		 if(playerNo==2)
-		 {
-			 renderSecondplayer(g);
-			 return;
-		 }
+	      
+	       
+	      
+	         
+	       this.bs.show();
+		   this.g.dispose();
 
-	  
-       if(playerNo==3)
-       {
-    	   renderBall(g);
-    	   return;
-    	  
-       }
-      
-        
-  
-        
-		
-		
 	}
 	
-	private void renderBall(Graphics2D g2) {
-		 g.drawImage(ballImg, ball_xpos, ball_ypos, ball_radius, ball_radius,null);
-		 /*Blocks b=new Blocks(50,100,40,80);
-		 b.start();
-		 
-		 g.drawRect(b.block_xpos, b.block_ypos, b.block_width, b.block_height);*/
-		 this.bs.show();
-		 this.g.dispose();
-		
-	}
 
-	private void renderSecondplayer(Graphics2D g2) {
-		g.drawImage(playerImage, player_xpos,player_ypos,player_width,player_height,null);
-		this.bs.show();
-		this.g.dispose();
-		
-	}
-
-	private void renderMainplayer(Graphics2D g2) {
-		 g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		 g.drawImage(playerImage, player_xpos,player_ypos,player_width,player_height,null);
-		 this.bs.show();
-		 this.g.dispose();
-		 return;
-		
-	}
 
 	private synchronized void Tick() 
 	{ 
@@ -220,6 +191,10 @@ public class Main   implements Runnable,KeyListener{
 		   distance =calculateDistance(player_xpos+player_width/2,player_ypos+player_height/2,ball_xpos+ball_radius/2,ball_ypos+ball_radius/2);
 		   checkBallCollision(distance);
 		 }
+		 GameComponents.can_heigth=canvas.getHeight();
+		 GameComponents.can_width=canvas.getWidth();
+		 
+		 
 
 	}
 	
@@ -376,6 +351,8 @@ public class Main   implements Runnable,KeyListener{
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE)
 		{
+			
+			GameComponents.ballIsMoving=true;
 			if(!ballIsMoving)
 			{
 				ballIsMoving=true;
@@ -438,27 +415,33 @@ public class Main   implements Runnable,KeyListener{
 	
 	public static void main(String args[])
 	{
-		Main player_01 =new Main(1280,720,"hello",1);
-		Main player_02 =new Main(2);
+		Main obj =new Main(1280,720,"hello",1);
+		//Main player_02 =new Main(2);
 		
-		Main ball =new Main(3);
+		//Main ball =new Main(3);
 		
-		player_01.InitPlayer(60, 100, 40, 80);
-		player_02.InitPlayer(60, 600, 40, 80);
-		
-		
-		ball.InitBall();
+		//player_01.InitPlayer(60, 100, 40, 80);
+		//player_02.InitPlayer(60, 600, 40, 80);
 		
 		
-		Thread t =new Thread(player_01);
-		Thread t2 =new Thread(player_02);
+		//ball.InitBall();
 		
-		Thread t3 =new Thread(ball);
 		
+		Thread t =new Thread(obj);
+		//Thread t2 =new Thread(player_02);
+		
+		//Thread t3 =new Thread(ball);
+		obj.gc=new GameComponents();
+		obj.gc.initProperties(60,200,40,80,"icons\\green_ball.png");
+		obj.gc.initializeSpeed(3, 3);
 		
 		t.start();
-		t2.start();
-		t3.start();
+		//t2.start();
+		//t3.start();
+		
+		
+		
+		
 
 		
 		
