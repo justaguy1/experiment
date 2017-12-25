@@ -43,9 +43,11 @@ public class Main   implements Runnable,KeyListener{
 	
 	static int clearRectCount =0;
 
-	static int gamecomponentinitcount =0;
 	
-	GameComponents gc;
+	
+	GameComponents ball;
+	GameComponents player_01,player_02;
+	
 	
 	
 	
@@ -86,9 +88,9 @@ public class Main   implements Runnable,KeyListener{
 		canvas.addKeyListener(this);
 		canvas.setFocusable(true);
 	}
-	Main(int width,int height, String title,int pNo)
+	Main(int width,int height, String title)
 	{
-		playerNo = pNo;
+		
 		
 		frame =new JFrame(title);
 		frame.setSize(width,height);
@@ -126,7 +128,7 @@ public class Main   implements Runnable,KeyListener{
 			 
 			 if(delta>=1)
 			 {
-				 Tick();
+				 //Tick();
 				 Render();
 				 delta--;
 			 }
@@ -141,7 +143,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		if(bs==null)
 		{
-			canvas.createBufferStrategy(2);
+			canvas.createBufferStrategy(3);
 			return;
 		}
 		
@@ -155,10 +157,12 @@ public class Main   implements Runnable,KeyListener{
 			
 			
 			
-			gc.moveBall();
 			
-			g.drawImage(gc.img, gc.x, gc.y,gc.width,gc.height,null);
-		
+		//draw ball in the screen 	
+		//g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
+		g.drawImage(ball.img, ball.x+50, ball.y+40,ball.width,ball.height,null);
+		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
+		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
 		
 		
@@ -185,14 +189,13 @@ public class Main   implements Runnable,KeyListener{
 	    int distance;
 		if(playerNo==3) 
 		 moveBall();
-		 checkPlayerInput();
+		// checkPlayerInput();
 		 if(playerNo !=3)
 		 {
 		   distance =calculateDistance(player_xpos+player_width/2,player_ypos+player_height/2,ball_xpos+ball_radius/2,ball_ypos+ball_radius/2);
 		   checkBallCollision(distance);
 		 }
-		 GameComponents.can_heigth=canvas.getHeight();
-		 GameComponents.can_width=canvas.getWidth();
+		
 		 
 		 
 
@@ -242,52 +245,7 @@ public class Main   implements Runnable,KeyListener{
 			    	
 			    }
 		}
-	private void checkPlayerInput() {
-		int max_x=canvas.getWidth();
-		
-		
-		if(this.playerNo ==1)
-		{
-			if(right==true)
-			{
-				if(player_xpos<=max_x-player_width-10)
-				{
-					player_xpos+=10;
-				}
-			}
-				
-			if(left==true)
-			{
 	
-				if(player_xpos>=10)
-				{
-					player_xpos-=10;
-				}
-			}
-		}
-		
-		if(this.playerNo ==2)
-		{
-				
-			if(_right==true)
-			{
-	
-				if(player_xpos<=max_x-player_width-10)
-				{
-					player_xpos+=10;
-				}
-			}
-				
-			if(_left==true)
-			{
-				
-				if(player_xpos>=10)
-				{
-					player_xpos-=10;
-				}
-			}
-		}
-	}
 	
 
 	public synchronized void moveBall()
@@ -357,6 +315,7 @@ public class Main   implements Runnable,KeyListener{
 			{
 				ballIsMoving=true;
 			}
+		
 			
 		}
 
@@ -366,26 +325,20 @@ public class Main   implements Runnable,KeyListener{
 
 	
 	public void keyReleased(KeyEvent e) {
-
-		if(this.playerNo ==1)
-		{
-			if(e.getKeyCode()==KeyEvent.VK_D)
+		
+		
+     	
+		if(e.getKeyCode()==KeyEvent.VK_D)
 				right=false;
 			
-			if(e.getKeyCode()==KeyEvent.VK_A)				
+		if(e.getKeyCode()==KeyEvent.VK_A)				
 				left =false;
-			
-			
-		}
-		if(this.playerNo ==2)
-		{
-			if(e.getKeyCode()==KeyEvent.VK_RIGHT)
-            _right=false;
-
-         	if(e.getKeyCode()==KeyEvent.VK_LEFT)
-			_left=false;
-
-		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT)
+	        	_right=false;
+		
+	    if(e.getKeyCode()==KeyEvent.VK_LEFT)
+				_left=false;
 		
 	}
 
@@ -415,7 +368,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	public static void main(String args[])
 	{
-		Main obj =new Main(1280,720,"hello",1);
+		Main obj =new Main(1280,720,"hello");
 		//Main player_02 =new Main(2);
 		
 		//Main ball =new Main(3);
@@ -431,13 +384,26 @@ public class Main   implements Runnable,KeyListener{
 		//Thread t2 =new Thread(player_02);
 		
 		//Thread t3 =new Thread(ball);
-		obj.gc=new GameComponents();
-		obj.gc.initProperties(60,200,40,80,"icons\\green_ball.png");
-		obj.gc.initializeSpeed(3, 3);
+		 GameComponents.can_heigth=canvas.getHeight();
+		 GameComponents.can_width=canvas.getWidth();
+		 
+		obj.ball=new GameComponents();
+		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
+		obj.ball.initializeSpeed(3, 3);
+		obj.ball.start();
+		
+		obj.player_01 =new GameComponents();
+		obj.player_01.initProperties(60, 600, 80, 40,1, "icons\\player.png");
+		obj.player_01.initializeSpeed(10, 0);
+		obj.player_01.start();
+		
+		obj.player_02 =new GameComponents();
+		obj.player_02.initProperties(60, 100, 80, 40,2, "icons\\player.png");
+		obj.player_02.initializeSpeed(10, 0);
+		obj.player_02.start();
 		
 		t.start();
-		//t2.start();
-		//t3.start();
+	
 		
 		
 		
