@@ -48,46 +48,8 @@ public class Main   implements Runnable,KeyListener{
 	GameComponents ball;
 	GameComponents player_01,player_02;
 	
-	
-	
-	
 
-	
-	 public void InitBall()
-	{
-		ball_xpos=200;
-		ball_ypos=585;
-		ball_radius=20;
-		ball_xspeed=3;
-		ball_yspeed=3;
-		
-		
-		
-		
-		ballImg=this.getImage("icons\\green_ball.png");
-		
-	
-		
-		
-	}
-	
-	void InitPlayer(int x,int y,int height, int width)
-	{
-		player_xpos=x;
-		player_ypos=y;
-		player_height=height;
-		player_width=width;
-		
-		this.playerImage=this.getImage("icons\\player.png");
-	}
-	
-	Main(int pNo)
-	{
-		
-		playerNo = pNo;
-		canvas.addKeyListener(this);
-		canvas.setFocusable(true);
-	}
+
 	Main(int width,int height, String title)
 	{
 		
@@ -127,8 +89,8 @@ public class Main   implements Runnable,KeyListener{
 			 lastTime=now;
 			 
 			 if(delta>=1)
-			 {
-				 //Tick();
+			 { 
+				 Tick();
 				 Render();
 				 delta--;
 			 }
@@ -187,14 +149,16 @@ public class Main   implements Runnable,KeyListener{
 	private synchronized void Tick() 
 	{ 
 	    int distance;
-		if(playerNo==3) 
-		 moveBall();
-		// checkPlayerInput();
-		 if(playerNo !=3)
-		 {
-		   distance =calculateDistance(player_xpos+player_width/2,player_ypos+player_height/2,ball_xpos+ball_radius/2,ball_ypos+ball_radius/2);
+		
+		
+		
+		   distance =calculateDistance(player_01.x+player_01.width/2,player_01.y+player_01.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
 		   checkBallCollision(distance);
-		 }
+		   
+		   distance=calculateDistance(player_02.x+player_02.width/2,player_02.y+player_02.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
+		   checkBallCollision(distance);
+		  
+		 // System.out.println(CollisionDetected);
 		
 		 
 		 
@@ -203,17 +167,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	public synchronized void checkBallCollision(int distance)
 	{
-		if(CollisionDetected)
-			{
-			if(playerNo==1)
-			{
-				ball_yspeed=3;
-			}
-			if(playerNo==2)
-			{
-				ball_yspeed=-3;
-			}
-		}
+		ball.yspeed=-ball.yspeed;
 	}
 	
 	int calculateDistance(int x1, int y1, int x2, int y2)
@@ -225,7 +179,7 @@ public class Main   implements Runnable,KeyListener{
 		    
 		    calculateCollision(x1,y1,x2,y2,distance);
 		    
-		   // System.out.println("Distance : "+distance);
+		    System.out.println("Distance : "+distance);
 		    return  distance;
 		    
 		  }
@@ -236,6 +190,7 @@ public class Main   implements Runnable,KeyListener{
 			   if(distance<42)
 			   {
 				   CollisionDetected =true;
+				   
 				  
 			   }
 			   
@@ -248,45 +203,6 @@ public class Main   implements Runnable,KeyListener{
 	
 	
 
-	public synchronized void moveBall()
-	{
-       int max_x=canvas.getWidth();
-       int max_y=canvas.getHeight();
-		
-		if(ballIsMoving)
-		{
-	
-			ball_xpos=ball_xpos+ball_xspeed;
-			ball_ypos=ball_ypos+ball_yspeed;
-
-		}
-		
-		
-		if(ball_xpos<=10)
-		{
-			ball_xspeed=-ball_xspeed;
-			count=0;
-		
-		}
-		if(ball_xpos>=max_x-ball_radius)
-		{
-			ball_xspeed=-ball_xspeed;
-			count=0;
-		}
-		
-		if(ball_ypos<=10)
-		{
-			ball_yspeed=-ball_yspeed;
-			count=0;
-		}
-		if(ball_ypos>=max_y-ball_radius)
-		{
-			ball_yspeed=-ball_yspeed;
-			count=0;
-		}
-		
-		
-	}
 	
 
 	
@@ -305,6 +221,21 @@ public class Main   implements Runnable,KeyListener{
 			
 			if(e.getKeyCode()==KeyEvent.VK_LEFT)
 				_left=true;
+			
+			if(e.getKeyCode()==KeyEvent.VK_I)
+				ball.y-=2;
+			
+			if(e.getKeyCode()==KeyEvent.VK_J)
+				ball.x-=2;
+
+		
+			if(e.getKeyCode()==KeyEvent.VK_K)
+				ball.y+=2;
+			
+			if(e.getKeyCode()==KeyEvent.VK_L)
+				ball.x+=2;
+			
+			
 		
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE)
@@ -348,42 +279,14 @@ public class Main   implements Runnable,KeyListener{
 		
 	}
 	
-	public Image getImage(String path)
-	{
-		Image img =null;
-		
-		try {
-			
-			img = new ImageIcon(getClass().getResource(path)).getImage();
-		}
-		
-		catch(Exception e)
-		{
-			System.out.println("no image found");
-			System.exit(1);
-		}
-
-		return img;
-	}
+	
 	
 	public static void main(String args[])
 	{
 		Main obj =new Main(1280,720,"hello");
-		//Main player_02 =new Main(2);
-		
-		//Main ball =new Main(3);
-		
-		//player_01.InitPlayer(60, 100, 40, 80);
-		//player_02.InitPlayer(60, 600, 40, 80);
-		
-		
-		//ball.InitBall();
-		
 		
 		Thread t =new Thread(obj);
-		//Thread t2 =new Thread(player_02);
 		
-		//Thread t3 =new Thread(ball);
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
 		 
@@ -403,14 +306,6 @@ public class Main   implements Runnable,KeyListener{
 		obj.player_02.start();
 		
 		t.start();
-	
-		
-		
-		
-		
-
-		
-		
 
 	}
 

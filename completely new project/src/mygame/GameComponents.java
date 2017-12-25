@@ -66,7 +66,7 @@ public class GameComponents implements Runnable {
 	}
 	public   void moveBall()
 	{
-		System.out.println("x : "+this.x);
+		
 	
 		
 		
@@ -136,7 +136,7 @@ public class GameComponents implements Runnable {
 	
 	 private synchronized void Tick() throws InterruptedException {
 		 
-		 
+		
 		 if(this.id==0)
 		 {
 			 moveBall();
@@ -146,11 +146,15 @@ public class GameComponents implements Runnable {
 		 if(this.id !=0)
 		 {
 			 checkPlayerInput();
+			 
 			 Thread.sleep(17);
 		 }
 		 
 		
+		 
+		
 	}
+
 
 	void start()
 	 {
