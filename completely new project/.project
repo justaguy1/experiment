@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>completely new project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/mygame/icons/green_ball.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/green_ball.png</location>
+		</link>
+		<link>
+			<name>src/mygame/icons/player.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/player.png</location>
+		</link>
+	</linkedResources>
+</projectDescription>
