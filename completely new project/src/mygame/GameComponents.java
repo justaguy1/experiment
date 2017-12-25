@@ -119,7 +119,12 @@ public class GameComponents implements Runnable {
 			 
 			 if(delta>=1)
 			 {
-				 Tick();
+				 try {
+					Tick();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				 
 				 delta--;
 			 }
@@ -129,15 +134,19 @@ public class GameComponents implements Runnable {
 		
 	}
 	
-	 private synchronized void Tick() {
+	 private synchronized void Tick() throws InterruptedException {
+		 
+		 
 		 if(this.id==0)
 		 {
 			 moveBall();
+			 Thread.sleep(17);
 		 }
 		 
 		 if(this.id !=0)
 		 {
 			 checkPlayerInput();
+			 Thread.sleep(17);
 		 }
 		 
 		
