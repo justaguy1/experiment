@@ -121,8 +121,9 @@ public class Main   implements Runnable,KeyListener{
 			
 			
 		//draw ball in the screen 	
-		//g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
-		g.drawImage(ball.img, ball.x+50, ball.y+40,ball.width,ball.height,null);
+		
+		g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
+		
 		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
@@ -158,7 +159,9 @@ public class Main   implements Runnable,KeyListener{
 		   distance=calculateDistance(player_02.x+player_02.width/2,player_02.y+player_02.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
 		   checkBallCollision(distance);
 		  
-		 // System.out.println(CollisionDetected);
+		  // System.out.println(CollisionDetected);
+		   
+		   
 		
 		 
 		 
@@ -290,10 +293,7 @@ public class Main   implements Runnable,KeyListener{
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
 		 
-		obj.ball=new GameComponents();
-		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
-		obj.ball.initializeSpeed(3, 3);
-		obj.ball.start();
+		
 		
 		obj.player_01 =new GameComponents();
 		obj.player_01.initProperties(60, 600, 80, 40,1, "icons\\player.png");
@@ -304,6 +304,13 @@ public class Main   implements Runnable,KeyListener{
 		obj.player_02.initProperties(60, 100, 80, 40,2, "icons\\player.png");
 		obj.player_02.initializeSpeed(10, 0);
 		obj.player_02.start();
+		
+		obj.ball=new GameComponents();
+		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
+		obj.ball.initializeSpeed(3, 3);
+		obj.ball.start();
+		
+		
 		
 		t.start();
 
