@@ -1,15 +1,12 @@
 package mygame;
 
 import java.awt.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
-
 
 
 
@@ -18,7 +15,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	int height,width;
 	String title;
-	 static int count =0;
+	static int count =0;
 	
 	JFrame frame;
 	public static Canvas canvas;
@@ -26,7 +23,7 @@ public class Main   implements Runnable,KeyListener{
 	 BufferStrategy bs;
 	int playerNo =0;
 	
-	int player_xpos,player_ypos,player_height,player_width;
+	
 	
 	static boolean _left=false,_right=false,left=false,right=false;
 	
@@ -34,19 +31,19 @@ public class Main   implements Runnable,KeyListener{
 	static boolean isRunning =true;
 	
 	//related to ball
-	public static int ball_xpos,ball_ypos,ball_radius,ball_xspeed,ball_yspeed;
-	public static Image ballImg =null;
-	static boolean ballIsMoving =false;
-	static boolean CollisionDetected=false;
+	static boolean ballIsMoving=false;
+	
+
 	
 	Image playerImage=null;
 	
 	static int clearRectCount =0;
 
 	
-	
+	// used for exchanging data 
 	GameComponents ball;
 	GameComponents player_01,player_02;
+	
 	
 
 
@@ -109,39 +106,22 @@ public class Main   implements Runnable,KeyListener{
 			return;
 		}
 		
-		
-		
 		g=(Graphics2D) bs.getDrawGraphics();
 		g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		
-		
-			
-			
-			
-			
-			
-		//draw ball in the screen 	
+
 		
 		g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
 		
 		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
-		
-		
-		//g.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height,null);  
-		
 		g.drawRect(0, 0, canvas.getWidth()-1, canvas.getHeight()-1);
 		g.drawRect(1, 1, canvas.getWidth()-2, canvas.getHeight()-2);
 		g.drawRect(2, 2, canvas.getWidth()-3, canvas.getHeight()-3);
 		
-		
-	      
-	       
-	      
-	         
-	       this.bs.show();
-		   this.g.dispose();
+
+	    bs.show();
+		g.dispose();
 
 	}
 	
@@ -149,32 +129,9 @@ public class Main   implements Runnable,KeyListener{
 
 	private synchronized void Tick() 
 	{ 
-	    
-		
-		
-		  /* distance =calculateDistance(player_01.x+player_01.width/2,player_01.y+player_01.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
-		   checkBallCollision(distance);
-		   
-		   distance=calculateDistance(player_02.x+player_02.width/2,player_02.y+player_02.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
-		   checkBallCollision(distance);*/
-		  
-		  // System.out.println(CollisionDetected);
-		   
 		 ball.distancecalculator(player_01);
 		 ball.distancecalculator(player_02);
-		  
-		
-		
-		 
-		 
-
 	}
-	
-	public synchronized void checkBallCollision(int distance)
-	{
-		ball.yspeed=-ball.yspeed;
-	}
-	
 	
 	public void keyPressed(KeyEvent e) {
 		
@@ -265,29 +222,19 @@ public class Main   implements Runnable,KeyListener{
 		obj.ball.initializeSpeed(3, 3);
 		obj.ball.start();
 		
-		
-	
-		
+
 		obj.player_01 =new GameComponents();
 		obj.player_01.initProperties(60, 600, 80, 40,1, "icons\\player.png");
 		obj.player_01.initializeSpeed(10, 0);
 		obj.player_01.start();
 		
-		
-		
+	
 		obj.player_02 =new GameComponents();
 		obj.player_02.initProperties(60, 100, 80, 40,2, "icons\\player.png");
 		obj.player_02.initializeSpeed(10, 0);
 		obj.player_02.start();
 		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		t.start();
 
 	}

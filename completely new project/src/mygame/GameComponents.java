@@ -23,10 +23,9 @@ public class GameComponents implements Runnable {
 	
 	int dx,dy; // variables used for calculating distance
 	
-	//it is only for ball
-	static int xpos=0, ypos=0;// position of anything that the ball collides with
 	
-	static boolean xcol=false,ycol=false,col=false; // varibale that indicates whether the collision has occured or not
+	
+	static boolean col=false; // varibale that indicates whether the collision has occured or not
 	
 	static long colTime =0; // time when collision occured
 	
@@ -144,8 +143,7 @@ public class GameComponents implements Runnable {
 		 if(this.id==0)
 		 {
 			 moveBall();
-			 if(col==true)
-			 changeBallPosition();
+			 
 			
 			 Thread.sleep(17);
 		 }
@@ -159,10 +157,45 @@ public class GameComponents implements Runnable {
 
 	}
 	 
-	 private void changeBallPosition() {
+	 private void changeBallPosition(GameComponents obj) {
 		
-		//if(this.x-)
-		// yspeed=-yspeed;
+
+		if(x-obj.x <0)
+		 {
+			 xspeed=-xspeed;
+			System.out.println("left");
+			return;
+		 }
+		
+		 if(x-obj.x >=obj.width)
+		{
+			 xspeed=-xspeed;
+			System.out.println("right");
+			return;
+		}
+		 if(y-obj.y <0)
+		{
+			System.out.println("top");
+			yspeed=-yspeed;
+			return;
+		}
+		 if(y-obj.y>=obj.height)
+		{
+			System.out.println("down");
+			yspeed=-yspeed;
+			return;
+		}
+		
+		
+		
+		 
+		
+		
+		
+		//yspeed=-yspeed;
+	
+		 
+		 
 		 
 		 
 	}
@@ -199,12 +232,7 @@ public class GameComponents implements Runnable {
 
 		if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
 		{
-			//col=true;
-			//System.out.println("collided");
-			//xpos =obj.x;
-			//ypos=obj.y;
-			
-			yspeed=-yspeed;
+			changeBallPosition(obj);
 			count++;
 			colTime = System.currentTimeMillis();
 			
