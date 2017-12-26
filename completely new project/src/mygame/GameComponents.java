@@ -19,8 +19,16 @@ public class GameComponents implements Runnable {
 	
 	static int count=0;
 	
-	int xa=0;
 	
+	
+	int dx,dy; // variables used for calculating distance
+	
+	//it is only for ball
+	static int xpos=0, ypos=0;// position of anything that the ball collides with
+	
+	static boolean xcol=false,ycol=false,col=false; // varibale that indicates whether the collision has occured or not
+	
+	static long colTime =0; // time when collision occured
 	
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
@@ -30,11 +38,9 @@ public class GameComponents implements Runnable {
 		this.width=width;
 		this.height=height;
 		this.id=id;
+		
+		
 		initializeImage(ImagePath);
-		
-		System.out.println("x : "+ x);
-		
-	
 	}
 	
 	public void initializeImage(String path)
@@ -66,10 +72,7 @@ public class GameComponents implements Runnable {
 	}
 	public   void moveBall()
 	{
-		
-	
-		
-		
+
 		if(ballIsMoving)
 		{
 			x=x+xspeed;
@@ -136,10 +139,14 @@ public class GameComponents implements Runnable {
 	
 	 private synchronized void Tick() throws InterruptedException {
 		 
+		 set_dx_dy();
 		
 		 if(this.id==0)
 		 {
 			 moveBall();
+			 if(col==true)
+			 changeBallPosition();
+			
 			 Thread.sleep(17);
 		 }
 		 
@@ -149,12 +156,66 @@ public class GameComponents implements Runnable {
 			 
 			 Thread.sleep(17);
 		 }
-		 
+
+	}
+	 
+	 private void changeBallPosition() {
 		
+		//if(this.x-)
+		// yspeed=-yspeed;
 		 
+		 
+	}
+
+	private void set_dx_dy() {
+		 dx=this.x+this.width/2;
+		 dy=this.y+this.height/2;
 		
 	}
 
+	void  distancecalculator(GameComponents obj)
+	 {
+		 calculateDistance(dx,dy,obj.dx,obj.dy,obj);
+	 }
+	 
+	 int calculateDistance(int x1, int y1, int x2, int y2 ,GameComponents obj)
+		{
+		    int x=(x2-x1)*(x2-x1);
+		    int y= (y2-y1)*(y2-y1);
+		    
+		    int distance =(int) Math.sqrt(x+y);
+		    
+		    calculateCollision(distance,obj);
+		    
+		   // System.out.println("Distance : "+distance);
+		    return  distance;
+		    
+		  }
+
+
+	private void calculateCollision( int distance,GameComponents obj) {
+		
+		long timeNow = System.currentTimeMillis();
+
+		if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
+		{
+			//col=true;
+			//System.out.println("collided");
+			//xpos =obj.x;
+			//ypos=obj.y;
+			
+			yspeed=-yspeed;
+			count++;
+			colTime = System.currentTimeMillis();
+			
+			
+		}
+		if(timeNow -colTime >=500)
+		{
+			count=0;
+		}
+				
+	}
 
 	void start()
 	 {

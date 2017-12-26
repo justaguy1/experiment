@@ -149,19 +149,21 @@ public class Main   implements Runnable,KeyListener{
 
 	private synchronized void Tick() 
 	{ 
-	    int distance;
+	    
 		
 		
-		
-		   distance =calculateDistance(player_01.x+player_01.width/2,player_01.y+player_01.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
+		  /* distance =calculateDistance(player_01.x+player_01.width/2,player_01.y+player_01.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
 		   checkBallCollision(distance);
 		   
 		   distance=calculateDistance(player_02.x+player_02.width/2,player_02.y+player_02.height/2,ball.x+ball.width/2,ball.y+ball.height/2);
-		   checkBallCollision(distance);
+		   checkBallCollision(distance);*/
 		  
 		  // System.out.println(CollisionDetected);
 		   
-		   
+		 ball.distancecalculator(player_01);
+		 ball.distancecalculator(player_02);
+		  
+		
 		
 		 
 		 
@@ -173,41 +175,6 @@ public class Main   implements Runnable,KeyListener{
 		ball.yspeed=-ball.yspeed;
 	}
 	
-	int calculateDistance(int x1, int y1, int x2, int y2)
-		{
-		    int x=(x2-x1)*(x2-x1);
-		    int y= (y2-y1)*(y2-y1);
-		    
-		    int distance =(int) Math.sqrt(x+y);
-		    
-		    calculateCollision(x1,y1,x2,y2,distance);
-		    
-		    System.out.println("Distance : "+distance);
-		    return  distance;
-		    
-		  }
-	   
-	void calculateCollision(int x1,int y1, int x2, int y2, int distance)
-		{
-			
-			   if(distance<42)
-			   {
-				   CollisionDetected =true;
-				   
-				  
-			   }
-			   
-               else 
-			    {
-			    	CollisionDetected =false;
-			    	
-			    }
-		}
-	
-	
-
-	
-
 	
 	public void keyPressed(KeyEvent e) {
 		
@@ -293,22 +260,31 @@ public class Main   implements Runnable,KeyListener{
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
 		 
+		obj.ball=new GameComponents();
+		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
+		obj.ball.initializeSpeed(3, 3);
+		obj.ball.start();
 		
+		
+	
 		
 		obj.player_01 =new GameComponents();
 		obj.player_01.initProperties(60, 600, 80, 40,1, "icons\\player.png");
 		obj.player_01.initializeSpeed(10, 0);
 		obj.player_01.start();
 		
+		
+		
 		obj.player_02 =new GameComponents();
 		obj.player_02.initProperties(60, 100, 80, 40,2, "icons\\player.png");
 		obj.player_02.initializeSpeed(10, 0);
 		obj.player_02.start();
 		
-		obj.ball=new GameComponents();
-		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
-		obj.ball.initializeSpeed(3, 3);
-		obj.ball.start();
+		
+		
+		
+		
+		
 		
 		
 		
