@@ -162,36 +162,67 @@ public class GameComponents implements Runnable {
 	 
 	 private void changeBallPosition(GameComponents obj) {
 		
-		 if(obj.id ==10)
-		 {
+		
+		if(obj.id !=10)
+		{
+
+			if(x-obj.x <0)
+			 {
+				 xspeed=-4;
+				System.out.println("left");
+				return;
+			 }
+			
+			 if(x-obj.x >=obj.width)
+			{
+				 xspeed=+4;
+				System.out.println("right");
+				return;
+			}
+			 if(y-obj.y <0)
+			{
+				System.out.println("top");
+				yspeed=-4;
+				return;
+			}
+			 if(y-obj.y>=obj.height)
+			{
+				System.out.println("down");
+				yspeed=+4;
+				return;
+			}
+		}
+		else
+		{
+			
+			 
+			if(x-obj.x <0)
+			 {
+				 xspeed=-4;
+				System.out.println("left");
+				
+			 }
+			
+			 if(x-obj.x >=obj.width)
+			{
+				 xspeed=+4;
+				System.out.println("right");
+				
+			}
+			 if(y-obj.y <0)
+			{
+				System.out.println("top");
+				yspeed=-4;
+				
+			}
+			 if(y-obj.y>=obj.height)
+			{
+				System.out.println("down");
+				yspeed=+4;
+				
+			}
 			 obj.x=-100;
 			 obj.y=-100;
-		 }
-
-		if(x-obj.x <0)
-		 {
-			 xspeed=-xspeed;
-			System.out.println("left");
-			return;
-		 }
-		
-		 if(x-obj.x >=obj.width)
-		{
-			 xspeed=-xspeed;
-			System.out.println("right");
-			return;
-		}
-		 if(y-obj.y <0)
-		{
-			System.out.println("top");
-			yspeed=-yspeed;
-			return;
-		}
-		 if(y-obj.y>=obj.height)
-		{
-			System.out.println("down");
-			yspeed=-yspeed;
-			return;
 		}
 		
 		
@@ -248,7 +279,7 @@ public class GameComponents implements Runnable {
 			
 			
 		}
-		if(timeNow -colTime >=500)
+		if(timeNow -colTime >=300)
 		{
 			count=0;
 			col=false;
