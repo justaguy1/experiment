@@ -2,6 +2,7 @@ package mygame;
 
 import java.awt.Image;
 
+
 import javax.swing.ImageIcon;
 
 public class GameComponents implements Runnable {
@@ -37,6 +38,8 @@ public class GameComponents implements Runnable {
 		this.width=width;
 		this.height=height;
 		this.id=id;
+		dx=width/2+this.x;
+		dy=height/2+this.y;
 		
 		
 		initializeImage(ImagePath);
@@ -159,6 +162,11 @@ public class GameComponents implements Runnable {
 	 
 	 private void changeBallPosition(GameComponents obj) {
 		
+		 if(obj.id ==10)
+		 {
+			 obj.x=-100;
+			 obj.y=-100;
+		 }
 
 		if(x-obj.x <0)
 		 {
@@ -206,21 +214,22 @@ public class GameComponents implements Runnable {
 		
 	}
 
-	void  distancecalculator(GameComponents obj)
-	 {
-		 calculateDistance(dx,dy,obj.dx,obj.dy,obj);
-	 }
+	
 	 
-	 int calculateDistance(int x1, int y1, int x2, int y2 ,GameComponents obj)
+	 int calculateDistance(GameComponents obj)
 		{
-		    int x=(x2-x1)*(x2-x1);
-		    int y= (y2-y1)*(y2-y1);
+		//System.out.println("X : "+obj.dx+" Y : "+obj.dy);
+		 
+		 
+		    int x=(obj.dx-this.dx)*(obj.dx-this.dx);
+		    int y= (obj.dy-this.dy)*(obj.dy-this.dy);
 		    
 		    int distance =(int) Math.sqrt(x+y);
 		    
 		    calculateCollision(distance,obj);
 		    
-		   // System.out.println("Distance : "+distance);
+		    
+		  // System.out.println("Distance : "+distance);
 		    return  distance;
 		    
 		  }

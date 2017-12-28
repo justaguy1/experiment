@@ -7,6 +7,9 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 
@@ -40,9 +43,12 @@ public class Main   implements Runnable,KeyListener{
 	static int clearRectCount =0;
 
 	
-	// used for exchanging data 
-	GameComponents ball;
-	GameComponents player_01,player_02;
+	
+	static GameComponents ball;
+	static GameComponents player_01,player_02;
+	static List<GameComponents> blocks ;
+	static GameComponents block[];
+	
 	
 	
 
@@ -115,9 +121,8 @@ public class Main   implements Runnable,KeyListener{
 		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
-		g.drawRect(0, 0, canvas.getWidth()-1, canvas.getHeight()-1);
-		g.drawRect(1, 1, canvas.getWidth()-2, canvas.getHeight()-2);
-		g.drawRect(2, 2, canvas.getWidth()-3, canvas.getHeight()-3);
+		for(int i=0;i<15;i++)
+		g.drawImage(block[i].img,block[i].x, block[i].y,block[i].width,block[i].height,null);
 		
 
 	    bs.show();
@@ -129,8 +134,13 @@ public class Main   implements Runnable,KeyListener{
 
 	private synchronized void Tick() 
 	{ 
-		 ball.distancecalculator(player_01);
-		 ball.distancecalculator(player_02);
+		 ball.calculateDistance(player_01);
+		 ball.calculateDistance(player_02);
+		 
+		 for(int i=0;i<15;i++)
+		 ball.calculateDistance(block[i]);
+		
+		//System.out.println(block[0].y);
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -217,26 +227,55 @@ public class Main   implements Runnable,KeyListener{
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
 		 
-		obj.ball=new GameComponents();
-		obj.ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
-		obj.ball.initializeSpeed(4, 4);
-		obj.ball.start();
+		ball=new GameComponents();
+		ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
+		ball.initializeSpeed(4, 4);
+		ball.start();
 		
 
-		obj.player_01 =new GameComponents();
-		obj.player_01.initProperties(100, 600, 40, 80,1, "icons\\player.png");
-		obj.player_01.initializeSpeed(10, 0);
-		obj.player_01.start();
+		player_01 =new GameComponents();
+		player_01.initProperties(100, 600, 40, 80,1, "icons\\player.png");
+		player_01.initializeSpeed(10, 0);
+		player_01.start();
 		
 	
-		obj.player_02 =new GameComponents();
-		obj.player_02.initProperties(1120, 100, 40, 80,2, "icons\\player.png");
-		obj.player_02.initializeSpeed(10, 0);
-		obj.player_02.start();
+		player_02 =new GameComponents();
+		player_02.initProperties(1120, 100, 40, 80,2, "icons\\player.png");
+		player_02.initializeSpeed(10, 0);
+		player_02.start();
 		
 		
 
 		t.start();
+		
+		blocks =new ArrayList<GameComponents>();
+		
+		//obj.blocks.add(obj.ball);
+		
+		block=new GameComponents[15];
+		
+		for(int i=0;i<15;i++)
+		{
+			block[i]=new GameComponents();
+		}
+		
+		block[0].initProperties(300, 200, 80, 40,10, "icons\\block_y.png");
+		block[1].initProperties(400, 200, 80, 40,10, "icons\\block_y.png");
+		block[2].initProperties(500, 200, 80, 40,10, "icons\\block_y.png");
+		block[3].initProperties(600, 200, 80, 40,10, "icons\\block_y.png");
+		block[4].initProperties(700, 200, 80, 40,10, "icons\\block_y.png");
+		block[5].initProperties(400, 300, 80, 40,10, "icons\\block_y.png");
+		block[6].initProperties(500, 300, 80, 40,10, "icons\\block_y.png");
+		block[7].initProperties(600, 300, 80, 40,10, "icons\\block_y.png");
+		block[8].initProperties(700, 300, 80, 40,10, "icons\\block_y.png");
+		block[9].initProperties(500, 400, 80, 40,10, "icons\\block_y.png");
+		block[10].initProperties(600, 400, 80, 40,10, "icons\\block_y.png");
+		block[11].initProperties(700, 400, 80, 40,10, "icons\\block_y.png");
+		block[12].initProperties(600, 500, 80, 40,10, "icons\\block_y.png");
+		block[13].initProperties(700, 500, 80, 40,10, "icons\\block_y.png");
+		block[14].initProperties(700, 600, 80, 40,10, "icons\\block_y.png");
+		
+		
 
 	}
 
