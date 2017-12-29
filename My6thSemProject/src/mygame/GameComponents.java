@@ -7,7 +7,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class GameComponents implements Runnable {
+public class GameComponents implements Runnable {		//test push for DISCORD notify system
 	
 	int x,y,height,width;  // initial position and sized of player or ball
 	Image img=null;  // image for ball or player 
