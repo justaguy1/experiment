@@ -49,6 +49,13 @@ public class Main   implements Runnable,KeyListener{
 	static List<GameComponents> blocks ;
 	static GameComponents block[];
 	
+	static String player1ImgPath ="icons\\player.png";
+	static String player2ImgPath="icons\\player2.png";
+	static String ballImgPath="icons\\green_ball.png";
+	
+	
+	static String blockImgPath[] =new String[6];
+	
 	
 	
 
@@ -73,6 +80,17 @@ public class Main   implements Runnable,KeyListener{
 		canvas.setFocusable(true);
 		
 		
+		
+	}
+	
+	static void setBlockImagepath()
+	{
+		blockImgPath[1] = "icons\\block_r.png";
+		blockImgPath[2] = "icons\\block_g.jpg";
+		blockImgPath[3] = "icons\\block_y.png";
+		blockImgPath[4] = "icons\\block_lg.png";
+		blockImgPath[5] = "icons\\block_b.png";
+	
 		
 	}
 	
@@ -122,7 +140,8 @@ public class Main   implements Runnable,KeyListener{
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
 		for(int i=0;i<15;i++)
-		g.drawImage(block[i].img,block[i].x, block[i].y,block[i].width,block[i].height,null);
+		g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
+		
 		
 
 	    bs.show();
@@ -227,20 +246,24 @@ public class Main   implements Runnable,KeyListener{
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
 		 
+		 
+		 
+		 
+		 
 		ball=new GameComponents();
-		ball.initProperties(60,200,20,20,0,"icons\\green_ball.png");
+		ball.initProperties(60,200,20,20,0,ballImgPath);
 		ball.initializeSpeed(4, 4);
 		ball.start();
 		
 
 		player_01 =new GameComponents();
-		player_01.initProperties(100, 600, 40, 80,1, "icons\\player.png");
+		player_01.initProperties(100, 600, 40, 80,1, player1ImgPath);
 		player_01.initializeSpeed(10, 0);
 		player_01.start();
 		
 	
 		player_02 =new GameComponents();
-		player_02.initProperties(1120, 100, 40, 80,2, "icons\\player.png");
+		player_02.initProperties(1120, 100, 40, 80,2, player2ImgPath);
 		player_02.initializeSpeed(10, 0);
 		player_02.start();
 		
@@ -259,21 +282,24 @@ public class Main   implements Runnable,KeyListener{
 			block[i]=new GameComponents();
 		}
 		
-		block[0].initProperties(300, 200, 80, 40,10, "icons\\block_y.png");
-		block[1].initProperties(400, 200, 80, 40,10, "icons\\block_y.png");
-		block[2].initProperties(500, 200, 80, 40,10, "icons\\block_y.png");
-		block[3].initProperties(600, 200, 80, 40,10, "icons\\block_y.png");
-		block[4].initProperties(700, 200, 80, 40,10, "icons\\block_y.png");
-		block[5].initProperties(400, 300, 80, 40,10, "icons\\block_y.png");
-		block[6].initProperties(500, 300, 80, 40,10, "icons\\block_y.png");
-		block[7].initProperties(600, 300, 80, 40,10, "icons\\block_y.png");
-		block[8].initProperties(700, 300, 80, 40,10, "icons\\block_y.png");
-		block[9].initProperties(500, 400, 80, 40,10, "icons\\block_y.png");
-		block[10].initProperties(600, 400, 80, 40,10, "icons\\block_y.png");
-		block[11].initProperties(700, 400, 80, 40,10, "icons\\block_y.png");
-		block[12].initProperties(600, 500, 80, 40,10, "icons\\block_y.png");
-		block[13].initProperties(700, 500, 80, 40,10, "icons\\block_y.png");
-		block[14].initProperties(700, 600, 80, 40,10, "icons\\block_y.png");
+		 setBlockImagepath(); // set image path for blocks
+		
+		block[0].setBlockImage();
+		block[0].initProperties(300, 200, 80, 40,5,10 );
+		block[1].initProperties(400, 200, 80, 40,5,10 );
+		block[2].initProperties(500, 200, 80, 40,5,10 );
+		block[3].initProperties(600, 200, 80, 40,3,10 );
+		block[4].initProperties(700, 200, 80, 40,3,10 );
+		block[5].initProperties(400, 300, 80, 40,2,10 );
+		block[6].initProperties(500, 300, 80, 40,1,10 );
+		block[7].initProperties(600, 300, 80, 40,1,10 );
+		block[8].initProperties(700, 300, 80, 40,1,10 );
+		block[9].initProperties(500, 400, 80, 40,3,10 );
+		block[10].initProperties(600, 400, 80, 40,2,10 );
+		block[11].initProperties(700, 400, 80, 40,2,10 );
+		block[12].initProperties(600, 500, 80, 40,1,10 );
+		block[13].initProperties(700, 500, 80, 40,2,10 );
+		block[14].initProperties(700, 600, 80, 40,3,10 );
 		
 		
 

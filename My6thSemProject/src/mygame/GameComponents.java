@@ -20,7 +20,7 @@ public class GameComponents implements Runnable {
 	
 	static int count=0;
 	
-	
+	int blockLevel;
 	
 	int dx,dy; // variables used for calculating distance
 	
@@ -30,6 +30,7 @@ public class GameComponents implements Runnable {
 	
 	static long colTime =0; // time when collision occured
 	
+	static Image block[];
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
 		
@@ -43,13 +44,41 @@ public class GameComponents implements Runnable {
 		
 		
 		initializeImage(ImagePath);
+		
 	}
 	
-	public void initializeImage(String path)
+	public  void setBlockImage()
+	{
+		block=new Image[6];
+		for(int i=1;i<6;i++)
+		block[i]=new ImageIcon(getClass().getResource(Main.blockImgPath[i])).getImage();
+	}
+	
+	
+	public void initProperties(int x, int y, int width, int height,int level,int id)
+	{
+		
+		this.x=x;
+		this.y=y;
+		this.width=width;
+		this.height=height;
+		this.id=id;
+		dx=width/2+this.x;
+		dy=height/2+this.y;
+		
+		
+		
+		blockLevel =level;
+		
+	}
+	
+	
+	
+	public Image initializeImage(String path)
 	{
 		if (this.img != null)
 		{
-			return;
+			return this.img;
 		}
 		else
 		{
@@ -63,7 +92,8 @@ public class GameComponents implements Runnable {
 				System.out.println("no image found");
 				System.exit(1);
 			}
-		}	
+		}
+		return this.img;
 		
 	}
 	
@@ -195,34 +225,44 @@ public class GameComponents implements Runnable {
 		else
 		{
 			
-			 
-			if(x-obj.x <0)
-			 {
-				 xspeed=-4;
-				System.out.println("left");
-				
-			 }
+			if(obj.blockLevel==1)
+			{
+				 obj.x=-100;
+				 obj.y=-100;
+				 
+			}
 			
-			 if(x-obj.x >=obj.width)
+			else
 			{
-				 xspeed=+4;
-				System.out.println("right");
+				if(x-obj.x <0)
+				 {
+					 xspeed=-4;
+					System.out.println("left");
+					
+				 }
+				
+				 if(x-obj.x >=obj.width)
+				{
+					 xspeed=+4;
+					System.out.println("right");
+					
+				}
+				 if(y-obj.y <0)
+				{
+					System.out.println("top");
+					yspeed=-4;
+					
+				}
+				 if(y-obj.y>=obj.height)
+				{
+					System.out.println("down");
+					yspeed=+4;
+					
+				}
+				 
+				 obj.blockLevel--;
 				
 			}
-			 if(y-obj.y <0)
-			{
-				System.out.println("top");
-				yspeed=-4;
-				
-			}
-			 if(y-obj.y>=obj.height)
-			{
-				System.out.println("down");
-				yspeed=+4;
-				
-			}
-			 obj.x=-100;
-			 obj.y=-100;
 		}
 		
 		
