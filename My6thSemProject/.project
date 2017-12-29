@@ -41,6 +41,11 @@
 			<location>C:/Users/Binaya/Downloads/block_y.png</location>
 		</link>
 		<link>
+			<name>src/mygame/icons/chest.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/chest.png</location>
+		</link>
+		<link>
 			<name>src/mygame/icons/green_ball.png</name>
 			<type>1</type>
 			<location>C:/Users/Binaya/Downloads/green_ball.png</location>
@@ -54,6 +59,16 @@
 			<name>src/mygame/icons/player2.png</name>
 			<type>1</type>
 			<location>C:/Users/Binaya/Downloads/player2.png</location>
+		</link>
+		<link>
+			<name>src/mygame/icons/red_ball.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/red_ball.png</location>
+		</link>
+		<link>
+			<name>src/mygame/sounds/bounce.wav</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/bounce.wav</location>
 		</link>
 	</linkedResources>
 </projectDescription>

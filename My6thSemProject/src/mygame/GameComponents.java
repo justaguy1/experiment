@@ -3,6 +3,8 @@ package mygame;
 import java.awt.Image;
 
 
+
+
 import javax.swing.ImageIcon;
 
 public class GameComponents implements Runnable {
@@ -24,13 +26,17 @@ public class GameComponents implements Runnable {
 	
 	int dx,dy; // variables used for calculating distance
 	
+    static int ballSpeed=4;
 	
 	
 	static boolean col=false; // varibale that indicates whether the collision has occured or not
 	
 	static long colTime =0; // time when collision occured
 	
+	static long timeNow=0;
 	static Image block[];
+	
+	 SuperPowers sp=new SuperPowers();
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
 		
@@ -74,11 +80,11 @@ public class GameComponents implements Runnable {
 	
 	
 	
-	public Image initializeImage(String path)
+	public void initializeImage(String path)
 	{
 		if (this.img != null)
 		{
-			return this.img;
+			return;
 		}
 		else
 		{
@@ -93,7 +99,7 @@ public class GameComponents implements Runnable {
 				System.exit(1);
 			}
 		}
-		return this.img;
+		
 		
 	}
 	
@@ -104,7 +110,7 @@ public class GameComponents implements Runnable {
 	}
 	public   void moveBall()
 	{
-
+		
 		if(ballIsMoving)
 		{
 			x=x+xspeed;
@@ -187,86 +193,126 @@ public class GameComponents implements Runnable {
 			 
 			 Thread.sleep(17);
 		 }
+		 
+		 //System.out.println(sp.freeze);
+		 
+		 removePower();
 
 	}
 	 
-	 private void changeBallPosition(GameComponents obj) {
+	 private void removePower() {
+		if(sp.freeze==false)
+			return;
+		else if(sp.powerTime==0)
+		{
+			sp.powerTime=System.currentTimeMillis();
+		}
+		
+		if(timeNow -sp.powerTime >=10000)
+		{
+			sp.freeze=false;
+			sp.powerTime=0;
+		}
+		
+		System.out.println(sp.powerTime);
+		
+		
+		
+	}
+
+	private void changeBallPosition(GameComponents obj) {
+		
 		
 		
 		if(obj.id !=10)
 		{
-
+			obj.sp.freeze=this.sp.freeze;
+			
+			if(obj.id==5)
+			{
+				setPower();
+				return;
+			}
 			if(x-obj.x <0)
 			 {
-				 xspeed=-4;
+				
+				 xspeed=-ballSpeed;
 				System.out.println("left");
 				return;
 			 }
 			
 			 if(x-obj.x >=obj.width)
 			{
-				 xspeed=+4;
+				 xspeed=+ballSpeed;
 				System.out.println("right");
 				return;
 			}
 			 if(y-obj.y <0)
 			{
 				System.out.println("top");
-				yspeed=-4;
+				yspeed=-ballSpeed;
 				return;
 			}
 			 if(y-obj.y>=obj.height)
 			{
 				System.out.println("down");
-				yspeed=+4;
+				yspeed=+ballSpeed;
 				return;
 			}
+			 
+			 obj.sp.freeze=this.sp.freeze;
 		}
 		else
 		{
 			
 			
 			
-			
+
+			 if(obj.blockLevel==1)
+				{
+				 	
+					 obj.x=-100;
+					 obj.y=-100;
+					 
+					 
+					 
+				}
+			 else
+			 {
+				 obj.blockLevel--;
+			 }
 			
 				if(x-obj.x <0)
 				 {
-					 xspeed=-4;
+					 xspeed=-ballSpeed;
 					System.out.println("left");
 					
 				 }
 				
 				 if(x-obj.x >=obj.width)
 				{
-					 xspeed=+4;
+					 xspeed=+ballSpeed;
 					System.out.println("right");
 					
 				}
 				 if(y-obj.y <0)
 				{
 					System.out.println("top");
-					yspeed=-4;
+					yspeed=-ballSpeed;
 					
 				}
 				 if(y-obj.y>=obj.height)
 				{
 					System.out.println("down");
-					yspeed=+4;
+					yspeed=+ballSpeed;
 					
 				}
+				
 				 
 				 
+					 
 				 
-				 if(obj.blockLevel==1)
-					{
-						 obj.x=-100;
-						 obj.y=-100;
-						 return;
-					}
-				 else
-				 {
-					 obj.blockLevel--;
-				 }
+				 
 				
 			
 		}
@@ -283,6 +329,11 @@ public class GameComponents implements Runnable {
 		 
 		 
 		 
+	}
+
+	private void setPower() {
+		sp.freeze=true;
+		
 	}
 
 	private void set_dx_dy() {
@@ -314,7 +365,7 @@ public class GameComponents implements Runnable {
 
 	private void calculateCollision( int distance,GameComponents obj) {
 		
-		long timeNow = System.currentTimeMillis();
+		 timeNow = System.currentTimeMillis();
 
 		if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
 		{
@@ -364,7 +415,7 @@ public class GameComponents implements Runnable {
 		int max_y=Main.canvas.getHeight();
 		
 		
-		if(id==1)
+		if(id==1 && sp.freeze==false)
 		{
 			if(Main.UP==true)
 			{
@@ -384,7 +435,7 @@ public class GameComponents implements Runnable {
 			}
 		}
 		
-		if(id==2)
+		if(id==2 && sp.freeze==false)
 		{
 				
 			if(Main._UP==true)
@@ -406,4 +457,6 @@ public class GameComponents implements Runnable {
 			}
 		}
 	}
+
+
 }

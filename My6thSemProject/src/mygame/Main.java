@@ -48,6 +48,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents player_01,player_02;
 	static List<GameComponents> blocks ;
 	static GameComponents block[];
+	static GameComponents chest;
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -135,6 +136,7 @@ public class Main   implements Runnable,KeyListener{
 
 		
 		g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
+		g.drawImage(chest.img, chest.x, chest.y,chest.width,chest.height,null);
 		
 		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
@@ -158,6 +160,7 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 for(int i=0;i<15;i++)
 		 ball.calculateDistance(block[i]);
+		 ball.calculateDistance(chest);
 		
 		//System.out.println(block[0].y);
 	}
@@ -251,25 +254,26 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 
 		ball=new GameComponents();
-		ball.initProperties(60,200,20,20,0,ballImgPath);
+		ball.initProperties(750,550,20,20,0,ballImgPath);
 		ball.initializeSpeed(4, 4);
 		ball.start();
 		
 
 		player_01 =new GameComponents();
-		player_01.initProperties(100, 600, 40, 80,1, player1ImgPath);
+		player_01.initProperties(100, 600, 20, 80,1, player1ImgPath);
 		player_01.initializeSpeed(10, 0);
 		player_01.start();
 		
 	
 		player_02 =new GameComponents();
-		player_02.initProperties(1120, 100, 40, 80,2, player2ImgPath);
+		player_02.initProperties(1120, 100, 20, 80,2, player2ImgPath);
 		player_02.initializeSpeed(10, 0);
 		player_02.start();
 		
-		
+		 chest =new GameComponents();
+			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
 
-		t.start();
+		
 		
 		blocks =new ArrayList<GameComponents>();
 		
@@ -301,6 +305,8 @@ public class Main   implements Runnable,KeyListener{
 		block[13].initProperties(700, 500, 80, 40,2,10 );
 		block[14].initProperties(700, 600, 80, 40,3,10 );
 		
+	   
+		t.start();
 		
 
 	}
