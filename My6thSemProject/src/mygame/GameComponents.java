@@ -225,15 +225,10 @@ public class GameComponents implements Runnable {
 		else
 		{
 			
-			if(obj.blockLevel==1)
-			{
-				 obj.x=-100;
-				 obj.y=-100;
-				 
-			}
 			
-			else
-			{
+			
+			
+			
 				if(x-obj.x <0)
 				 {
 					 xspeed=-4;
@@ -260,9 +255,20 @@ public class GameComponents implements Runnable {
 					
 				}
 				 
-				 obj.blockLevel--;
+				 
+				 
+				 if(obj.blockLevel==1)
+					{
+						 obj.x=-100;
+						 obj.y=-100;
+						 return;
+					}
+				 else
+				 {
+					 obj.blockLevel--;
+				 }
 				
-			}
+			
 		}
 		
 		
@@ -319,7 +325,7 @@ public class GameComponents implements Runnable {
 			
 			
 		}
-		if(timeNow -colTime >=300)
+		if(timeNow -colTime >=200)
 		{
 			count=0;
 			col=false;
