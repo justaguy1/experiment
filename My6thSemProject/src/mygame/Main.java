@@ -10,10 +10,6 @@ import javax.swing.JFrame;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class Main   implements Runnable,KeyListener{
 	
 	int height,width;
@@ -25,7 +21,6 @@ public class Main   implements Runnable,KeyListener{
 	 static Graphics2D g;
 	 BufferStrategy bs;
 	int playerNo =0;
-	
 		
 	static boolean _DOWN=false,_UP=false,DOWN=false,UP=false;
 	
@@ -35,13 +30,9 @@ public class Main   implements Runnable,KeyListener{
 	//related to ball
 	static boolean ballIsMoving=false;
 	
-
-	
 	Image playerImage=null;
 	
 	static int clearRectCount =0;
-
-	
 	
 	static GameComponents ball;
 	static GameComponents player_01,player_02;
@@ -56,14 +47,9 @@ public class Main   implements Runnable,KeyListener{
 	
 	static String blockImgPath[] =new String[6];
 	
-	
-	
-
-
 	Main(int width,int height, String title)
 	{
-		
-		
+	
 		frame =new JFrame(title);
 		frame.setSize(width,height);
 		frame.setTitle(title);
@@ -78,8 +64,6 @@ public class Main   implements Runnable,KeyListener{
 		frame.pack();
 		canvas.addKeyListener(this);
 		canvas.setFocusable(true);
-		
-		
 		
 	}
 	

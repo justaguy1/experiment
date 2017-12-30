@@ -39,7 +39,6 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	static long timeNow=0;
 	static Image block[];
-	String name;
 	
 	 SuperPowers sp=new SuperPowers();
 	File bounce = new File("sounds/bounce.wav");
@@ -60,25 +59,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		initializeImage(ImagePath);
 		
 	}
-	void setName(String Name)
-	{
-		name=Name;
-	}
 	
 	public  void setBlockImage()
 	{
 		block=new Image[6];
-		
-		try 
-		{
 		for(int i=1;i<6;i++)
 		block[i]=new ImageIcon(getClass().getResource(Main.blockImgPath[i])).getImage();
-	
-		}
-		catch(Exception e)
-		{
-			System.out.println("error occured while setting array of bloc image");
-		}
 	}
 	
 	
@@ -116,8 +102,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			
 			catch(Exception e)
 			{
-		
-				System.out.println("no image found at path "+path);
+				System.out.println("no image found");
 				System.exit(1);
 			}
 		}
@@ -134,37 +119,32 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	{
 		
 		if(ballIsMoving)
-		{		
-			x=x+sp.bXSpeed;
-			y=y+sp.bYSpeed;
+		{
+			x=x+xspeed;
+			y=y+yspeed;
 		}
 
 		
 		if(x<=10)
 		{
-		  //xspeed=-xspeed;
-			sp.bXSpeed=-sp.bXSpeed;
+		  xspeed=-xspeed;
 			count=0;
 		
 		}
 		if(x>=can_width-width)
 		{
-		    
-		    //xspeed=-xspeed;
-		    sp.bXSpeed=-sp.bXSpeed;
+		    xspeed=-xspeed;
 			count=0;
 		}
 		
 		if(y<=10)
 		{
-			//yspeed=-yspeed;
-			sp.bYSpeed=-sp.bYSpeed;
+			yspeed=-yspeed;
 			count=0;
 		}
 		if(y>=can_heigth-height)
 		{
-			//yspeed=-yspeed;
-			sp.bYSpeed=-sp.bYSpeed;
+			yspeed=-yspeed;
 			count=0;
 		}
 		
@@ -228,9 +208,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 	 
 	 private void removePower() {
-		
-		// System.out.println("i am "+name);
-		if(this.sp.powerIsOn==false)
+		if(sp.freeze==false)
 			return;
 		else if(sp.powerTime==0)
 		{
@@ -241,16 +219,18 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			Playsound(freeze_s);
 								
 			sp.powerTime=System.currentTimeMillis();
-			
 		}
 		
 		if(timeNow -sp.powerTime >=10000)
 		{
-			/*sp.powerIsOn=false;
 			sp.freeze=false;
+<<<<<<< HEAD
 			sp.powerTime=0;*/
 			
 			this.sp.resetAllPowerUps();
+=======
+			sp.powerTime=0;
+>>>>>>> 00cd513104c006b7bdfd1c58ce84e7d6f5bced94
 		}
 		
 		System.out.println(sp.powerTime);
@@ -261,13 +241,6 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 	private void changeBallPosition(GameComponents obj) {
 		
-		if(obj.id ==1 || obj.id==2)
-		{
-			obj.sp.powerIsOn=true;
-			obj.sp.freeze=this.sp.freeze;
-			obj.sp.playerSpeed=this.sp.playerSpeed;
-			
-		}
 		
 		
 		if(obj.id !=10)
@@ -278,9 +251,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 			if(obj.id==5)
 			{
-				sp.gainRandomPower();
+				setPower();
 				return;
 			}
+<<<<<<< HEAD
 			 if(y-obj.y <height/2)
 				{
 					System.out.println("top");
@@ -308,9 +282,36 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					System.out.println("right");
 					return;
 				}
+=======
+			if(x-obj.x <0)
+			 {
+				
+				 xspeed=-ballSpeed;
+				System.out.println("left");
+				return;
+			 }
+			
+			 if(x-obj.x >=obj.width)
+			{
+				 xspeed=+ballSpeed;
+				System.out.println("right");
+				return;
+			}
+			 if(y-obj.y <0)
+			{
+				System.out.println("top");
+				yspeed=-ballSpeed;
+				return;
+			}
+			 if(y-obj.y>=obj.height)
+			{
+				System.out.println("down");
+				yspeed=+ballSpeed;
+				return;
+			}
+>>>>>>> 00cd513104c006b7bdfd1c58ce84e7d6f5bced94
 			 
-			 //obj.sp.freeze=this.sp.freeze;
-	
+			 obj.sp.freeze=this.sp.freeze;
 		}
 		else
 		{
@@ -320,45 +321,95 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 			 if(obj.blockLevel==1)
 				{
+<<<<<<< HEAD
+				 	
 					 obj.x=-4000;
 					 obj.y=-4000;
+					 
+					 
+					 
+=======
+				 	 obj.x=-100;
+					 obj.y=-100;
 					
+>>>>>>> 00cd513104c006b7bdfd1c58ce84e7d6f5bced94
 				}
 			 else
 			 {
 				 obj.blockLevel--;
 			 }
 			
+<<<<<<< HEAD
 			 if(obj.y-y>=height/2)
 				{
 					System.out.println("top");
-					sp.bYSpeed=-sp.bYSpeed;
 					
+					sp.bYSpeed=-sp.bYSpeed;
+					return;
 				}
 				 if(y-obj.y>=obj.height/2)
 				{
 					System.out.println("down");
 					sp.bYSpeed=-sp.bYSpeed;
-					
+					return;
 				}
 				 if(x-obj.x<0)
+=======
+				if(x-obj.x <0)
+>>>>>>> 00cd513104c006b7bdfd1c58ce84e7d6f5bced94
 				 {
-					yspeed=-ballSpeed;
-					
-					sp.bXSpeed=-sp.bXSpeed;
+					 xspeed=-ballSpeed;
 					System.out.println("left");
+					
 				 }
 				
 				 if(obj.x-x<0)
 				{
-					 sp.bXSpeed=-sp.bXSpeed;
+					 xspeed=+ballSpeed;
 					System.out.println("right");
+					
+				}
+<<<<<<< HEAD
 			
+				
+				 
+				 
+					 
+				 
+				 
+				
+			
+		}
+		
+		
+		
+		 
+		
+		
+		
+		//yspeed=-yspeed;
+	
+		 
+		 
+		 
+		 
+=======
+				 if(y-obj.y <0)
+				{
+					System.out.println("top");
+					yspeed=-ballSpeed;
+					
+				}
+				 if(y-obj.y>=obj.height)
+				{
+					System.out.println("down");
+					yspeed=+ballSpeed;
 					
 				}
 					
 		}			
 		//yspeed=-yspeed;		 
+>>>>>>> 00cd513104c006b7bdfd1c58ce84e7d6f5bced94
 	}
 
 	private void setPower() {
@@ -449,8 +500,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			{
 				if(y>=10)
 				{
-					
-					y-=sp.playerSpeed;
+					y-=10;
 				}
 			}
 				
@@ -459,8 +509,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 				if(y<=max_y-height-10)
 				{
-					
-					y+=sp.playerSpeed;
+					y+=10;
 				}
 			}
 		}
@@ -471,9 +520,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			if(Main._UP==true)
 			{
 	
-				if(y>=sp.playerSpeed)
+				if(y>=10)
 				{
-					y-=sp.playerSpeed;
+					y-=10;
 				}
 			}
 				
@@ -482,7 +531,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				
 				if(y<=max_y-height-10)
 				{
-					y+=sp.playerSpeed;
+					y+=10;
 				}
 			}
 		}
