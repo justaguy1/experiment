@@ -1,11 +1,15 @@
 package mygame;
 
 import java.awt.Image;
+import java.io.File;
 
-
-
-
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+
+import java.io.File;
+import javax.sound.sampled.*;
+
 
 public class GameComponents implements Runnable {		//test push for DISCORD notify system
 	
@@ -37,6 +41,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	static Image block[];
 	
 	 SuperPowers sp=new SuperPowers();
+	File bounce = new File("sounds/bounce.wav");
+	File freeze_s= new File("sounds/freeze.wav");
+		
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
 		
@@ -205,6 +212,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			return;
 		else if(sp.powerTime==0)
 		{
+		
+		Main.ball.initializeImage("icons\\light_blue_ball.png");
+		Main.player1ImgPath="icons\\Player_frozen.png";
+					
+			Playsound(freeze_s);
+								
 			sp.powerTime=System.currentTimeMillis();
 		}
 		
@@ -227,7 +240,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		if(obj.id !=10)
 		{
 			obj.sp.freeze=this.sp.freeze;
-			
+			if(obj.sp.freeze==false)		
+				Playsound(bounce);
+
 			if(obj.id==5)
 			{
 				setPower();
@@ -270,12 +285,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 			 if(obj.blockLevel==1)
 				{
-				 	
-					 obj.x=-100;
+				 	 obj.x=-100;
 					 obj.y=-100;
-					 
-					 
-					 
+					
 				}
 			 else
 			 {
@@ -307,33 +319,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					yspeed=+ballSpeed;
 					
 				}
-				
-				 
-				 
-					 
-				 
-				 
-				
-			
-		}
-		
-		
-		
-		 
-		
-		
-		
-		//yspeed=-yspeed;
-	
-		 
-		 
-		 
-		 
+					
+		}			
+		//yspeed=-yspeed;		 
 	}
 
 	private void setPower() {
-		sp.freeze=true;
-		
+		sp.freeze=true;		
 	}
 
 	private void set_dx_dy() {
@@ -341,7 +333,6 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 dy=this.y+this.height/2;
 		
 	}
-
 	
 	 
 	 int calculateDistance(GameComponents obj)
@@ -457,6 +448,22 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			}
 		}
 	}
-
+	
+	
+	private void Playsound(File Sound) {		//bounce sound playing function
+		try {
+			
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(Sound));
+			//System.out.println("sound:");
+			clip.start();
+			
+			//Thread.sleep(clip.getMicrosecondLength()/1000);
+		}
+		catch(Exception e){
+			System.out.println("error");
+		}
+		
+	}
 
 }
