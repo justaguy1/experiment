@@ -48,7 +48,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents player_01,player_02;
 	static List<GameComponents> blocks ;
 	static GameComponents block[];
-	static GameComponents chest;
+/*	static GameComponents chest;*/
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -136,7 +136,7 @@ public class Main   implements Runnable,KeyListener{
 
 		
 		g.drawImage(ball.img, ball.x, ball.y,ball.width,ball.height,null);
-		g.drawImage(chest.img, chest.x, chest.y,chest.width,chest.height,null);
+/*		g.drawImage(chest.img, chest.x, chest.y,chest.width,chest.height,null);*/
 		
 		g.drawImage(player_01.img, player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(player_02.img, player_02.x, player_02.y,player_02.width,player_02.height,null);
@@ -160,7 +160,7 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 for(int i=0;i<15;i++)
 		 ball.calculateDistance(block[i]);
-		 ball.calculateDistance(chest);
+/*		 ball.calculateDistance(chest);*/
 		
 		//System.out.println(block[0].y);
 	}
@@ -270,8 +270,8 @@ public class Main   implements Runnable,KeyListener{
 		player_02.initializeSpeed(10, 0);
 		player_02.start();
 		
-		 chest =new GameComponents();
-			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
+/*		 chest =new GameComponents();*/
+/*			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");*/
 
 		
 		
