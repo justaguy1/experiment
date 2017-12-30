@@ -69,11 +69,19 @@ public class Main   implements Runnable,KeyListener{
 	
 	static void setBlockImagepath()
 	{
+	  try
+	  {
 		blockImgPath[1] = "icons\\block_r.png";
 		blockImgPath[2] = "icons\\block_g.jpg";
 		blockImgPath[3] = "icons\\block_y.png";
 		blockImgPath[4] = "icons\\block_lg.png";
 		blockImgPath[5] = "icons\\block_b.png";
+	  }
+	  catch(Exception e)
+	  {
+		  System.out.println("problem occured while setting array of image path at setBlockImagepath()");
+	  }
+	  
 	
 		
 	}
@@ -227,7 +235,7 @@ public class Main   implements Runnable,KeyListener{
 	{
 		Main obj =new Main(1280,720,"hello");
 		
-		Thread t =new Thread(obj);
+		 Thread t =new Thread(obj);
 		
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
@@ -239,18 +247,21 @@ public class Main   implements Runnable,KeyListener{
 		ball=new GameComponents();
 		ball.initProperties(750,550,20,20,0,ballImgPath);
 		ball.initializeSpeed(4, 4);
+		ball.setName("ball");
 		ball.start();
 		
 
 		player_01 =new GameComponents();
 		player_01.initProperties(100, 600, 20, 80,1, player1ImgPath);
 		player_01.initializeSpeed(10, 0);
+		player_01.setName("Player 1");
 		player_01.start();
 		
 	
 		player_02 =new GameComponents();
 		player_02.initProperties(1120, 100, 20, 80,2, player2ImgPath);
 		player_02.initializeSpeed(10, 0);
+		player_02.setName("Player 2");
 		player_02.start();
 		
 		 chest =new GameComponents();
