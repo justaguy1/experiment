@@ -261,7 +261,7 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 
 		ball=new GameComponents();
-		ball.initProperties(750,550,20,20,0,ballImgPath);
+		ball.initProperties(50,50,20,20,0,ballImgPath);
 		ball.initializeSpeed(4, 4);
 		ball.setName("ball");
 		ball.start();

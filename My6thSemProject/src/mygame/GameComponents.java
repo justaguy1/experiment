@@ -233,7 +233,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			sp.freeze=false;
 			sp.powerTime=0;*/
 			
-			this.sp.resetAllPowerUps(this.name);
+			this.sp.resetAllPowerUps();
 		}
 		
 		
@@ -263,33 +263,33 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				sp.gainRandomPower();
 				return;
 			}
-			if(x-obj.x <0)
-			 {
+			 if(y-obj.y <height/2)
+				{
+					System.out.println("top");
+					
+					sp.bYSpeed=-sp.bYSpeed;
+					return;
+				}
+				 if(y-obj.y>=obj.height/2)
+				{
+					System.out.println("down");
+					sp.bYSpeed=-sp.bYSpeed;
+					return;
+				}
+				 if(x-obj.x<0)
+				 {
+					
+					sp.bXSpeed=-sp.bXSpeed;
+					System.out.println("left");
+					return;
+				 }
 				
-				sp.bXSpeed=-sp.bXSpeed;
-				System.out.println("left");
-				
-			 }
-			
-			 if(x-obj.x >=obj.width)
-			{
-				 sp.bXSpeed=-sp.bXSpeed;
-				System.out.println("right");
-				
-			}
-			 if(y-obj.y <0)
-			{
-				System.out.println("top");
-				
-				sp.bYSpeed=-sp.bYSpeed;
-				
-			}
-			 if(y-obj.y>=obj.height)
-			{
-				System.out.println("down");
-				sp.bYSpeed=-sp.bYSpeed;
-				
-			}
+				 if(obj.x-x<0)
+				{
+					 sp.bXSpeed=-sp.bXSpeed;
+					System.out.println("right");
+					return;
+				}
 			 
 	
 		}
@@ -302,8 +302,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			 if(obj.blockLevel==1)
 				{
 				 	
-					 obj.x=-100;
-					 obj.y=-100;
+					 obj.x=-4000;
+					 obj.y=-4000;
 					 
 					 
 					 
@@ -313,7 +313,20 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 obj.blockLevel--;
 			 }
 			
-				 if(x-obj.x <0)
+			 if(obj.y-y>=height/2)
+				{
+					System.out.println("top");
+					
+					sp.bYSpeed=-sp.bYSpeed;
+					return;
+				}
+				 if(y-obj.y>=obj.height/2)
+				{
+					System.out.println("down");
+					sp.bYSpeed=-sp.bYSpeed;
+					return;
+				}
+				 if(x-obj.x<0)
 				 {
 					
 					sp.bXSpeed=-sp.bXSpeed;
@@ -321,25 +334,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					return;
 				 }
 				
-				 if(x-obj.x >=obj.width)
+				 if(obj.x-x<0)
 				{
 					 sp.bXSpeed=-sp.bXSpeed;
 					System.out.println("right");
 					return;
 				}
-				 if(y-obj.y <0)
-				{
-					System.out.println("top");
-					
-					sp.bYSpeed=-sp.bYSpeed;
-					return;
-				}
-				 if(y-obj.y>=obj.height)
-				{
-					System.out.println("down");
-					sp.bYSpeed=-sp.bYSpeed;
-					return;
-				}
+			
 				
 				 
 				 

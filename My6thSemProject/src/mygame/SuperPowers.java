@@ -22,9 +22,9 @@ public class SuperPowers {
 	int bXSpeed=4;
 	int bYSpeed=4;
 	
-	void resetAllPowerUps(String name)
+	void resetAllPowerUps()
 	{
-		System.out.println(name);
+		
 		 	freeze=false;
 			// use is moving boolean
 			
@@ -64,7 +64,7 @@ public class SuperPowers {
 		
 				//make ball move very slow
 			case 2:
-				resetAllPowerUps("a");
+				resetAllPowerUps();
 				powerIsOn=true;
 				isBallPower=true;
 				bXSpeed=2;
@@ -74,7 +74,7 @@ public class SuperPowers {
 				
 				//makes ball move very fast
 			case 3:
-				resetAllPowerUps("a");
+				resetAllPowerUps();
 				powerIsOn=true;
 				isBallPower =true;
 				bXSpeed=8;
@@ -85,6 +85,7 @@ public class SuperPowers {
 				
 				//makes player move very slow
 			case 4:
+				resetAllPowerUps();
 				powerIsOn=true;
 				isPlayerPower=true;
 				playerSpeed=5;
@@ -93,6 +94,7 @@ public class SuperPowers {
 				
 				//makes player move very fast
 			case 5:
+				resetAllPowerUps();
 				powerIsOn=true;
 				isPlayerPower=true;
 				playerSpeed=20;
