@@ -104,6 +104,12 @@ public class SuperPowers {
 				powerIsOn=true;
 				System.out.println("some shit happened ");
 				break;
+				
+				/*if (x < obj.x + obj.width &&
+						  x +width > obj.x &&
+						  y < obj.y + obj.height &&
+						  height + y > obj.y && count==0) {
+						   */
 		}
 	}
 

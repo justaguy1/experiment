@@ -253,13 +253,38 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			this.sp.resetAllPowerUps();
 		}
 		
-		System.out.println(sp.powerTime);
+		//System.out.println(sp.powerTime);
 		
 		
 		
 	}
 
 	private void changeBallPosition(GameComponents obj) {
+		
+		float w=(width+obj.width)/2;
+		float h=(height+obj.height)/2;
+		
+		float disY =dy-obj.dy;
+		float disX =dx-obj.dx;
+		
+		float wy =w*disY;
+		float hx =h*disX;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		if(obj.id ==1 || obj.id==2)
 		{
@@ -281,40 +306,41 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				sp.gainRandomPower();
 				return;
 			}
-			 if(y-obj.y <height/2)
-				{
-					System.out.println("top");
-					
-					sp.bYSpeed=-sp.bYSpeed;
-					return;
+			
+			if (wy > hx)
+				{  
+					if (wy > -hx)
+					{
+			           System.out.println("down");
+			           sp.bYSpeed=-sp.bYSpeed;
+					}
+			        else
+			        {
+			           System.out.println("left");
+			           sp.bXSpeed=-sp.bXSpeed;
+			           return;
+			        }
 				}
-				 if(y-obj.y>=obj.height/2)
-				{
-					System.out.println("down");
-					sp.bYSpeed=-sp.bYSpeed;
-					return;
-				}
-				 if(x-obj.x<0)
-				 {
-					
-					sp.bXSpeed=-sp.bXSpeed;
-					System.out.println("left");
-					return;
-				 }
-				
-				 if(obj.x-x<0)
-				{
-					 sp.bXSpeed=-sp.bXSpeed;
-					System.out.println("right");
-					return;
-				}
-			 
+		    else
+		    {
+			        if (wy > -hx)
+			        {
+			        	 System.out.println("right");
+			        	 sp.bXSpeed=-sp.bXSpeed;
+			        }
+			           
+			        else
+			        {
+			        	 System.out.println("top");
+			        	 sp.bYSpeed=-sp.bYSpeed;
+			        }
+		    }
+		            /* at the bottom */
 			 //obj.sp.freeze=this.sp.freeze;
 	
 		}
 		else
 		{
-			
 			
 			
 
@@ -328,42 +354,42 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			 {
 				 obj.blockLevel--;
 			 }
-			
-			 if(obj.y-y>=height/2)
-				{
-					System.out.println("top");
-					sp.bYSpeed=-sp.bYSpeed;
-					
+			 
+
+			 if (wy > hx)
+				{  
+					if (wy > -hx)
+					{
+			           System.out.println("down");
+			           sp.bYSpeed=-sp.bYSpeed;
+					}
+			        else
+			        {
+			           System.out.println("left");
+			           sp.bXSpeed=-sp.bXSpeed;
+			           return;
+			        }
 				}
-				 if(y-obj.y>=obj.height/2)
-				{
-					System.out.println("down");
-					sp.bYSpeed=-sp.bYSpeed;
-					
-				}
-				 if(x-obj.x<0)
-				 {
-					yspeed=-ballSpeed;
-					
-					sp.bXSpeed=-sp.bXSpeed;
-					System.out.println("left");
-				 }
+		    else
+		    {
+			        if (wy > -hx)
+			        {
+			        	 System.out.println("right");
+			        	 sp.bXSpeed=-sp.bXSpeed;
+			        }
+			           
+			        else
+			        {
+			        	 System.out.println("top");
+			        	 sp.bYSpeed=-sp.bYSpeed;
+			        }
+		    }
 				
-				 if(obj.x-x<0)
-				{
-					 sp.bXSpeed=-sp.bXSpeed;
-					System.out.println("right");
-			
-					
-				}
 					
 		}			
 		//yspeed=-yspeed;		 
 	}
 
-	private void setPower() {
-		sp.freeze=true;		
-	}
 
 	private void set_dx_dy() {
 		 dx=this.x+this.width/2;
@@ -395,7 +421,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		
 		 timeNow = System.currentTimeMillis();
 
-		if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
+		/*if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
 		{
 			changeBallPosition(obj);
 			count++;
@@ -408,7 +434,25 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		{
 			count=0;
 			col=false;
-		}
+		}*/
+		 
+		 if (x < obj.x + obj.width &&
+				  x +width > obj.x &&
+				  y < obj.y + obj.height &&
+				  height + y > obj.y && count==0) {
+				   
+			 
+			 
+			 	changeBallPosition(obj);
+			 	count++;
+				colTime = System.currentTimeMillis();
+				col=true;
+				}
+		 if(timeNow -colTime >=500)
+			{
+				count=0;
+				col=false;
+			}
 				
 	}
 
