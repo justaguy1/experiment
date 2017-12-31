@@ -36,8 +36,15 @@ public class SuperPowers {
 			
 			// time used to check amout of time passed after user get power
 			powerTime=0;
-			bXSpeed=4;
-			bYSpeed=4;
+			if(this.bXSpeed<0)
+				this.bXSpeed=-4;
+			else
+				this.bXSpeed=4;
+			
+			if(this.bYSpeed<0)
+				this.bYSpeed=-4;
+			else
+				this.bYSpeed=4;
 			
 			playerSpeed=10;
 			powerIsOn=false;
