@@ -21,6 +21,8 @@ public class SuperPowers {
 	
 	int bXSpeed=4;
 	int bYSpeed=4;
+	int powerLevelPlayer=1;
+	int powerLevelBall=1;
 	
 	void resetAllPowerUps()
 	{
@@ -39,6 +41,10 @@ public class SuperPowers {
 			
 			playerSpeed=10;
 			powerIsOn=false;
+			
+			powerLevelPlayer=1;
+			powerLevelBall=1;
+			
 		
 			
 			
@@ -59,6 +65,8 @@ public class SuperPowers {
 				
 				powerIsOn=true;
 				freeze=true;
+				powerLevelBall=5;
+				powerLevelPlayer=3;
 				System.out.println("freezed");
 				break;
 		
@@ -69,6 +77,7 @@ public class SuperPowers {
 				isBallPower=true;
 				bXSpeed=2;
 				bYSpeed=2;
+				powerLevelBall=3;
 				System.out.println("slow ball");
 				break;
 				
@@ -79,6 +88,7 @@ public class SuperPowers {
 				isBallPower =true;
 				bXSpeed=8;
 				bYSpeed=8;
+				powerLevelBall=4;
 				System.out.println("fast ball");
 				
 				break;

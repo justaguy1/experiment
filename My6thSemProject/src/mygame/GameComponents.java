@@ -7,8 +7,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-import java.io.File;
-import javax.sound.sampled.*;
+
 
 
 public class GameComponents implements Runnable {		//test push for DISCORD notify system
@@ -28,9 +27,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	int blockLevel;
 	
-	int dx,dy; // variables used for calculating distance
+	int dx,dy; // variable that sets coordinates to center
 	
-    static int ballSpeed=4;
+   // static int ballSpeed=4;
 	
 	
 	static boolean col=false; // varibale that indicates whether the collision has occured or not
@@ -39,7 +38,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	static long timeNow=0;
 	static Image block[];
+	static Image playerI[];
+	static Image [] ballI;
 	String name;
+	int powerLevel=1;
 	
 	 SuperPowers sp=new SuperPowers();
 	File bounce = new File("sounds/bounce.wav");
@@ -80,6 +82,38 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			System.out.println("error occured while setting array of bloc image");
 		}
 	}
+	public void setPlayerImage()
+	{
+		playerI=new Image[4];
+		try 
+		{
+		for(int i=1;i<4;i++)
+		playerI[i]=new ImageIcon(getClass().getResource(Main.playerImgPath[i])).getImage();
+	
+		}
+		catch(Exception e)
+		{
+			System.out.println("error occured while setting array of player image");
+		}
+		
+	}
+	
+	public void setBallImage()
+	{
+		ballI=new Image[6];
+		try 
+		{
+		for(int i=1;i<6;i++)
+		ballI[i]=new ImageIcon(getClass().getResource(Main.ballImgPath[i])).getImage();
+	
+		}
+		catch(Exception e)
+		{
+			System.out.println("error occured while setting array of ball image");
+		}
+	}
+	
+	
 	
 	
 	public void initProperties(int x, int y, int width, int height,int level,int id)
@@ -235,8 +269,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		else if(sp.powerTime==0)
 		{
 		
-		Main.ball.initializeImage("icons\\light_blue_ball.png");
-		Main.player1ImgPath="icons\\Player_frozen.png";
+		/*Main.ball.initializeImage("icons\\light_blue_ball.png");
+		Main.player1ImgPath="icons\\Player_frozen.png";*/
 					
 			Playsound(freeze_s);
 								
@@ -291,6 +325,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			obj.sp.powerIsOn=true;
 			obj.sp.freeze=this.sp.freeze;
 			obj.sp.playerSpeed=this.sp.playerSpeed;
+			obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+			
 			
 		}
 		
@@ -342,7 +378,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		else
 		{
 			
-			
+			Playsound(bounce);
 
 			 if(obj.blockLevel==1)
 				{
@@ -398,26 +434,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 	
 	 
-	 int calculateDistance(GameComponents obj)
-		{
-		//System.out.println("X : "+obj.dx+" Y : "+obj.dy);
-		 
-		 
-		    int x=(obj.dx-this.dx)*(obj.dx-this.dx);
-		    int y= (obj.dy-this.dy)*(obj.dy-this.dy);
-		    
-		    int distance =(int) Math.sqrt(x+y);
-		    
-		    calculateCollision(distance,obj);
-		    
-		    
-		  // System.out.println("Distance : "+distance);
-		    return  distance;
-		    
-		  }
 
 
-	private void calculateCollision( int distance,GameComponents obj) {
+
+	public void calculateCollision(GameComponents obj) {
 		
 		 timeNow = System.currentTimeMillis();
 
@@ -448,7 +468,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				colTime = System.currentTimeMillis();
 				col=true;
 				}
-		 if(timeNow -colTime >=500)
+		 if(timeNow -colTime >=100)
 			{
 				count=0;
 				col=false;
