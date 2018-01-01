@@ -398,11 +398,15 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		else
 		{
 			if(obj.blockLevel<=3&&obj.blockLevel>1)
-		//	Playsound(bounce);
 			Playsound(enemy_N);
 			if(obj.blockLevel>3)
 				Playsound(enemy_H);
 			
+<<<<<<< HEAD
+		//	Playsound(bounce);
+
+=======
+>>>>>>> e9f2b495d47c0177d4af497a0991ac8a1e4d35c0
 			 if(obj.blockLevel==1)
 				{
 					 obj.x=-4000;
