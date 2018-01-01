@@ -48,6 +48,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	 SuperPowers sp=new SuperPowers();
 	File bounce = new File("sounds/bounce.wav");
 	File freeze_s= new File("sounds/freeze.wav");
+	File enemy_H= new File("sounds/enemy_hard_bounce.wav");
+	File enemy_N= new File("sounds/enemy_normal_bounce.wav");
+	File destroy_S=new File("sounds/break.wav");
 		
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
@@ -286,7 +289,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		else if(sp.powerTime==0)
 		{
 					
-			Playsound(freeze_s);
+		//	Playsound(freeze_s);
 								
 			sp.powerTime=System.currentTimeMillis();
 			
@@ -328,7 +331,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		if(obj.id !=10)
 		{
 			obj.sp.freeze=this.sp.freeze;
-			if(obj.sp.freeze==false)		
+			//if(obj.sp.freeze==false)		
 				Playsound(bounce);
 
 			if(obj.id==5)
@@ -388,14 +391,16 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		}
 		else
 		{
+			if(obj.blockLevel<=3&&obj.blockLevel>1)
+			Playsound(enemy_N);
+			if(obj.blockLevel>3)
+				Playsound(enemy_H);
 			
-			Playsound(bounce);
-
 			 if(obj.blockLevel==1)
 				{
 					 obj.x=-4000;
 					 obj.y=-4000;
-					
+					Playsound(destroy_S);
 				}
 			 else
 			 {
@@ -564,7 +569,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 	
 	
-	private void Playsound(File Sound) {		//bounce sound playing function
+	public static void Playsound(File Sound) {		//bounce sound playing function
 		try {
 			
 			Clip clip = AudioSystem.getClip();

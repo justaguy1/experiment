@@ -1,5 +1,6 @@
 package mygame;
 
+import java.io.File;
 import java.util.Random;
 
 public class SuperPowers {
@@ -29,6 +30,12 @@ public class SuperPowers {
 	static long timeCounter=0;
 	boolean canGetPowers=true;
 	static int count =0;
+	
+	File freeze_s= new File("sounds/freeze.wav");
+	File slowdown_S= new File("sounds/slowdown.wav");
+	File speedup_S= new File("sounds/speedup.wav");
+	File ballclone_S= new File("sounds/ball_clone.wav");
+
 	
 	void resetAllPowerUps()
 	{
@@ -96,7 +103,7 @@ public class SuperPowers {
 					powerLevelBall=5;
 					powerLevelPlayer=3;
 					powerLevelPowers=1;
-					
+					GameComponents.Playsound(freeze_s);
 					System.out.println("freezed");
 					break;
 			
@@ -109,6 +116,7 @@ public class SuperPowers {
 					bYSpeed=2;
 					powerLevelBall=3;
 					powerLevelPowers=2;
+					GameComponents.Playsound(slowdown_S);
 					System.out.println("slow ball");
 					break;
 					
@@ -119,6 +127,7 @@ public class SuperPowers {
 					isPlayerPower=true;
 					threeBall=true;
 					powerLevelPowers=6;
+					GameComponents.Playsound(ballclone_S);
 					System.out.println("three ball");
 					break;	
 				
@@ -152,6 +161,7 @@ public class SuperPowers {
 					bYSpeed=8;
 					powerLevelBall=4;
 					powerLevelPowers=3;
+					GameComponents.Playsound(speedup_S);
 					System.out.println("fast ball");
 					
 					break;
