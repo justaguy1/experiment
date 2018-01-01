@@ -302,7 +302,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		{
 					
 		//	Playsound(freeze_s);
-								
+		//alu						
 			sp.powerTime=System.currentTimeMillis();
 			
 		}
