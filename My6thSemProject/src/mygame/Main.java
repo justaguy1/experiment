@@ -40,6 +40,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents block[];
 	static GameComponents chest;
 	static GameComponents powers[];
+	static GameComponents initializer;
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -47,10 +48,12 @@ public class Main   implements Runnable,KeyListener{
 	
 	
 	static String blockImgPath[] =new String[6];
+	static String blockRImgPath[] =new String[6]; 
 	static String playerImgPath[]=new String[4];
 	static String ballImgPath[]=new String[6];
 	static String powersImgPath[]=new String[6];
 	
+	static String backgroundimg="icons\\bk.jpg"; 
 	static long tickTime=0;
 	
 	Main(int width,int height, String title)
@@ -82,6 +85,12 @@ public class Main   implements Runnable,KeyListener{
 		blockImgPath[3] = "icons\\block_y.png";
 		blockImgPath[4] = "icons\\block_lg.png";
 		blockImgPath[5] = "icons\\block_b.png";
+		
+		blockRImgPath[1] = "icons\\block_r_r.png";
+		blockRImgPath[2] = "icons\\block_g_r.jpg";
+		blockRImgPath[3] = "icons\\block_y_r.png";
+		blockRImgPath[4] = "icons\\block_lg_r.png";
+		blockRImgPath[5] = "icons\\block_b_r.png";
 		
 		playerImgPath[1]= "icons\\player.png";
 		playerImgPath[2]="icons\\player2.png";
@@ -148,7 +157,7 @@ public class Main   implements Runnable,KeyListener{
 		g=(Graphics2D) bs.getDrawGraphics();
 		g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-		
+		g.drawImage(initializer.img, initializer.x, initializer.y,initializer.width,initializer.height,null);
 		g.drawImage(GameComponents.ballI[ball.sp.powerLevelBall], ball.x, ball.y,ball.width,ball.height,null);
 		g.drawImage(chest.img, chest.x, chest.y,chest.width,chest.height,null);
 		
@@ -156,8 +165,9 @@ public class Main   implements Runnable,KeyListener{
 		g.drawImage(GameComponents.playerI[player_02.sp.powerLevelPlayer], player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
 		for(int i=0;i<15;i++)
-		g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
-		
+		{
+			g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
+		}
 		for(int i=0;i<3;i++)
 		g.drawImage(GameComponents.ballI[1], powers[i].x, powers[i].y,powers[i].width,powers[i].height,null);
 
@@ -277,13 +287,14 @@ public class Main   implements Runnable,KeyListener{
 		 GameComponents.can_width=canvas.getWidth();
 		 
 		 
-		 GameComponents initializer =new GameComponents();
+		  initializer =new GameComponents();
 		 
 		 setAllImagepath(); // set image path for every images
 		 initializer.setBallImage();
 		 initializer.setBlockImage();
 		 initializer.setPlayerImage();
 		 initializer.setPowersImage();
+		 initializer.initProperties(0, 0, canvas.getWidth(), canvas.getHeight(), -1, backgroundimg);
 		 
 		 
 		ball=new GameComponents();

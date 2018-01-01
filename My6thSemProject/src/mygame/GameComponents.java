@@ -39,6 +39,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	static long timeNow=0;
 	static Image block[];
+	static Image blockR[];
 	static Image playerI[];
 	static Image [] ballI;
 	static Image [] powersI;
@@ -72,11 +73,16 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	public  void setBlockImage()
 	{
 		block=new Image[6];
+		blockR=new Image[6];
+		
 		
 		try 
 		{
 		for(int i=1;i<6;i++)
-		block[i]=new ImageIcon(getClass().getResource(Main.blockImgPath[i])).getImage();
+		{
+			block[i]=new ImageIcon(getClass().getResource(Main.blockImgPath[i])).getImage();
+			blockR[i]=new ImageIcon(getClass().getResource(Main.blockRImgPath[i])).getImage();
+		}
 	
 		}
 		catch(Exception e)
@@ -343,12 +349,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				}
 				if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
 				{
-					Main.powers[0].x=500;
-					Main.powers[0].y=500;
-					Main.powers[1].x=200;
-					Main.powers[1].y=200;
-					Main.powers[2].x=600;
-					Main.powers[2].y=600;
+					Main.powers[0].x=getRandom(300, 800);
+					Main.powers[0].y=getRandom(400,600);
+					Main.powers[1].x=getRandom(300, 800);
+					Main.powers[1].y=getRandom(400,600);
+					Main.powers[2].x=getRandom(300, 800);
+					Main.powers[2].y=getRandom(400,600);
 					
 				}
 				return;
@@ -389,7 +395,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		else
 		{
 			
-			Playsound(bounce);
+		//	Playsound(bounce);
 
 			 if(obj.blockLevel==1)
 				{

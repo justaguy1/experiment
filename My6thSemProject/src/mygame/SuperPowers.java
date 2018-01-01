@@ -118,7 +118,7 @@ public class SuperPowers {
 					powerIsOn=true;
 					isPlayerPower=true;
 					threeBall=true;
-					powerLevelPowers=6;
+					powerLevelPowers=3;
 					System.out.println("three ball");
 					break;	
 				
@@ -151,7 +151,7 @@ public class SuperPowers {
 					bXSpeed=8;
 					bYSpeed=8;
 					powerLevelBall=4;
-					powerLevelPowers=3;
+					powerLevelPowers=6;
 					System.out.println("fast ball");
 					
 					break;
