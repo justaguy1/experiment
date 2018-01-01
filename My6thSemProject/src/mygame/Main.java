@@ -9,6 +9,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main   implements Runnable,KeyListener{
 	
@@ -102,11 +103,11 @@ public class Main   implements Runnable,KeyListener{
 		ballImgPath[4]="icons\\red_ball.png";
 		ballImgPath[5]="icons\\light_blue_ball.png";
 		
-		powersImgPath[1]="icons\\green_ball.png";
-		powersImgPath[2]="icons\\green_ball.png";
-		powersImgPath[3]="icons\\green_ball.png";
-		powersImgPath[4]="icons\\green_ball.png";
-		powersImgPath[5]="icons\\green_ball.png";
+		powersImgPath[1]="icons\\green_ball_clone.png";
+		powersImgPath[2]="icons\\green_ball_clone.png";
+		powersImgPath[3]="icons\\green_ball_clone.png";
+		powersImgPath[4]="icons\\green_ball_clone.png";
+		powersImgPath[5]="icons\\green_ball_clone.png";
 		
 	  }
 	  catch(Exception e)
@@ -164,7 +165,7 @@ public class Main   implements Runnable,KeyListener{
 		g.drawImage(GameComponents.playerI[player_01.sp.powerLevelPlayer], player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(GameComponents.playerI[player_02.sp.powerLevelPlayer], player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
-		for(int i=0;i<15;i++)
+		for(int i=0;i<80;i++)
 		{
 			g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
 		}
@@ -184,7 +185,7 @@ public class Main   implements Runnable,KeyListener{
 		 ball.calculateCollision(player_01);
 		 ball.calculateCollision(player_02);
 		 
-		 for(int i=0;i<15;i++)
+		 for(int i=0;i<80;i++)
 		 ball.calculateCollision(block[i]);
 		 ball.calculateCollision(chest);
 		
@@ -195,7 +196,7 @@ public class Main   implements Runnable,KeyListener{
 			 {
 				 powers[j].calculateCollision(player_01);
 				 powers[j].calculateCollision(player_02);
-				 for(int i=0;i<15;i++)
+				 for(int i=0;i<80 ;i++)
 				 powers[j].calculateCollision(block[i]);
 				
 			 }
@@ -317,8 +318,7 @@ public class Main   implements Runnable,KeyListener{
 		player_02.setName("Player 2");
 		player_02.start();
 		
-		 chest =new GameComponents();
-			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
+		
 
 		powers =new GameComponents[6];
 		for(int i=0;i<5;i++)
@@ -328,7 +328,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		for(int i=0;i<3;i++)
 		{
-			powers[i].initProperties(-500, -500, 20, 20, 1, 4);
+			powers[i].initProperties(-500, -500, 15, 15, 1, 4);
 			powers[i].setName("powers");
 			powers[i].start();
 		}
@@ -338,37 +338,84 @@ public class Main   implements Runnable,KeyListener{
 		
 		//obj.blocks.add(obj.ball);
 		
-		block=new GameComponents[15];
-		
-		for(int i=0;i<15;i++)
-		{
-			block[i]=new GameComponents();
-		}
 		
 		
 		
 		
 		
-		block[0].initProperties(300, 200, 80, 40,5,10 );
-		block[1].initProperties(400, 200, 80, 40,5,10 );
-		block[2].initProperties(500, 200, 80, 40,5,10 );
-		block[3].initProperties(600, 200, 80, 40,3,10 );
-		block[4].initProperties(700, 200, 80, 40,3,10 );
-		block[5].initProperties(400, 300, 80, 40,2,10 );
-		block[6].initProperties(500, 300, 80, 40,1,10 );
-		block[7].initProperties(600, 300, 80, 40,1,10 );
-		block[8].initProperties(700, 300, 80, 40,1,10 );
-		block[9].initProperties(500, 400, 80, 40,3,10 );
-		block[10].initProperties(600, 400, 80, 40,2,10 );
-		block[11].initProperties(700, 400, 80, 40,2,10 );
-		block[12].initProperties(600, 500, 80, 40,1,10 );
-		block[13].initProperties(700, 500, 80, 40,2,10 );
-		block[14].initProperties(700, 600, 80, 40,3,10 );
+		obj.stage_first();
+		
+		
+		
 		
 	   
 		t.start();
 		
 
 	}
+
+	  void stage_first() {
+		 
+		 block=new GameComponents[80];
+		 
+		 for(int i=0;i<80;i++)
+			{
+				block[i]=new GameComponents();
+			}
+		 
+	/*	block[0].initProperties(300, 100, 80, 40,rand(5),10 );
+		block[1].initProperties(380, 100, 80, 40,rand(5),10 );
+		block[2].initProperties(460, 100, 80, 40,rand(5),10 );
+		block[3].initProperties(540, 100, 80, 40,rand(5),10 );
+		block[4].initProperties(620, 100, 80, 40,rand(5),10 );
+		block[5].initProperties(700, 100, 80, 40,rand(5),10 );
+		block[6].initProperties(300, 140, 80, 40,rand(5),10 );
+		block[7].initProperties(380, 140, 80, 40,rand(5),10 );
+		block[8].initProperties(460, 140, 80, 40,rand(5),10 );
+		block[9].initProperties(540, 140, 80, 40,rand(5),10 );
+		block[10].initProperties(620, 140, 80, 40,rand(5),10 );
+		//block[5].initProperties(400, 300, 80, 40,2,10 );
+		
+		block[5].initProperties(700, 100, 80, 40,3,10 );
+		block[11].initProperties(700, 400, 80, 40,2,10 );
+		block[12].initProperties(600, 500, 80, 40,1,10 );
+		block[13].initProperties(700, 500, 80, 40,2,10 );
+		block[14].initProperties(700, 600, 80, 40,3,10 );*/
+		 
+		 chest =new GameComponents();
+			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
+			chest.start();
+			
+		int j=0;
+		int k=1;
+		 for(int i=0;i<80;i++)
+		 {
+			 k++;
+			 if(i%8==0)
+			 {
+				 j++;
+				 k=1;
+			 }
+			 if(i<24)
+			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(5),10 );
+			 
+			 if(i>=24 && i<48)
+				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(5),10 );
+			 
+			 if(i>=48)
+				 block[i].initProperties(600+k*40, j*40, 40,40,rand(5),10 );
+				 
+		 }
+		
+	}
+	  
+	  int rand(int value)
+		{
+			Random rand = new Random();
+
+			int  n = rand.nextInt(value) + 1;
+			return n;
+			
+		} 
 
 }

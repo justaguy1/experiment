@@ -51,6 +51,16 @@
 			<location>C:/Users/Binaya/Downloads/blocks/block_y_r.png</location>
 		</link>
 		<link>
+			<name>src/mygame/icons/chest.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/chest.png</location>
+		</link>
+		<link>
+			<name>src/mygame/icons/chest_grey.png</name>
+			<type>1</type>
+			<location>C:/Users/Binaya/Downloads/chest_grey.png</location>
+		</link>
+		<link>
 			<name>src/mygame/icons/powerUp.jpg</name>
 			<type>1</type>
 			<location>C:/Users/Binaya/Downloads/powerUp.jpg</location>

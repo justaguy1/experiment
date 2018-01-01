@@ -161,14 +161,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	
 	
-	public void initializeImage(String path)
+	public Image initializeImage(String path)
 	{
-		if (this.img != null)
-		{
-			return;
-		}
-		else
-		{
+	
 			try {
 				
 				this.img = new ImageIcon(getClass().getResource(path)).getImage();
@@ -180,7 +175,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				System.out.println("no image found at path "+path);
 				System.exit(1);
 			}
-		}
+		return this.img;
 		
 		
 	}
@@ -284,6 +279,17 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 }
 		 if(this.id !=4)
 		 removePower();
+		 
+		 if(this.id==5)
+		 {
+			 
+			 if(sp.canGetPowers==true)
+				 this.img =this.initializeImage("icons\\chest.png");
+			 else
+				 this.img=this.initializeImage("icons\\chest_grey.png");
+			 
+			 
+		 }
 		 Thread.sleep(17);
 	}
 	 
@@ -304,6 +310,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		if(timeNow -sp.powerTime >=10000)
 		{
 			this.sp.resetAllPowerUps();
+			if(id==5)
+				System.out.println("chest");
 		}
 
 	}
@@ -343,6 +351,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			if(obj.id==5)
 			{
 				sp.gainRandomPower();
+				obj.sp.canGetPowers=sp.canGetPowers;
+				obj.sp.powerIsOn=sp.powerIsOn;
 				
 				for(int i=0;i<3;i++)
 				{
@@ -360,7 +370,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					Main.powers[2].y=getRandom(400,600);
 					
 				}
-				return;
+				//return;
 			}
 			
 			if (wy > hx)

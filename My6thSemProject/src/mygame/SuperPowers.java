@@ -92,12 +92,13 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(6) + 1;
-			
+			// int n=3;
 			switch(n)
 			{
 			// freezes player if struck by ball
 				case 1:
-					
+					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					freeze=true;
 					powerLevelBall=5;
@@ -110,6 +111,7 @@ public class SuperPowers {
 					//make ball move very slow
 				case 2:
 					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					isBallPower=true;
 					bXSpeed=2;
@@ -123,6 +125,7 @@ public class SuperPowers {
 					
 				case 3:
 					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					isPlayerPower=true;
 					threeBall=true;
@@ -139,6 +142,7 @@ public class SuperPowers {
 					//makes player move very slow
 				case 4:
 					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					isPlayerPower=true;
 					playerSpeed=5;
@@ -149,6 +153,7 @@ public class SuperPowers {
 					//makes player move very fast
 				case 5:
 					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					isPlayerPower=true;
 					playerSpeed=20;
@@ -159,6 +164,7 @@ public class SuperPowers {
 					//makes ball move very fast
 				case 6:
 					resetAllPowerUps();
+					canGetPowers=false;
 					powerIsOn=true;
 					isBallPower =true;
 					bXSpeed=8;
