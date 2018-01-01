@@ -2,6 +2,7 @@ package mygame;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.Random;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -40,6 +41,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	static Image block[];
 	static Image playerI[];
 	static Image [] ballI;
+	static Image [] powersI;
 	String name;
 	int powerLevel=1;
 	
@@ -113,6 +115,21 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		}
 	}
 	
+	public void setPowersImage()
+	{
+		powersI=new Image[6];
+		try 
+		{
+		for(int i=1;i<6;i++)
+		powersI[i]=new ImageIcon(getClass().getResource(Main.powersImgPath[i])).getImage();
+	
+		}
+		catch(Exception e)
+		{
+			System.out.println("error occured while setting array of powers image");
+		}
+	}
+	
 	
 	
 	
@@ -166,6 +183,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 	public   void moveBall()
 	{
+
 		
 		if(ballIsMoving)
 		{		
@@ -240,25 +258,24 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 
 		 set_dx_dy();
 		
-		 if(this.id==0)
-		 {
+		 
+			 if(this.id==4 && sp.powerIsOn==true)
 			 moveBall();
-			 
 			
-			 Thread.sleep(17);
-		 }
+			 if(this.id==0)
+				 moveBall();
+			
+		 
 		 
 		 if(this.id !=0)
 		 {
 			 checkPlayerInput();
 			 
-			 Thread.sleep(17);
+			 //Thread.sleep(17);
 		 }
-		 
-		 //System.out.println(sp.freeze);
-		 
+		 if(this.id !=4)
 		 removePower();
-
+		 Thread.sleep(17);
 	}
 	 
 	 private void removePower() {
@@ -268,9 +285,6 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			return;
 		else if(sp.powerTime==0)
 		{
-		
-		/*Main.ball.initializeImage("icons\\light_blue_ball.png");
-		Main.player1ImgPath="icons\\Player_frozen.png";*/
 					
 			Playsound(freeze_s);
 								
@@ -280,17 +294,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		
 		if(timeNow -sp.powerTime >=10000)
 		{
-			/*sp.powerIsOn=false;
-			sp.freeze=false;
-			sp.powerTime=0;*/
-			
 			this.sp.resetAllPowerUps();
 		}
-		
-		//System.out.println(sp.powerTime);
-		
-		
-		
+
 	}
 
 	private void changeBallPosition(GameComponents obj) {
@@ -305,27 +311,15 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		float hx =h*disX;
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		if(obj.id ==1 || obj.id==2)
 		{
-			obj.sp.powerIsOn=true;
-			obj.sp.freeze=this.sp.freeze;
-			obj.sp.playerSpeed=this.sp.playerSpeed;
-			obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+			if(obj.sp.powerIsOn==false)
+			{
+				obj.sp.powerIsOn=true;
+				obj.sp.freeze=this.sp.freeze;
+				obj.sp.playerSpeed=this.sp.playerSpeed;
+				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+			}
 			
 			
 		}
@@ -340,6 +334,23 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			if(obj.id==5)
 			{
 				sp.gainRandomPower();
+				
+				for(int i=0;i<3;i++)
+				{
+					Main.powers[i].sp.powerIsOn=sp.powerIsOn;
+					Main.powers[i].sp.powerLevelPowers=sp.powerLevelPowers;
+					Main.powers[i].sp.threeBall=sp.threeBall;
+				}
+				if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
+				{
+					Main.powers[0].x=500;
+					Main.powers[0].y=500;
+					Main.powers[1].x=200;
+					Main.powers[1].y=200;
+					Main.powers[2].x=600;
+					Main.powers[2].y=600;
+					
+				}
 				return;
 			}
 			
@@ -567,6 +578,24 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			System.out.println("error");
 		}
 		
+	}
+	
+	int getRandom(int min ,int max)
+	{
+		Random rand = new Random();
+
+		int  n = rand.nextInt(max) + 1;
+
+		return clamp(min,max,n);
+	}
+	int clamp(int min ,int max,int value)
+	{
+		if(value<=min)
+			value=min;
+		else if(value>=max)
+			value=max;
+		
+		return value;
 	}
 
 }

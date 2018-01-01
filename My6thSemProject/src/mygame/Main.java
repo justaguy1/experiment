@@ -39,6 +39,7 @@ public class Main   implements Runnable,KeyListener{
 	static List<GameComponents> blocks ;
 	static GameComponents block[];
 	static GameComponents chest;
+	static GameComponents powers[];
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -48,6 +49,9 @@ public class Main   implements Runnable,KeyListener{
 	static String blockImgPath[] =new String[6];
 	static String playerImgPath[]=new String[4];
 	static String ballImgPath[]=new String[6];
+	static String powersImgPath[]=new String[6];
+	
+	static long tickTime=0;
 	
 	Main(int width,int height, String title)
 	{
@@ -88,6 +92,12 @@ public class Main   implements Runnable,KeyListener{
 		ballImgPath[3]="icons\\green_ball_strong.png";
 		ballImgPath[4]="icons\\red_ball.png";
 		ballImgPath[5]="icons\\light_blue_ball.png";
+		
+		powersImgPath[1]="icons\\green_ball.png";
+		powersImgPath[2]="icons\\green_ball.png";
+		powersImgPath[3]="icons\\green_ball.png";
+		powersImgPath[4]="icons\\green_ball.png";
+		powersImgPath[5]="icons\\green_ball.png";
 		
 	  }
 	  catch(Exception e)
@@ -148,7 +158,8 @@ public class Main   implements Runnable,KeyListener{
 		for(int i=0;i<15;i++)
 		g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
 		
-		
+		for(int i=0;i<3;i++)
+		g.drawImage(GameComponents.ballI[1], powers[i].x, powers[i].y,powers[i].width,powers[i].height,null);
 
 	    bs.show();
 		g.dispose();
@@ -159,6 +170,7 @@ public class Main   implements Runnable,KeyListener{
 
 	private synchronized void Tick() 
 	{ 
+		tickTime = System.currentTimeMillis();
 		 ball.calculateCollision(player_01);
 		 ball.calculateCollision(player_02);
 		 
@@ -167,6 +179,17 @@ public class Main   implements Runnable,KeyListener{
 		 ball.calculateCollision(chest);
 		
 		//System.out.println(block[0].y);
+		 for(int j=0;j<3;j++)
+		 {
+			 if(powers[j].sp.powerIsOn==true)
+			 {
+				 powers[j].calculateCollision(player_01);
+				 powers[j].calculateCollision(player_02);
+				 for(int i=0;i<15;i++)
+				 powers[j].calculateCollision(block[i]);
+				
+			 }
+		 }
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -260,6 +283,7 @@ public class Main   implements Runnable,KeyListener{
 		 initializer.setBallImage();
 		 initializer.setBlockImage();
 		 initializer.setPlayerImage();
+		 initializer.setPowersImage();
 		 
 		 
 		ball=new GameComponents();
@@ -285,6 +309,18 @@ public class Main   implements Runnable,KeyListener{
 		 chest =new GameComponents();
 			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
 
+		powers =new GameComponents[6];
+		for(int i=0;i<5;i++)
+		{
+			powers[i]=new GameComponents();
+		}
+		
+		for(int i=0;i<3;i++)
+		{
+			powers[i].initProperties(-500, -500, 20, 20, 1, 4);
+			powers[i].setName("powers");
+			powers[i].start();
+		}
 		
 		
 		blocks =new ArrayList<GameComponents>();
@@ -300,9 +336,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-		block[0].setBlockImage();
-		block[0].setPlayerImage();
-		block[0].setBallImage();
+		
 		
 		block[0].initProperties(300, 200, 80, 40,5,10 );
 		block[1].initProperties(400, 200, 80, 40,5,10 );

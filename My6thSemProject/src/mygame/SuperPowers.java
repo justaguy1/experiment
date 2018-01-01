@@ -23,10 +23,17 @@ public class SuperPowers {
 	int bYSpeed=4;
 	int powerLevelPlayer=1;
 	int powerLevelBall=1;
+	int powerLevelPowers=1;
+	boolean threeBall=false;
+	
+	static long timeCounter=0;
+	boolean canGetPowers=true;
+	static int count =0;
 	
 	void resetAllPowerUps()
 	{
-		
+			canGetPowers=true;
+			threeBall=false;
 		 	freeze=false;
 			// use is moving boolean
 			
@@ -53,6 +60,8 @@ public class SuperPowers {
 			powerLevelBall=1;
 			
 		
+			powerLevelPowers=1;
+			
 			
 			
 	}
@@ -60,73 +69,98 @@ public class SuperPowers {
 	void gainRandomPower()
 	{
 	
-
-		Random rand = new Random();
-
-		int  n = rand.nextInt(5) + 1;
 		
-		switch(n)
+		
+		if(Main.tickTime-timeCounter >10000)
 		{
-		// freezes player if struck by ball
-			case 1:
-				
-				powerIsOn=true;
-				freeze=true;
-				powerLevelBall=5;
-				powerLevelPlayer=3;
-				System.out.println("freezed");
-				break;
+			canGetPowers=true;
+			count=0;
+		}
 		
-				//make ball move very slow
-			case 2:
-				resetAllPowerUps();
-				powerIsOn=true;
-				isBallPower=true;
-				bXSpeed=2;
-				bYSpeed=2;
-				powerLevelBall=3;
-				System.out.println("slow ball");
-				break;
+		if(canGetPowers==true && count ==0)
+		{
+			count++;
+			timeCounter = System.currentTimeMillis();
+			canGetPowers=false;
+			Random rand = new Random();
+
+			int  n = rand.nextInt(6) + 1;
+			
+			switch(n)
+			{
+			// freezes player if struck by ball
+				case 1:
+					
+					powerIsOn=true;
+					freeze=true;
+					powerLevelBall=5;
+					powerLevelPlayer=3;
+					powerLevelPowers=1;
+					
+					System.out.println("freezed");
+					break;
+			
+					//make ball move very slow
+				case 2:
+					resetAllPowerUps();
+					powerIsOn=true;
+					isBallPower=true;
+					bXSpeed=2;
+					bYSpeed=2;
+					powerLevelBall=3;
+					powerLevelPowers=2;
+					System.out.println("slow ball");
+					break;
+					
+					
+				case 3:
+					resetAllPowerUps();
+					powerIsOn=true;
+					isPlayerPower=true;
+					threeBall=true;
+					powerLevelPowers=6;
+					System.out.println("three ball");
+					break;	
 				
-				//makes ball move very fast
-			case 3:
-				resetAllPowerUps();
-				powerIsOn=true;
-				isBallPower =true;
-				bXSpeed=8;
-				bYSpeed=8;
-				powerLevelBall=4;
-				System.out.println("fast ball");
+					
+					//makes player move very slow
+				case 4:
+					resetAllPowerUps();
+					powerIsOn=true;
+					isPlayerPower=true;
+					playerSpeed=5;
+					powerLevelPowers=4;
+					System.out.println("slow player");
+					break;
+					
+					//makes player move very fast
+				case 5:
+					resetAllPowerUps();
+					powerIsOn=true;
+					isPlayerPower=true;
+					playerSpeed=20;
+					powerLevelPowers=5;
+					System.out.println("fast player");
+					break;
+					
+					//makes ball move very fast
+				case 6:
+					resetAllPowerUps();
+					powerIsOn=true;
+					isBallPower =true;
+					bXSpeed=8;
+					bYSpeed=8;
+					powerLevelBall=4;
+					powerLevelPowers=3;
+					System.out.println("fast ball");
+					
+					break;
+				default:
+					powerIsOn=true;
+					System.out.println("some shit happened ");
+					break;
 				
-				break;
-				
-				//makes player move very slow
-			case 4:
-				resetAllPowerUps();
-				powerIsOn=true;
-				isPlayerPower=true;
-				playerSpeed=5;
-				System.out.println("slow player");
-				break;
-				
-				//makes player move very fast
-			case 5:
-				resetAllPowerUps();
-				powerIsOn=true;
-				isPlayerPower=true;
-				playerSpeed=20;
-				System.out.println("fast player");
-				break;
-			default:
-				powerIsOn=true;
-				System.out.println("some shit happened ");
-				break;
-				
-				/*if (x < obj.x + obj.width &&
-						  x +width > obj.x &&
-						  y < obj.y + obj.height &&
-						  height + y > obj.y && count==0) {
-						   */
+			}
 		}
 	}
 
