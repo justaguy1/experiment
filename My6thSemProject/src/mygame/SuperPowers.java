@@ -25,6 +25,7 @@ public class SuperPowers {
 	int powerLevelPlayer=1;
 	int powerLevelBall=1;
 	int powerLevelPowers=1;
+	int bulletCount =0;
 	boolean threeBall=false;
 	
 	static long timeCounter=0;
@@ -91,8 +92,8 @@ public class SuperPowers {
 			canGetPowers=false;
 			Random rand = new Random();
 
-			int  n = rand.nextInt(6) + 1;
-			// int n=3;
+			int  n = rand.nextInt(7) + 1;
+			 //int n=7;
 			switch(n)
 			{
 			// freezes player if struck by ball
@@ -173,10 +174,38 @@ public class SuperPowers {
 
 					powerLevelPowers=6;
 
-					powerLevelPowers=3;
+					
 					GameComponents.Playsound(speedup_S);
 
 					System.out.println("fast ball");
+					
+					break;
+					
+				case 7:
+					
+					resetAllPowerUps();
+					canGetPowers=false;
+					powerIsOn=true;
+					isPlayerPower=true;
+					powerLevelPowers=7;
+					
+					resetAllPowerUps();
+					canGetPowers=false;
+					powerIsOn=true;
+					isPlayerPower=true;
+					
+
+					
+					GameComponents.Playsound(ballclone_S);
+					if(GameComponents.playerNo==1)
+						Main.player_01.sp.bulletCount=5;
+					else
+						Main.player_02.sp.bulletCount=5;
+					
+					
+					GameComponents.Playsound(speedup_S);
+
+					System.out.println("bullets");
 					
 					break;
 				default:

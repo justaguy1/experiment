@@ -24,6 +24,7 @@ public class Main   implements Runnable,KeyListener{
 	int playerNo =0;
 		
 	static boolean _DOWN=false,_UP=false,DOWN=false,UP=false;
+	static boolean fire1=false,fire2=false;
 	
 	//related to thread
 	static boolean isRunning =true;
@@ -42,6 +43,8 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents chest;
 	static GameComponents powers[];
 	static GameComponents initializer;
+	static GameComponents bullet1[];
+	static GameComponents bullet2[];
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -172,6 +175,28 @@ public class Main   implements Runnable,KeyListener{
 		for(int i=0;i<3;i++)
 		g.drawImage(GameComponents.ballI[1], powers[i].x, powers[i].y,powers[i].width,powers[i].height,null);
 
+		for(int i=0;i<5;i++)
+		{
+			if(bullet1[i].x >0 && bullet1[i].y>0)
+			{
+				g.drawImage(bullet1[i].img, bullet1[i].x, bullet1[i].y,bullet1[i].width,bullet1[i].height,null);
+				
+			}
+			
+			if(bullet2[i].x >0 && bullet2[i].y>0)
+			{
+				if(bullet2[i].x >0 && bullet2[i].y>0)
+				{
+					g.drawImage(bullet2[i].img, bullet2[i].x, bullet2[i].y,bullet2[i].width,bullet2[i].height,null);
+					
+				}
+				
+			}
+			
+			
+			
+		}
+		
 	    bs.show();
 		g.dispose();
 
@@ -199,6 +224,36 @@ public class Main   implements Runnable,KeyListener{
 				 for(int i=0;i<80 ;i++)
 				 powers[j].calculateCollision(block[i]);
 				
+			 }
+		 }
+		 
+		 for(int i=0;i<5;i++)
+		 {
+			 if(bullet1[i].x >0 && bullet1[i].y>0)
+			 {
+				 bullet1[i].x+=8;
+				 bullet1[i].calculateCollision(player_02);
+				for(int j=0;j<80;j++)
+				 bullet1[i].calculateCollision(block[j]);
+				 
+				 if(bullet1[i].x>Main.canvas.getWidth())
+				 {
+					 bullet1[i].x=-100;
+				 }
+			 }
+			 
+
+			 if(bullet2[i].x >0 && bullet2[i].y>0)
+			 {
+				 bullet2[i].x-=8;
+				 bullet2[i].calculateCollision(player_02);
+				 for(int j=0;j<80 ;j++)
+					 bullet2[i].calculateCollision(block[j]);
+				 
+				 if(bullet2[i].x>Main.canvas.getWidth())
+				 {
+					 bullet2[i].x=-100;
+				 }
 			 }
 		 }
 	}
@@ -232,7 +287,11 @@ public class Main   implements Runnable,KeyListener{
 			if(e.getKeyCode()==KeyEvent.VK_L)
 				ball.x+=2;
 			
+			if(e.getKeyCode()==KeyEvent.VK_E)
+				fire1=true;
 			
+			if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
+				fire2=true;
 		
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE)
@@ -268,6 +327,11 @@ public class Main   implements Runnable,KeyListener{
 	    if(e.getKeyCode()==KeyEvent.VK_DOWN)
 				_DOWN=false;
 		
+	    if(e.getKeyCode()==KeyEvent.VK_E)
+			fire1=false;
+		
+		if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
+			fire2=false;
 	}
 
 	
@@ -309,6 +373,7 @@ public class Main   implements Runnable,KeyListener{
 		player_01.initProperties(100, 600, 20, 80,1, player1ImgPath);
 		player_01.initializeSpeed(10, 0);
 		player_01.setName("Player 1");
+		player_01.sp.bulletCount=4;
 		player_01.start();
 		
 	
@@ -385,6 +450,25 @@ public class Main   implements Runnable,KeyListener{
 		 chest =new GameComponents();
 			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
 			chest.start();
+			
+		bullet1=new GameComponents[5];
+		bullet2=new GameComponents[5];
+		
+		for(int i=0;i<5;i++)
+		{
+			bullet1[i]=new GameComponents();
+			bullet2[i]=new GameComponents();
+		}
+		
+		for(int i=0;i<5;i++)
+		{
+			
+			
+			bullet1[i].initProperties(-100, -100, 15, 15, 6, "icons\\bullet.png");
+			bullet2[i].initProperties(-100, -100, 15, 15, 7, "icons\\bullet.png");
+			bullet1[i].start();
+			bullet2[i].start();
+		}
 			
 		int j=0;
 		int k=1;

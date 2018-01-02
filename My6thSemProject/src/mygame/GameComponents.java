@@ -46,6 +46,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	String name;
 	int powerLevel=1;
 	
+	static int playerNo=2;
+	
 	 SuperPowers sp=new SuperPowers();
 	File bounce = new File("sounds/bounce.wav");
 	File freeze_s= new File("sounds/freeze.wav");
@@ -290,6 +292,22 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			 
 			 
 		 }
+		 
+		 if(this.id==6)
+		 {
+			 if(x>0)
+			 {
+				 x=x+sp.bXSpeed;
+			 }
+		 }
+		 
+		 if(id==7)
+		 {
+			 if(x>0)
+			 {
+				 x=x-sp.bXSpeed;
+			 }
+		 }
 		 Thread.sleep(17);
 	}
 	 
@@ -338,6 +356,11 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
 			}
 			
+			if(obj.id==1)
+				playerNo=1;
+			if(obj.id==2)
+				playerNo=2;
+			
 			
 		}
 		
@@ -362,12 +385,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				}
 				if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
 				{
-					Main.powers[0].x=getRandom(300, 800);
-					Main.powers[0].y=getRandom(400,600);
-					Main.powers[1].x=getRandom(300, 800);
-					Main.powers[1].y=getRandom(400,600);
-					Main.powers[2].x=getRandom(300, 800);
-					Main.powers[2].y=getRandom(400,600);
+					Main.powers[0].x=getRandom(300, 1000);
+					Main.powers[0].y=getRandom(100,700);
+					Main.powers[1].x=getRandom(300, 1000);
+					Main.powers[1].y=getRandom(100,700);
+					Main.powers[2].x=getRandom(300, 1000);
+					Main.powers[2].y=getRandom(100,700);
 					
 				}
 				//return;
@@ -456,7 +479,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				
 					
 		}			
-		//yspeed=-yspeed;		 
+		
+		if(id==6)
+		{
+			x=-100;
+			y=-100;
+		}
+		
 	}
 
 
@@ -560,6 +589,26 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					y+=sp.playerSpeed;
 				}
 			}
+			
+			if(sp.bulletCount>0)
+			{
+				if(Main.fire1==true)
+				{
+					sp.bulletCount--;
+					
+					Main.bullet1[sp.bulletCount].x=dx+width;
+					Main.bullet1[sp.bulletCount].y=dy;
+					
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+						
+					}
+				}
+			}
 		}
 		
 		if(id==2 && sp.freeze==false)
@@ -580,6 +629,22 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				if(y<=max_y-height-10)
 				{
 					y+=sp.playerSpeed;
+				}
+			}
+			
+			if(sp.bulletCount>0)
+			{
+				if(Main.fire2==true)
+				{
+					sp.bulletCount--;
+					Main.bullet2[sp.bulletCount].x=dx-width;
+					Main.bullet2[sp.bulletCount].y=dy;
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
