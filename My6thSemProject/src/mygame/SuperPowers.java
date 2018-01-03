@@ -97,43 +97,23 @@ public class SuperPowers {
 			switch(n)
 			{
 			// freezes player if struck by ball
+				
+					
+					
 				case 1:
 					resetAllPowerUps();
-					canGetPowers=false;
-					powerIsOn=true;
-					freeze=true;
-					powerLevelBall=5;
-					powerLevelPlayer=3;
-					powerLevelPowers=1;
-					GameComponents.Playsound(freeze_s);
-					System.out.println("freezed");
-					break;
-			
-					//make ball move very slow
-				case 2:
-					resetAllPowerUps();
-					canGetPowers=false;
-					powerIsOn=true;
-					isBallPower=true;
-					bXSpeed=2;
-					bYSpeed=2;
-					powerLevelBall=3;
-					powerLevelPowers=2;
-					GameComponents.Playsound(slowdown_S);
-					System.out.println("slow ball");
-					break;
 					
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
 					
-				case 3:
-					resetAllPowerUps();
 					canGetPowers=false;
 					powerIsOn=true;
-					isPlayerPower=true;
-					threeBall=true;
+					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.threeBall=true;
 
-					powerLevelPowers=3;
+					
 
-					powerLevelPowers=6;
+					powerLevelPowers=n;
 					GameComponents.Playsound(ballclone_S);
 
 					System.out.println("three ball");
@@ -141,35 +121,41 @@ public class SuperPowers {
 				
 					
 					//makes player move very slow
-				case 4:
+				case 2:
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
 					canGetPowers=false;
 					powerIsOn=true;
-					isPlayerPower=true;
-					playerSpeed=5;
-					powerLevelPowers=4;
+					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.playerSpeed=5;
+					Main.powerUp[n].sp.powerLevelPowers=n;
 					System.out.println("slow player");
 					break;
 					
 					//makes player move very fast
-				case 5:
+				case 3:
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
 					canGetPowers=false;
 					powerIsOn=true;
-					isPlayerPower=true;
-					playerSpeed=20;
-					powerLevelPowers=5;
+					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.playerSpeed=20;
+					Main.powerUp[n].sp.powerLevelPowers=n;
 					System.out.println("fast player");
 					break;
 					
 					//makes ball move very fast
-				case 6:
+				case 4:
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
 					canGetPowers=false;
 					powerIsOn=true;
-					isBallPower =true;
-					bXSpeed=8;
-					bYSpeed=8;
+					Main.powerUp[n].sp.isBallPower =true;
+					Main.powerUp[n].sp.bXSpeed=8;
+					Main.powerUp[n].sp.bYSpeed=8;
 					powerLevelBall=4;
 
 					powerLevelPowers=6;
@@ -181,19 +167,17 @@ public class SuperPowers {
 					
 					break;
 					
-				case 7:
-					
+				case 5:
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
-					canGetPowers=false;
-					powerIsOn=true;
-					isPlayerPower=true;
-					powerLevelPowers=7;
 					
-					resetAllPowerUps();
-					canGetPowers=false;
 					powerIsOn=true;
-					isPlayerPower=true;
+					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.powerLevelPowers=7;
 					
+					
+					canGetPowers=false;
 
 					
 					GameComponents.Playsound(ballclone_S);
@@ -208,7 +192,36 @@ public class SuperPowers {
 					System.out.println("bullets");
 					
 					break;
-				default:
+					
+					case 6:
+					
+					
+					resetAllPowerUps();
+					canGetPowers=false;
+					powerIsOn=true;
+					freeze=true;
+					powerLevelBall=5;
+					powerLevelPlayer=3;
+					powerLevelPowers=n;
+					GameComponents.Playsound(freeze_s);
+					System.out.println("freezed");
+					break;
+			
+					//make ball move very slow
+				case 7:
+					resetAllPowerUps();
+					canGetPowers=false;
+					powerIsOn=true;
+					isBallPower=true;
+					bXSpeed=2;
+					bYSpeed=2;
+					powerLevelBall=3;
+					powerLevelPowers=n;
+					GameComponents.Playsound(slowdown_S);
+					System.out.println("slow ball");
+					break;
+					
+				 default:
 					powerIsOn=true;
 					System.out.println("some shit happened ");
 					break;

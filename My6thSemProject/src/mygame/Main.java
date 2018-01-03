@@ -45,6 +45,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents initializer;
 	static GameComponents bullet1[];
 	static GameComponents bullet2[];
+	static GameComponents powerUp[];
 	
 	static String player1ImgPath ="icons\\player.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -56,6 +57,7 @@ public class Main   implements Runnable,KeyListener{
 	static String playerImgPath[]=new String[4];
 	static String ballImgPath[]=new String[6];
 	static String powersImgPath[]=new String[6];
+	static String powerUps[]=new String[8];
 	
 	static String backgroundimg="icons\\bk.jpg"; 
 	static long tickTime=0;
@@ -111,6 +113,14 @@ public class Main   implements Runnable,KeyListener{
 		powersImgPath[3]="icons\\green_ball_clone.png";
 		powersImgPath[4]="icons\\green_ball_clone.png";
 		powersImgPath[5]="icons\\green_ball_clone.png";
+		
+		powerUps[1]="icons\\fire.png";
+		powerUps[2]="icons\\ice.png";
+		powerUps[3]="icons\\slow.png";
+		powerUps[4]="icons\\slow_ball.png";
+		powerUps[5]="icons\\three_ball.png";
+		powerUps[6]="icons\\what.png";
+		powerUps[7]="icons\\what_grey.png";
 		
 	  }
 	  catch(Exception e)
@@ -197,6 +207,14 @@ public class Main   implements Runnable,KeyListener{
 			
 		}
 		
+		for(int i=0;i<6;i++)
+		{
+			if(powerUp[i].x>0)
+			{
+				g.drawImage(GameComponents.powerUp[i], powerUp[i].x, powerUp[i].y,powerUp[i].width,powerUp[i].height,null);
+			}
+		}
+		
 	    bs.show();
 		g.dispose();
 
@@ -255,9 +273,41 @@ public class Main   implements Runnable,KeyListener{
 					 bullet2[i].x=-100;
 				 }
 			 }
+			 
+			 
+			  getpowers();
 		 }
 	}
 	
+	private void getpowers() {
+		
+		System.out.println(GameComponents.playerNo);
+		for(int i=0;i<6;i++)
+		{
+			if(powerUp[i].x>0)
+			{
+				if(GameComponents.playerNo==1)
+				{
+					powerUp[i].x--;
+					powerUp[i].calculateCollision(player_01);
+				}
+				else if(GameComponents.playerNo==2)
+					{
+						powerUp[i].x++;
+						powerUp[i].calculateCollision(player_02);
+						
+						if(powerUp[i].x>Main.canvas.getWidth()+10)
+						{
+							powerUp[i].x=-100;
+						}
+							
+					}
+					
+			}
+		}
+		
+	}
+
 	public void keyPressed(KeyEvent e) {
 		
 		
@@ -386,9 +436,17 @@ public class Main   implements Runnable,KeyListener{
 		
 
 		powers =new GameComponents[6];
-		for(int i=0;i<5;i++)
+		powerUp=new GameComponents[6];
+		for(int i=0;i<6;i++)
 		{
 			powers[i]=new GameComponents();
+			powerUp[i]=new GameComponents();
+		}
+		
+		for(int i=0;i<6;i++)
+		{
+			powerUp[i].initProperties(-100, -100, 40, 40, 1, 20);
+			powerUp[i].start();
 		}
 		
 		for(int i=0;i<3;i++)
@@ -397,6 +455,7 @@ public class Main   implements Runnable,KeyListener{
 			powers[i].setName("powers");
 			powers[i].start();
 		}
+		
 		
 		
 		blocks =new ArrayList<GameComponents>();
@@ -448,7 +507,7 @@ public class Main   implements Runnable,KeyListener{
 		block[14].initProperties(700, 600, 80, 40,3,10 );*/
 		 
 		 chest =new GameComponents();
-			chest.initProperties(800, 600,100, 100,5,"icons\\chest.png");
+			chest.initProperties(800, 600,100, 100,5,"icons\\what.png");
 			chest.start();
 			
 		bullet1=new GameComponents[5];
@@ -481,13 +540,13 @@ public class Main   implements Runnable,KeyListener{
 				 k=1;
 			 }
 			 if(i<24)
-			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(5),10 );
+			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(4),10 );
 			 
 			 if(i>=24 && i<48)
-				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(5),10 );
+				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(4),10 );
 			 
 			 if(i>=48)
-				 block[i].initProperties(600+k*40, j*40, 40,40,rand(5),10 );
+				 block[i].initProperties(600+k*40, j*40, 40,40,rand(4),10 );
 				 
 		 }
 		

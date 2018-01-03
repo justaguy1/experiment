@@ -43,6 +43,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	static Image playerI[];
 	static Image [] ballI;
 	static Image [] powersI;
+	static Image [] powerUp;
 	String name;
 	int powerLevel=1;
 	
@@ -78,7 +79,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	public  void setBlockImage()
 	{
 		block=new Image[6];
-		blockR=new Image[6];
+		blockR=new Image[7];
 		
 		
 		try 
@@ -129,10 +130,14 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	public void setPowersImage()
 	{
 		powersI=new Image[6];
+		powerUp=new Image[8];
 		try 
 		{
 		for(int i=1;i<6;i++)
 		powersI[i]=new ImageIcon(getClass().getResource(Main.powersImgPath[i])).getImage();
+		
+		for(int i=1;i<7;i++)
+			powerUp[i]=new ImageIcon(getClass().getResource(Main.powerUps[i])).getImage();
 	
 		}
 		catch(Exception e)
