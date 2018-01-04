@@ -291,9 +291,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 {
 			 
 			 if(sp.canGetPowers==true)
-				 this.img =this.initializeImage("icons\\chest.png");
+				 this.img =this.initializeImage("icons\\what.png");
 			 else
-				 this.img=this.initializeImage("icons\\chest_grey.png");
+				 this.img=this.initializeImage("icons\\what_grey.png");
 			 
 			 
 		 }
@@ -313,6 +313,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 x=x-sp.bXSpeed;
 			 }
 		 }
+		 
+		 
 		 Thread.sleep(17);
 	}
 	 
@@ -341,17 +343,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 	private void changeBallPosition(GameComponents obj) {
 		
-		float w=(width+obj.width)/2;
-		float h=(height+obj.height)/2;
-		
-		float disY =dy-obj.dy;
-		float disX =dx-obj.dx;
-		
-		float wy =w*disY;
-		float hx =h*disX;
 		
 		
-		if(obj.id ==1 || obj.id==2)
+		
+		if(obj.id ==1 || obj.id==2)  // this happens when ball collides with player
 		{
 			if(obj.sp.powerIsOn==false)
 			{
@@ -372,65 +367,19 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		
 		if(obj.id !=10)
 		{
-			obj.sp.freeze=this.sp.freeze;
-			//if(obj.sp.freeze==false)		
 				Playsound(bounce);
 
-			if(obj.id==5)
+			if(obj.id==5)  // this is set only when ball collides with chest 
 			{
 				sp.gainRandomPower();
 				obj.sp.canGetPowers=sp.canGetPowers;
 				obj.sp.powerIsOn=sp.powerIsOn;
 				
-				for(int i=0;i<3;i++)
-				{
-					Main.powers[i].sp.powerIsOn=sp.powerIsOn;
-					Main.powers[i].sp.powerLevelPowers=sp.powerLevelPowers;
-					Main.powers[i].sp.threeBall=sp.threeBall;
-				}
-				if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
-				{
-					Main.powers[0].x=getRandom(300, 1000);
-					Main.powers[0].y=getRandom(100,700);
-					Main.powers[1].x=getRandom(300, 1000);
-					Main.powers[1].y=getRandom(100,700);
-					Main.powers[2].x=getRandom(300, 1000);
-					Main.powers[2].y=getRandom(100,700);
-					
-				}
-				//return;
+				threeBalls();
+				
 			}
 			
-			if (wy > hx)
-				{  
-					if (wy > -hx)
-					{
-			           System.out.println("down");
-			           sp.bYSpeed=-sp.bYSpeed;
-					}
-			        else
-			        {
-			           System.out.println("left");
-			           sp.bXSpeed=-sp.bXSpeed;
-			           return;
-			        }
-				}
-		    else
-		    {
-			        if (wy > -hx)
-			        {
-			        	 System.out.println("right");
-			        	 sp.bXSpeed=-sp.bXSpeed;
-			        }
-			           
-			        else
-			        {
-			        	 System.out.println("top");
-			        	 sp.bYSpeed=-sp.bYSpeed;
-			        }
-		    }
-		            /* at the bottom */
-			 //obj.sp.freeze=this.sp.freeze;
+			collisionTest(obj);  // ball moves to different direction using this function
 	
 		}
 		else
@@ -452,49 +401,101 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 obj.blockLevel--;
 			 }
 			 
-
-			 if (wy > hx)
-				{  
-					if (wy > -hx)
-					{
-			           System.out.println("down");
-			           sp.bYSpeed=-sp.bYSpeed;
-					}
-			        else
-			        {
-			           System.out.println("left");
-			           sp.bXSpeed=-sp.bXSpeed;
-			           return;
-			        }
-				}
-		    else
-		    {
-			        if (wy > -hx)
-			        {
-			        	 System.out.println("right");
-			        	 sp.bXSpeed=-sp.bXSpeed;
-			        }
-			           
-			        else
-			        {
-			        	 System.out.println("top");
-			        	 sp.bYSpeed=-sp.bYSpeed;
-			        }
-		    }
+			 collisionTest(obj);	// ball moves to different direction using this function
 				
 					
 		}			
 		
-		if(id==6)
+		if(id==6 || id==7)  //destroy bullets after hitting something
 		{
 			x=-100;
 			y=-100;
 		}
 		
+		if(id==20)
+		{
+			if(obj.id ==1 || obj.id==2)
+				{
+					if(GameComponents.playerNo==1)
+						Main.player_01.sp.bulletCount=5;
+					else
+						Main.player_02.sp.bulletCount=5;
+				}
+			if(obj.id==1 || obj.id==2)
+			{
+				x=-100;
+				y=-100;
+			}
+		}
+		
 	}
 
 
-	private void set_dx_dy() {
+ private void collisionTest(GameComponents obj)  // moves ball according to collision occured
+ {
+	 float w=(width+obj.width)/2;
+		float h=(height+obj.height)/2;
+		
+		float disY =dy-obj.dy;
+		float disX =dx-obj.dx;
+		
+		float wy =w*disY;
+		float hx =h*disX;
+		
+		if (wy > hx)
+			{  
+				if (wy > -hx)
+				{
+		           System.out.println("down");
+		           sp.bYSpeed=-sp.bYSpeed;
+				}
+		        else
+		        {
+		           System.out.println("left");
+		           sp.bXSpeed=-sp.bXSpeed;
+		           return;
+		        }
+			}
+	    else
+	    {
+		        if (wy > -hx)
+		        {
+		        	 System.out.println("right");
+		        	 sp.bXSpeed=-sp.bXSpeed;
+		        }
+		           
+		        else
+		        {
+		        	 System.out.println("top");
+		        	 sp.bYSpeed=-sp.bYSpeed;
+		        }
+	    }
+		
+	}
+void threeBalls() {
+	for(int i=0;i<3;i++)  // this is only for three ball 
+	{
+		Main.powers[i].sp.powerIsOn=sp.powerIsOn;
+		Main.powers[i].sp.powerLevelPowers=sp.powerLevelPowers;
+		Main.powers[i].sp.threeBall=sp.threeBall;
+	}
+	if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
+	{
+		Main.powers[0].x=getRandom(300, 1000);
+		Main.powers[0].y=getRandom(100,700);
+		Main.powers[1].x=getRandom(300, 1000);
+		Main.powers[1].y=getRandom(100,700);
+		Main.powers[2].x=getRandom(300, 1000);
+		Main.powers[2].y=getRandom(100,700);
+		
+	}
+		
+	}
+	
+ 
+ 
+ 
+ private void set_dx_dy() {
 		 dx=this.x+this.width/2;
 		 dy=this.y+this.height/2;
 		
@@ -507,29 +508,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	public void calculateCollision(GameComponents obj) {
 		
 		 timeNow = System.currentTimeMillis();
-
-		/*if((Math.abs(this.y-obj.y))<=Math.abs(obj.height) && (Math.abs(this.x-obj.x))<=Math.abs(obj.width) && distance <=50  && count==0)
-		{
-			changeBallPosition(obj);
-			count++;
-			colTime = System.currentTimeMillis();
-			col=true;
-			
-			
-		}
-		if(timeNow -colTime >=200)
-		{
-			count=0;
-			col=false;
-		}*/
 		 
 		 if (x < obj.x + obj.width &&
 				  x +width > obj.x &&
 				  y < obj.y + obj.height &&
 				  height + y > obj.y && count==0) {
-				   
-			 
-			 
+
 			 	changeBallPosition(obj);
 			 	count++;
 				colTime = System.currentTimeMillis();
@@ -602,7 +586,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					sp.bulletCount--;
 					
 					Main.bullet1[sp.bulletCount].x=dx+width;
-					Main.bullet1[sp.bulletCount].y=dy;
+					Main.bullet1[sp.bulletCount].y=dy-20;
 					
 					try {
 						Thread.sleep(500);
@@ -642,8 +626,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				if(Main.fire2==true)
 				{
 					sp.bulletCount--;
-					Main.bullet2[sp.bulletCount].x=dx-width;
-					Main.bullet2[sp.bulletCount].y=dy;
+					Main.bullet2[sp.bulletCount].x=dx-3*width;
+					Main.bullet2[sp.bulletCount].y=dy-20;
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
