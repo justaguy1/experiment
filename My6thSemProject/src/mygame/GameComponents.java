@@ -38,9 +38,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	static long colTime =0; // time when collision occured
 	
 	static long timeNow=0;
-	static Image block[];
-	static Image blockR[];
-	static Image playerI[];
+	static Image [] block;
+	static Image [] blockR;
+	static Image [] playerI;
 	static Image [] ballI;
 	static Image [] powersI;
 	static Image [] powerUp;
@@ -78,8 +78,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	public  void setBlockImage()
 	{
-		block=new Image[6];
-		blockR=new Image[7];
+		block=new Image[7];
+		blockR=new Image[6];
 		
 		
 		try 

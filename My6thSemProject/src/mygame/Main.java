@@ -87,13 +87,13 @@ public class Main   implements Runnable,KeyListener{
 	  try
 	  {
 		blockImgPath[1] = "icons\\block_r.png";
-		blockImgPath[2] = "icons\\block_g.jpg";
+		blockImgPath[2] = "icons\\block_g.png";
 		blockImgPath[3] = "icons\\block_y.png";
 		blockImgPath[4] = "icons\\block_lg.png";
 		blockImgPath[5] = "icons\\block_b.png";
 		
 		blockRImgPath[1] = "icons\\block_r_r.png";
-		blockRImgPath[2] = "icons\\block_g_r.jpg";
+		blockRImgPath[2] = "icons\\block_g_r.png";
 		blockRImgPath[3] = "icons\\block_y_r.png";
 		blockRImgPath[4] = "icons\\block_lg_r.png";
 		blockRImgPath[5] = "icons\\block_b_r.png";
@@ -180,7 +180,11 @@ public class Main   implements Runnable,KeyListener{
 		
 		for(int i=0;i<80;i++)
 		{
+			if(i<24 && i>=48)
 			g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
+			else
+				g.drawImage(GameComponents.blockR[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
+				
 		}
 		for(int i=0;i<3;i++)
 		g.drawImage(GameComponents.ballI[1], powers[i].x, powers[i].y,powers[i].width,powers[i].height,null);
@@ -540,13 +544,13 @@ public class Main   implements Runnable,KeyListener{
 				 k=1;
 			 }
 			 if(i<24)
-			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(4),10 );
+			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(5),10 );
 			 
 			 if(i>=24 && i<48)
-				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(4),10 );
+				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(5),10 );
 			 
 			 if(i>=48)
-				 block[i].initProperties(600+k*40, j*40, 40,40,rand(4),10 );
+				 block[i].initProperties(600+k*40, j*40, 40,40,rand(5),10 );
 				 
 		 }
 		
