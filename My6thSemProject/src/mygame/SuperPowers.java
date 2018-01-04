@@ -182,15 +182,9 @@ public class SuperPowers {
 					
 					GameComponents.Playsound(ballclone_S);
 					if(GameComponents.playerNo==1)
-					{
 						Main.player_01.sp.bulletCount=5;
-						
-					}
-					else if( GameComponents.playerNo==2)
-					{
+					else
 						Main.player_02.sp.bulletCount=5;
-						
-					}
 					
 					
 					GameComponents.Playsound(speedup_S);

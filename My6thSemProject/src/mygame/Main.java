@@ -281,7 +281,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	private void getpowers() {
 		
-		//System.out.println(GameComponents.playerNo);
+		System.out.println(GameComponents.playerNo);
 		for(int i=0;i<6;i++)
 		{
 			if(powerUp[i].x>0)
@@ -523,8 +523,8 @@ public class Main   implements Runnable,KeyListener{
 		{
 			
 			
-			bullet1[i].initProperties(-100, -100, 30, 30, 6, "icons\\fireball.png");
-			bullet2[i].initProperties(-100, -100, 30, 30, 7, "icons\\fireballR.png");
+			bullet1[i].initProperties(-100, -100, 15, 15, 6, "icons\\bullet.png");
+			bullet2[i].initProperties(-100, -100, 15, 15, 7, "icons\\bullet.png");
 			bullet1[i].start();
 			bullet2[i].start();
 		}

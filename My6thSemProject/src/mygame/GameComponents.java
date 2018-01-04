@@ -599,12 +599,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			{
 				if(Main.fire1==true)
 				{
-					
 					sp.bulletCount--;
+					
 					Main.bullet1[sp.bulletCount].x=dx+width;
 					Main.bullet1[sp.bulletCount].y=dy;
-					
-					
 					
 					try {
 						Thread.sleep(500);
@@ -643,11 +641,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			{
 				if(Main.fire2==true)
 				{
-					
 					sp.bulletCount--;
 					Main.bullet2[sp.bulletCount].x=dx-width;
 					Main.bullet2[sp.bulletCount].y=dy;
-					
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
