@@ -93,7 +93,7 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(7) + 1;
-			 //int n=7;
+			  n=5;
 			switch(n)
 			{
 			// freezes player if struck by ball
