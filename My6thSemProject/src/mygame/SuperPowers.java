@@ -93,7 +93,7 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(7) + 1;
-			 n=5;
+			 //int n=7;
 			switch(n)
 			{
 			// freezes player if struck by ball
@@ -102,11 +102,16 @@ public class SuperPowers {
 					
 				case 1:
 					resetAllPowerUps();
-
+					
+					Main.powerUp[n].x=Main.ball.x;
+					Main.powerUp[n].y=Main.ball.y;
+					
 					canGetPowers=false;
 					powerIsOn=true;
-					isPlayerPower=true;
-					threeBall=true;
+					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.threeBall=true;
+
+					
 
 					powerLevelPowers=n;
 					GameComponents.Playsound(ballclone_S);
@@ -133,13 +138,11 @@ public class SuperPowers {
 					Main.powerUp[n].x=Main.ball.x;
 					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
-					
+					canGetPowers=false;
+					powerIsOn=true;
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.playerSpeed=20;
 					Main.powerUp[n].sp.powerLevelPowers=n;
-					
-					canGetPowers=false;
-					powerIsOn=true;
 					System.out.println("fast player");
 					break;
 					
@@ -148,15 +151,15 @@ public class SuperPowers {
 					Main.powerUp[n].x=Main.ball.x;
 					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
-					
-					isBallPower =true;
-					bXSpeed=8;
-					bYSpeed=8;
-					powerLevelBall=4;
-
-					powerLevelPowers=n;
 					canGetPowers=false;
 					powerIsOn=true;
+					Main.powerUp[n].sp.isBallPower =true;
+					Main.powerUp[n].sp.bXSpeed=8;
+					Main.powerUp[n].sp.bYSpeed=8;
+					powerLevelBall=4;
+
+					powerLevelPowers=6;
+
 					
 					GameComponents.Playsound(speedup_S);
 

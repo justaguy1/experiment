@@ -337,7 +337,7 @@ public class Main   implements Runnable,KeyListener{
 			if(e.getKeyCode()==KeyEvent.VK_L)
 				ball.x+=2;
 			
-			if(e.getKeyCode()==KeyEvent.VK_D)
+			if(e.getKeyCode()==KeyEvent.VK_E)
 				fire1=true;
 			
 			if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
@@ -377,7 +377,7 @@ public class Main   implements Runnable,KeyListener{
 	    if(e.getKeyCode()==KeyEvent.VK_DOWN)
 				_DOWN=false;
 		
-	    if(e.getKeyCode()==KeyEvent.VK_D)
+	    if(e.getKeyCode()==KeyEvent.VK_E)
 			fire1=false;
 		
 		if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
