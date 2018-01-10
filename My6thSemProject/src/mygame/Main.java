@@ -63,6 +63,8 @@ public class Main   implements Runnable,KeyListener{
 	static long tickTime=0;
 	
 	static int block_num=80;
+	static int block_counter=0;
+	static int block_gap=2;
 	
 	Main(int width,int height, String title)
 	{
@@ -181,11 +183,11 @@ public class Main   implements Runnable,KeyListener{
 		g.drawImage(GameComponents.playerI[player_01.sp.powerLevelPlayer], player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(GameComponents.playerI[player_02.sp.powerLevelPlayer], player_02.x, player_02.y,player_02.width,player_02.height,null);
 		
-		for(int i=0;i<80;i++)
+		for(int i=0;i<block_num;i++)
 		{
-			if(i<24 && i>=48)
+			if(block[i].height<block[i].width)
 			g.drawImage(GameComponents.block[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
-			else
+			else if(block[i].height>block[i].width)
 				g.drawImage(GameComponents.blockR[block[i].blockLevel],block[i].x, block[i].y,block[i].width,block[i].height,null);
 				
 		}
@@ -242,7 +244,7 @@ public class Main   implements Runnable,KeyListener{
 			
 			
 		}
-		System.out.println(ball.x-(canvas.getWidth()-30));
+	//	System.out.println(ball.x-(canvas.getWidth()-30));
 		
 		if(ball.x>canvas.getWidth()-30 && GameComponents.playerNo==1 )
 		{
@@ -399,6 +401,7 @@ public class Main   implements Runnable,KeyListener{
 					GameComponents.playerNo=2;
 					player_01.score=0;
 					player_02.score=0;
+					block_counter=0;
 					stage_first();
 				}
 				if(GameComponents.playerNo==1)
@@ -408,6 +411,7 @@ public class Main   implements Runnable,KeyListener{
 					player_01.score=0;
 					player_02.score=0;
 					GameComponents.playerNo=1;
+					block_counter=0;
 					stage_first();
 				}
 			}
@@ -541,29 +545,9 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 block=new GameComponents[block_num];
 		 
-		 for(int i=0;i<block_num;i++)
-			{
-				block[i]=new GameComponents();
-			}
-		 
-	/*	block[0].initProperties(300, 100, 80, 40,rand(5),10 );
-		block[1].initProperties(380, 100, 80, 40,rand(5),10 );
-		block[2].initProperties(460, 100, 80, 40,rand(5),10 );
-		block[3].initProperties(540, 100, 80, 40,rand(5),10 );
-		block[4].initProperties(620, 100, 80, 40,rand(5),10 );
-		block[5].initProperties(700, 100, 80, 40,rand(5),10 );
-		block[6].initProperties(300, 140, 80, 40,rand(5),10 );
-		block[7].initProperties(380, 140, 80, 40,rand(5),10 );
-		block[8].initProperties(460, 140, 80, 40,rand(5),10 );
-		block[9].initProperties(540, 140, 80, 40,rand(5),10 );
-		block[10].initProperties(620, 140, 80, 40,rand(5),10 );
-		//block[5].initProperties(400, 300, 80, 40,2,10 );
 		
-		block[5].initProperties(700, 100, 80, 40,3,10 );
-		block[11].initProperties(700, 400, 80, 40,2,10 );
-		block[12].initProperties(600, 500, 80, 40,1,10 );
-		block[13].initProperties(700, 500, 80, 40,2,10 );
-		block[14].initProperties(700, 600, 80, 40,3,10 );*/
+	for(int i=0;i<block_num;i++)
+		block[i]=new GameComponents();
 		 
 		 chest =new GameComponents();
 			chest.initProperties(800, 600,100, 100,5,"icons\\what.png");
@@ -590,7 +574,7 @@ public class Main   implements Runnable,KeyListener{
 			
 		int j=0;
 		int k=1;
-		 for(int i=0;i<block_num;i++)
+	/*	 for(int i=0;i<block_num;i++)
 		 {
 			 k++;
 			 if(i%8==0)
@@ -607,7 +591,12 @@ public class Main   implements Runnable,KeyListener{
 			 if(i>=48)
 				 block[i].initProperties(600+k*40, j*40, 40,40,rand(5),10 );
 				 
-		 }
+		 }*/
+		
+		createLevel(100, 100,40,80,2, 2, 1);
+		createLevel(500, 200,80,40,2, 2, 1);
+		
+		//createLevel(400, 100, 1, 2, 1);
 		
 	}
 	  
@@ -618,6 +607,37 @@ public class Main   implements Runnable,KeyListener{
 			int  n = rand.nextInt(value) + 1;
 			return n;
 			
-		} 
+		}
+	  
+	  void createLevel(int x, int y,int width, int height,int total_hor_tiles,int total_ver_tiles,int caller_id)
+	  {
+		  
+		  System.out.println("block counter : "+block_counter);
+		  int loop_count=0;
+		 
+		  int rangex =block_counter+total_hor_tiles;
+		  int rangey =block_counter+total_ver_tiles;
+		 
+		  System.out.println("rangeX : "+rangex);
+		  System.out.println("rangey : "+rangey);
+		  
+
+		  int p=block_counter;
+		  for(int i=p;i<rangex;i++)
+		  {
+			  for(int j=p;j<rangey;j++)
+			  {
+				  block[block_counter].initProperties(x+(width+block_gap)*loop_count, y+(height+block_gap)*j, width, height,rand(5),10 );
+				  
+				  block_counter++;
+			  }
+			  loop_count++;
+			  
+			 
+		  }
+		  //block_counter=p;
+		  System.out.println(block_counter);
+		 
+	  }
 
 }
