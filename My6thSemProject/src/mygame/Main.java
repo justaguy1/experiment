@@ -62,6 +62,8 @@ public class Main   implements Runnable,KeyListener{
 	static String backgroundimg="icons\\bk.jpg"; 
 	static long tickTime=0;
 	
+	static int block_num=80;
+	
 	Main(int width,int height, String title)
 	{
 	
@@ -266,7 +268,7 @@ public class Main   implements Runnable,KeyListener{
 		 ball.calculateCollision(player_01);
 		 ball.calculateCollision(player_02);
 		 
-		 for(int i=0;i<80;i++)
+		 for(int i=0;i<block_num;i++)
 		 ball.calculateCollision(block[i]);
 		 ball.calculateCollision(chest);
 		
@@ -277,7 +279,7 @@ public class Main   implements Runnable,KeyListener{
 			 {
 				 powers[j].calculateCollision(player_01);
 				 powers[j].calculateCollision(player_02);
-				 for(int i=0;i<80 ;i++)
+				 for(int i=0;i<block_num ;i++)
 				 powers[j].calculateCollision(block[i]);
 				
 			 }
@@ -289,7 +291,7 @@ public class Main   implements Runnable,KeyListener{
 			 {
 				 bullet1[i].x+=8;
 				 bullet1[i].calculateCollision(player_02);
-				for(int j=0;j<80;j++)
+				for(int j=0;j<block_num;j++)
 				 bullet1[i].calculateCollision(block[j]);
 				 
 				 if(bullet1[i].x>Main.canvas.getWidth())
@@ -303,7 +305,7 @@ public class Main   implements Runnable,KeyListener{
 			 {
 				 bullet2[i].x-=8;
 				 bullet2[i].calculateCollision(player_02);
-				 for(int j=0;j<80 ;j++)
+				 for(int j=0;j<block_num ;j++)
 					 bullet2[i].calculateCollision(block[j]);
 				 
 				 if(bullet2[i].x>Main.canvas.getWidth())
@@ -537,9 +539,9 @@ public class Main   implements Runnable,KeyListener{
 
 	  void stage_first() {
 		 
-		 block=new GameComponents[80];
+		 block=new GameComponents[block_num];
 		 
-		 for(int i=0;i<80;i++)
+		 for(int i=0;i<block_num;i++)
 			{
 				block[i]=new GameComponents();
 			}
@@ -588,7 +590,7 @@ public class Main   implements Runnable,KeyListener{
 			
 		int j=0;
 		int k=1;
-		 for(int i=0;i<80;i++)
+		 for(int i=0;i<block_num;i++)
 		 {
 			 k++;
 			 if(i%8==0)
