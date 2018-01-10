@@ -210,7 +210,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		{
 		  //xspeed=-xspeed;
 			sp.bXSpeed=-sp.bXSpeed;
+			
 			count=0;
+		
+			
 		
 		}
 		if(x>=can_width-width)
@@ -262,9 +265,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 
 				 delta--;
 			 }
+			 
+			// System.out.println(playerNo);
 			
 		 }
 		 stop();
+		 
+		
 		
 	}
 	
@@ -701,3 +708,45 @@ void threeBalls() {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

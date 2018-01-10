@@ -227,6 +227,30 @@ public class Main   implements Runnable,KeyListener{
 		
 		g.drawString("player 1 : "+player_01.score, 400, 40);
 		g.drawString("player 2 : "+player_02.score,800, 40);
+		
+		
+		g.setFont(new Font("Arial",Font.BOLD,60));
+		if(ball.x<=10 && GameComponents.playerNo==2 )
+		{
+			g.drawString("gameOver player 2 wins ", 250, 400);
+			
+			ballIsMoving=false;
+			GameComponents.ballIsMoving=false;
+			
+			
+			
+		}
+		System.out.println(ball.x-(canvas.getWidth()-30));
+		
+		if(ball.x>canvas.getWidth()-30 && GameComponents.playerNo==1 )
+		{
+			g.drawString("gameOver player 1 wins ", 250, 400);
+			ballIsMoving=false;
+			GameComponents.ballIsMoving=false;
+			
+			
+			
+		}
 	
 		
 	    bs.show();
@@ -365,6 +389,25 @@ public class Main   implements Runnable,KeyListener{
 			if(!ballIsMoving)
 			{
 				ballIsMoving=true;
+				
+				if(GameComponents.playerNo==2)
+				{
+					ball.x=player_01.dx+10;
+					ball.y=player_01.dy;
+					GameComponents.playerNo=2;
+					player_01.score=0;
+					player_02.score=0;
+					stage_first();
+				}
+				if(GameComponents.playerNo==1)
+				{
+					ball.x=player_02.dx-30;
+					ball.y=player_02.dy;
+					player_01.score=0;
+					player_02.score=0;
+					GameComponents.playerNo=1;
+					stage_first();
+				}
 			}
 		
 			
