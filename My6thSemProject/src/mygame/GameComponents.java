@@ -21,6 +21,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	
 	int xspeed,yspeed;  // speed at which player or ball moves
 	int id;
+	int score=0;
 	Thread t; //thread for all components in this class
 	boolean isRunning=false; //check whether the given thread is currently running
 	
@@ -31,6 +32,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	int dx,dy; // variable that sets coordinates to center
 	
    // static int ballSpeed=4;
+	
+	
 	
 	
 	static boolean col=false; // varibale that indicates whether the collision has occured or not
@@ -382,7 +385,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			collisionTest(obj);  // ball moves to different direction using this function
 	
 		}
-		else
+		else if(obj.id==10)
 		{
 			if(obj.blockLevel<=3&&obj.blockLevel>1)
 		//	Playsound(bounce);
@@ -401,8 +404,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 obj.blockLevel--;
 			 }
 			 
-			 collisionTest(obj);	// ball moves to different direction using this function
-				
+			 collisionTest(obj); // ball moves to different direction using this function
+			
+			calculateScore();
+			 
 					
 		}			
 		
@@ -431,7 +436,28 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 
 
- private void collisionTest(GameComponents obj)  // moves ball according to collision occured
+ private void calculateScore() {
+	 if(id==0)
+	 {
+		 if(playerNo==1)
+			 Main.player_01.score++;
+	 
+		 if(playerNo==2)
+			 Main.player_02.score++;
+	 }
+	 
+	 if(id==6)
+	 {
+		 Main.player_01.score++;
+	 }
+	 
+	 if(id==7)
+	 {
+		 Main.player_02.score++;
+	 } 
+		
+	}
+private void collisionTest(GameComponents obj)  // moves ball according to collision occured
  {
 	 float w=(width+obj.width)/2;
 		float h=(height+obj.height)/2;
@@ -519,7 +545,7 @@ void threeBalls() {
 				colTime = System.currentTimeMillis();
 				col=true;
 				}
-		 if(timeNow -colTime >=100)
+		 if(timeNow -colTime >=300)
 			{
 				count=0;
 				col=false;

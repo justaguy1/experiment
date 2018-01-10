@@ -79,6 +79,7 @@ public class Main   implements Runnable,KeyListener{
 		frame.pack();
 		canvas.addKeyListener(this);
 		canvas.setFocusable(true);
+	
 		
 	}
 	
@@ -218,6 +219,15 @@ public class Main   implements Runnable,KeyListener{
 				g.drawImage(GameComponents.powerUp[i], powerUp[i].x, powerUp[i].y,powerUp[i].width,powerUp[i].height,null);
 			}
 		}
+		
+		
+		g.setFont(new Font("Arial",Font.BOLD,20));
+		g.setColor(Color.BLUE);
+		
+		
+		g.drawString("player 1 : "+player_01.score, 400, 40);
+		g.drawString("player 2 : "+player_02.score,800, 40);
+	
 		
 	    bs.show();
 		g.dispose();
