@@ -66,6 +66,8 @@ public class Main   implements Runnable,KeyListener{
 	static int block_counter=0;
 	static int block_gap=2;
 	
+	static boolean gameJustStarted=true;
+	
 	Main(int width,int height, String title)
 	{
 	
@@ -234,12 +236,25 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		g.setFont(new Font("Arial",Font.BOLD,60));
+	
+		gameOver(g);
+	    bs.show();
+		g.dispose();
+
+	}
+	
+
+
+	
+
+	private void gameOver(Graphics2D g2) {
 		if(ball.x<=10 && GameComponents.playerNo==2 )
 		{
 			g.drawString("gameOver player 2 wins ", 250, 400);
 			
 			ballIsMoving=false;
 			GameComponents.ballIsMoving=false;
+			gameJustStarted=false;
 			
 			
 			
@@ -251,18 +266,12 @@ public class Main   implements Runnable,KeyListener{
 			g.drawString("gameOver player 1 wins ", 250, 400);
 			ballIsMoving=false;
 			GameComponents.ballIsMoving=false;
-			
+			gameJustStarted=false;
 			
 			
 		}
-	
 		
-	    bs.show();
-		g.dispose();
-
 	}
-	
-
 
 	private synchronized void Tick() 
 	{ 
@@ -394,25 +403,30 @@ public class Main   implements Runnable,KeyListener{
 			{
 				ballIsMoving=true;
 				
-				if(GameComponents.playerNo==2)
+				if(gameJustStarted==false)
 				{
-					ball.x=player_01.dx+10;
-					ball.y=player_01.dy;
-					GameComponents.playerNo=2;
-					player_01.score=0;
-					player_02.score=0;
-					block_counter=0;
-					stage_first();
-				}
-				if(GameComponents.playerNo==1)
-				{
-					ball.x=player_02.dx-30;
-					ball.y=player_02.dy;
-					player_01.score=0;
-					player_02.score=0;
-					GameComponents.playerNo=1;
-					block_counter=0;
-					stage_first();
+				
+					if(GameComponents.playerNo==2)
+					{
+						ball.x=player_01.dx+10;
+						ball.y=player_01.dy;
+						GameComponents.playerNo=2;
+						player_01.score=0;
+						player_02.score=0;
+						block_counter=0;
+						
+						stage_first();
+					}
+					if(GameComponents.playerNo==1)
+					{
+						ball.x=player_02.dx-30;
+						ball.y=player_02.dy;
+						player_01.score=0;
+						player_02.score=0;
+						GameComponents.playerNo=1;
+						block_counter=0;
+						stage_first();
+					}
 				}
 			}
 		
@@ -498,7 +512,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 
-		powers =new GameComponents[6];
+		powers =new GameComponents[6];  // three balls
 		powerUp=new GameComponents[6];
 		for(int i=0;i<6;i++)
 		{
@@ -572,31 +586,18 @@ public class Main   implements Runnable,KeyListener{
 			bullet2[i].start();
 		}
 			
-		int j=0;
-		int k=1;
-	/*	 for(int i=0;i<block_num;i++)
-		 {
-			 k++;
-			 if(i%8==0)
-			 {
-				 j++;
-				 k=1;
-			 }
-			 if(i<24)
-			 block[i].initProperties(220+k*80, 100+j*40, 80, 40,rand(5),10 );
-			 
-			 if(i>=24 && i<48)
-				 block[i].initProperties(220+k*40, j*80, 40, 80,rand(5),10 );
-			 
-			 if(i>=48)
-				 block[i].initProperties(600+k*40, j*40, 40,40,rand(5),10 );
-				 
-		 }*/
+	
+		//createLevel(10,-10,40,80,1, 9);
+		//createLevel(canvas.getWidth()-50,-10,40,80,1,9);
 		
-		createLevel(100, 100,40,80,2, 2, 1);
-		createLevel(500, 200,80,40,2, 2, 1);
+		createLevel(280,100,80,40,8, 1);
+		createLevel(280,500,80,40,8, 1);
+		createLevel(280,160,40,80,1, 4);
+		createLevel(580,160,40,80,1, 4);
+		createLevel(900,160,40,80,1, 4);
 		
-		//createLevel(400, 100, 1, 2, 1);
+		
+		
 		
 	}
 	  
@@ -609,7 +610,7 @@ public class Main   implements Runnable,KeyListener{
 			
 		}
 	  
-	  void createLevel(int x, int y,int width, int height,int total_hor_tiles,int total_ver_tiles,int caller_id)
+	  void createLevel(int x, int y,int width, int height,int total_hor_tiles,int total_ver_tiles)
 	  {
 		  
 		  System.out.println("block counter : "+block_counter);
@@ -623,11 +624,13 @@ public class Main   implements Runnable,KeyListener{
 		  
 
 		  int p=block_counter;
+		  
+		  
 		  for(int i=p;i<rangex;i++)
 		  {
-			  for(int j=p;j<rangey;j++)
+			  for(int j=0;j<total_ver_tiles;j++)
 			  {
-				  block[block_counter].initProperties(x+(width+block_gap)*loop_count, y+(height+block_gap)*j, width, height,rand(5),10 );
+				  block[block_counter].initProperties(x+(width+block_gap)*loop_count, y+(height+block_gap)*(j), width, height,rand(5),10 );
 				  
 				  block_counter++;
 			  }

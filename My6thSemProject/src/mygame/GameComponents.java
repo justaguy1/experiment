@@ -209,6 +209,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		if(x<=10)
 		{
 		  //xspeed=-xspeed;
+			if(id==4)
+			{
+				x=-100;
+				y=-100;
+				return;
+			}
+				
 			sp.bXSpeed=-sp.bXSpeed;
 			
 			count=0;
@@ -218,7 +225,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		}
 		if(x>=can_width-width)
 		{
-		    
+			if(id==4)
+			{
+				x=-100;
+				y=-100;
+				return;
+			}
 		    //xspeed=-xspeed;
 		    sp.bXSpeed=-sp.bXSpeed;
 			count=0;
@@ -280,7 +292,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 set_dx_dy();
 		
 		 
-			 if(this.id==4 && sp.powerIsOn==true)
+			 if(this.id==4 && sp.powerIsOn==true) // for three balls
 			 moveBall();
 			
 			 if(this.id==0)
@@ -512,15 +524,18 @@ void threeBalls() {
 		Main.powers[i].sp.powerLevelPowers=sp.powerLevelPowers;
 		Main.powers[i].sp.threeBall=sp.threeBall;
 	}
-	if(Main.powers[1].x<0 && Main.powers[1].y<0 && Main.powers[1].sp.threeBall==true)
+	for(int i=0;i<3;i++)
 	{
-		Main.powers[0].x=getRandom(300, 1000);
-		Main.powers[0].y=getRandom(100,700);
-		Main.powers[1].x=getRandom(300, 1000);
-		Main.powers[1].y=getRandom(100,700);
-		Main.powers[2].x=getRandom(300, 1000);
-		Main.powers[2].y=getRandom(100,700);
-		
+		if(Main.powers[i].x<0 && Main.powers[i].y<0 && Main.powers[i].sp.threeBall==true)
+		{
+			Main.powers[0].x=getRandom(300, 1000);
+			Main.powers[0].y=getRandom(100,700);
+			Main.powers[1].x=getRandom(300, 1000);
+			Main.powers[1].y=getRandom(100,700);
+			Main.powers[2].x=getRandom(300, 1000);
+			Main.powers[2].y=getRandom(100,700);
+			
+		}
 	}
 		
 	}

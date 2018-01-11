@@ -93,13 +93,13 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(7) + 1;
-			 n=5;
+			//w n=1;
 			switch(n)
 			{
 			// freezes player if struck by ball
 				
 					
-					
+		/*			
 				case 1:
 					resetAllPowerUps();
 
@@ -113,7 +113,7 @@ public class SuperPowers {
 
 					System.out.println("three ball");
 					break;	
-				
+				*/
 					
 					//makes player move very slow
 				case 2:
