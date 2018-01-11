@@ -476,9 +476,11 @@ public class Main   implements Runnable,KeyListener{
 	
 	public static void main(String args[])
 	{
-		Main obj =new Main(1280,720,"hello");
+		if(Main_menu.startgame==false)
+		Main_menu.main_menu();
 		
-		 Thread t =new Thread(obj);
+		Main obj =new Main(1280,720,"hello");
+		Thread t =new Thread(obj);
 		
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
