@@ -311,11 +311,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 
 		 if(this.id==5)
 		 {
+			
 			 
 			 if(sp.canGetPowers==true)
-				 this.img =this.initializeImage("icons\\what.png");
+				 this.img =this.initializeImage("icons\\chest.png");
 			 else
-				 this.img=this.initializeImage("icons\\what_grey.png");
+				 this.img=this.initializeImage("icons\\chest_grey.png");
 			 
 			 
 		 }
@@ -343,6 +344,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	 private void removePower() {
 		
 		// System.out.println("i am "+name);
+
+		
 		if(this.sp.powerIsOn==false)
 			return;
 		else if(sp.powerTime==0)
@@ -367,15 +370,19 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		
 		
 		
-		
-		if(obj.id ==1 || obj.id==2)  // this happens when ball collides with player
+		if((obj.id ==1 || obj.id==2)  )  // this happens when ball or power collides with player
 		{
+			
 			if(obj.sp.powerIsOn==false)
 			{
-				obj.sp.powerIsOn=true;
-				obj.sp.freeze=this.sp.freeze;
-				obj.sp.playerSpeed=this.sp.playerSpeed;
+				System.out.println("enter");
+				if(sp.powerIsOn==true)
+				obj.sp.powerIsOn=sp.powerIsOn;
+				
+				obj.sp.freeze=sp.freeze;
+				obj.sp.playerSpeed=sp.playerSpeed;
 				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+				obj.sp.bulletCount=sp.bulletCount;
 			}
 			
 			if(obj.id==1)
@@ -391,13 +398,14 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		{
 				Playsound(bounce);
 
-			if(obj.id==5)  // this is set only when ball collides with chest 
+			if(obj.id==5 && id ==0)  // this is set only when ball collides with chest 
 			{
 				sp.gainRandomPower();
 				obj.sp.canGetPowers=sp.canGetPowers;
 				obj.sp.powerIsOn=sp.powerIsOn;
 				
-				threeBalls();
+				
+				//threeBalls();
 				
 			}
 			
@@ -420,6 +428,9 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				}
 			 else
 			 {
+				 if(obj.blockLevel>10)
+					 return;
+				 else
 				 obj.blockLevel--;
 			 }
 			 
@@ -436,15 +447,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			y=-100;
 		}
 		
+		
 		if(id==20)
 		{
-			if(obj.id ==1 || obj.id==2)
-				{
-					if(GameComponents.playerNo==1)
-						Main.player_01.sp.bulletCount=5;
-					else
-						Main.player_02.sp.bulletCount=5;
-				}
+		
 			if(obj.id==1 || obj.id==2)
 			{
 				x=-100;
@@ -455,7 +461,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 
 
- private void calculateScore() {
+private void calculateScore() {
+	
 	 if(id==0)
 	 {
 		 if(playerNo==1)
@@ -517,12 +524,12 @@ private void collisionTest(GameComponents obj)  // moves ball according to colli
 	    }
 		
 	}
-void threeBalls() {
+static void threeBalls() {
 	for(int i=0;i<3;i++)  // this is only for three ball 
 	{
-		Main.powers[i].sp.powerIsOn=sp.powerIsOn;
-		Main.powers[i].sp.powerLevelPowers=sp.powerLevelPowers;
-		Main.powers[i].sp.threeBall=sp.threeBall;
+		Main.powers[i].sp.powerIsOn=Main.ball.sp.powerIsOn;
+		Main.powers[i].sp.powerLevelPowers=Main.ball.sp.powerLevelPowers;
+		Main.powers[i].sp.threeBall=Main.ball.sp.threeBall;
 	}
 	for(int i=0;i<3;i++)
 	{
@@ -539,22 +546,12 @@ void threeBalls() {
 	}
 		
 	}
-	
- 
- 
- 
- private void set_dx_dy() {
+private void set_dx_dy() {
 		 dx=this.x+this.width/2;
 		 dy=this.y+this.height/2;
 		
 	}
-	
-	 
-
-
-
-	public void calculateCollision(GameComponents obj) {
-		
+public void calculateCollision(GameComponents obj) {		
 		 timeNow = System.currentTimeMillis();
 		 
 		 if (x < obj.x + obj.width &&
@@ -704,7 +701,7 @@ void threeBalls() {
 		
 	}
 	
-	int getRandom(int min ,int max)
+	static int getRandom(int min ,int max)
 	{
 		Random rand = new Random();
 
@@ -712,7 +709,7 @@ void threeBalls() {
 
 		return clamp(min,max,n);
 	}
-	int clamp(int min ,int max,int value)
+	static int clamp(int min ,int max,int value)
 	{
 		if(value<=min)
 			value=min;

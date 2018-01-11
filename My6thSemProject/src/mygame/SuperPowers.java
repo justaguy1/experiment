@@ -14,7 +14,7 @@ public class SuperPowers {
 	
 	
 	
-	// time used to check amout of time passed after user get power
+	// time used to check amount of time passed after user get power
 	long powerTime=0;
 	
 	
@@ -44,6 +44,7 @@ public class SuperPowers {
 			threeBall=false;
 		 	freeze=false;
 			// use is moving boolean
+		 	
 			
 		 	 isBallPower=false;
 			 isPlayerPower=false;
@@ -69,7 +70,7 @@ public class SuperPowers {
 			
 		
 			powerLevelPowers=1;
-			
+			bulletCount=0;
 			
 			
 	}
@@ -93,14 +94,14 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(7) + 1;
-			//w n=1;
+			// n=3;
 			switch(n)
 			{
-			// freezes player if struck by ball
+			
 				
 					
-		/*			
-				case 1:
+				
+				/*case 1:
 					resetAllPowerUps();
 
 					canGetPowers=false;
@@ -110,16 +111,18 @@ public class SuperPowers {
 
 					powerLevelPowers=n;
 					GameComponents.Playsound(ballclone_S);
-
+					
+					GameComponents.threeBalls();
 					System.out.println("three ball");
-					break;	
-				*/
+					break;	*/
+				
 					
 					//makes player move very slow
 				case 2:
+					resetAllPowerUps();
 					Main.powerUp[n].x=Main.ball.x;
 					Main.powerUp[n].y=Main.ball.y;
-					resetAllPowerUps();
+					
 					canGetPowers=false;
 					powerIsOn=true;
 					Main.powerUp[n].sp.isPlayerPower=true;
@@ -130,10 +133,10 @@ public class SuperPowers {
 					
 					//makes player move very fast
 				case 3:
+					
+					resetAllPowerUps();
 					Main.powerUp[n].x=Main.ball.x;
 					Main.powerUp[n].y=Main.ball.y;
-					resetAllPowerUps();
-					
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.playerSpeed=20;
 					Main.powerUp[n].sp.powerLevelPowers=n;
@@ -145,8 +148,7 @@ public class SuperPowers {
 					
 					//makes ball move very fast
 				case 4:
-					Main.powerUp[n].x=Main.ball.x;
-					Main.powerUp[n].y=Main.ball.y;
+				
 					resetAllPowerUps();
 					
 					isBallPower =true;
@@ -171,11 +173,11 @@ public class SuperPowers {
 					
 					powerIsOn=true;
 					Main.powerUp[n].sp.isPlayerPower=true;
-					Main.powerUp[n].sp.powerLevelPowers=7;
+					Main.powerUp[n].sp.powerLevelPowers=n;
 					
 					
 					canGetPowers=false;
-
+					Main.powerUp[n].sp.bulletCount=5;
 					
 				
 					

@@ -40,7 +40,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents player_01,player_02;
 	static List<GameComponents> blocks ;
 	static GameComponents block[];
-	static GameComponents chest;
+	static GameComponents chest[];
 	static GameComponents powers[];
 	static GameComponents initializer;
 	static GameComponents bullet1[];
@@ -180,7 +180,9 @@ public class Main   implements Runnable,KeyListener{
 
 		g.drawImage(initializer.img, initializer.x, initializer.y,initializer.width,initializer.height,null);
 		g.drawImage(GameComponents.ballI[ball.sp.powerLevelBall], ball.x, ball.y,ball.width,ball.height,null);
-		g.drawImage(chest.img, chest.x, chest.y,chest.width,chest.height,null);
+		
+		for(int i=0;i<3;i++)
+		g.drawImage(chest[i].img, chest[i].x, chest[i].y,chest[i].width,chest[i].height,null);
 		
 		g.drawImage(GameComponents.playerI[player_01.sp.powerLevelPlayer], player_01.x, player_01.y,player_01.width,player_01.height,null);
 		g.drawImage(GameComponents.playerI[player_02.sp.powerLevelPlayer], player_02.x, player_02.y,player_02.width,player_02.height,null);
@@ -248,7 +250,7 @@ public class Main   implements Runnable,KeyListener{
 	
 
 	private void gameOver(Graphics2D g2) {
-		if(ball.x<=10 && GameComponents.playerNo==2 )
+		if(ball.x<=10 )
 		{
 			g.drawString("gameOver player 2 wins ", 250, 400);
 			
@@ -261,7 +263,7 @@ public class Main   implements Runnable,KeyListener{
 		}
 	//	System.out.println(ball.x-(canvas.getWidth()-30));
 		
-		if(ball.x>canvas.getWidth()-30 && GameComponents.playerNo==1 )
+		if(ball.x>canvas.getWidth()-30)
 		{
 			g.drawString("gameOver player 1 wins ", 250, 400);
 			ballIsMoving=false;
@@ -281,7 +283,8 @@ public class Main   implements Runnable,KeyListener{
 		 
 		 for(int i=0;i<block_num;i++)
 		 ball.calculateCollision(block[i]);
-		 ball.calculateCollision(chest);
+		 for(int i=0;i<3;i++)
+		 ball.calculateCollision(chest[i]);
 		
 		//System.out.println(block[0].y);
 		 for(int j=0;j<3;j++)
@@ -394,6 +397,8 @@ public class Main   implements Runnable,KeyListener{
 			if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
 				fire2=true;
 		
+			if(e.getKeyCode()==KeyEvent.VK_E)
+				ball.sp.gainRandomPower();
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE)
 		{
@@ -562,10 +567,17 @@ public class Main   implements Runnable,KeyListener{
 		
 	for(int i=0;i<block_num;i++)
 		block[i]=new GameComponents();
-		 
-		 chest =new GameComponents();
-			chest.initProperties(800, 600,100, 100,5,"icons\\what.png");
-			chest.start();
+	
+	
+		chest=new GameComponents[3];
+		for(int i=0;i<3;i++)
+		 chest[i] =new GameComponents();
+		
+	
+			chest[0].initProperties(800, 600,80, 40,5,"icons\\chest.png");
+			chest[0].start();
+			
+		
 			
 		bullet1=new GameComponents[5];
 		bullet2=new GameComponents[5];
@@ -587,8 +599,8 @@ public class Main   implements Runnable,KeyListener{
 		}
 			
 	
-		//createLevel(10,-10,40,80,1, 9);
-		//createLevel(canvas.getWidth()-50,-10,40,80,1,9);
+		createLevel(10,0,40,180,1, 4);
+		createLevel(canvas.getWidth()-50,0,40,180,1,4);
 		
 		createLevel(280,100,80,40,8, 1);
 		createLevel(280,500,80,40,8, 1);
