@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Main_menu {
-	static boolean m_click=false;
+	static boolean m_click=false,startgame=false;
 	static Image img[]=new Image[8];
 	static String[] path = 
 		{
@@ -30,7 +30,7 @@ public class Main_menu {
 	static Main_menu obj=new Main_menu();
 	static Point currentmouseloc=null;
 
-	public static void main(String[] args) 
+	public static void main_menu() 
 	{
 	
 		initialize();
@@ -39,7 +39,7 @@ public class Main_menu {
 		obj.show(img[i], 400, 100+(i*120));
 		obj.mousehandle();
 		
-		while(true) {
+		while(true&&startgame==false) {
 			try {
 		       Thread.sleep(100);
 		      } catch (InterruptedException e) {
@@ -142,7 +142,8 @@ public class Main_menu {
 	}
 	public void start_funct()
 	{
-		
+		startgame=true;
+		System.out.println(startgame);
 	}
 	public void option_funct()
 	{
