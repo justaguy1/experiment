@@ -9,8 +9,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.event.MouseInputListener;
 
 public class Main_menu {
 	static boolean m_click=false;
