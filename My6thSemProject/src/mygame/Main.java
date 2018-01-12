@@ -46,8 +46,9 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents bullet1[];
 	static GameComponents bullet2[];
 	static GameComponents powerUp[];
-	static GameComponents player1block[];
-	static GameComponents player2block[];
+	static GameComponents player1block;
+	static GameComponents player2block;
+	
 	
 	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -59,6 +60,8 @@ public class Main   implements Runnable,KeyListener{
 	static String ballImgPath[]=new String[6];
 	static String powersImgPath[]=new String[6];
 	static String powerUps[]=new String[8];
+	static String player1blocks[]=new String[4];
+	static String player2blocks[]=new String[4]; 
 	
 	static String backgroundimg="icons\\bk.jpg"; 
 	static long tickTime=0;
@@ -131,6 +134,14 @@ public class Main   implements Runnable,KeyListener{
 		powerUps[5]="icons\\three_ball.png";
 		powerUps[6]="icons\\what.png";
 		powerUps[7]="icons\\what_grey.png";
+		
+		player1blocks[3]="icons\\player1_life_block_1.png";
+		player1blocks[2]="icons\\player1_life_block_2.png";
+		player1blocks[1]="icons\\player1_life_block_3.png";
+		
+		player2blocks[3]="icons\\player2_life_block_1.png";
+		player2blocks[2]="icons\\player2_life_block_2.png";
+		player2blocks[1]="icons\\player2_life_block_3.png";
 		
 	  }
 	  catch(Exception e)
@@ -231,6 +242,8 @@ public class Main   implements Runnable,KeyListener{
 			}
 		}
 		
+		g.drawImage(GameComponents.player1block[player1block.blockLevel], player1block.x,player1block.y,player1block.width,player1block.height,null);
+		g.drawImage(GameComponents.player2block[player2block.blockLevel], player2block.x,player2block.y,player2block.width,player2block.height,null);
 		
 		g.setFont(new Font("Arial",Font.BOLD,20));
 		g.setColor(Color.BLUE);
@@ -283,7 +296,8 @@ public class Main   implements Runnable,KeyListener{
 		tickTime = System.currentTimeMillis();
 		 ball.calculateCollision(player_01);
 		 ball.calculateCollision(player_02);
-		 
+		 ball.calculateCollision(player1block);
+		 ball.calculateCollision(player2block);
 		 for(int i=0;i<block_num;i++)
 		 ball.calculateCollision(block[i]);
 		 for(int i=0;i<3;i++)
@@ -606,14 +620,24 @@ public class Main   implements Runnable,KeyListener{
 		}
 			
 	
-		createLevel(10,0,40,180,1, 4,1,1);
-		createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
+		//createLevel(10,0,40,180,1, 4,1,1);
+		//createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
+		
+		player1block=new GameComponents();
+		player2block=new GameComponents();
+		
+		player1block.initProperties(10, 0, 20, 720, 3, 10);
+		player2block.initProperties(canvas.getWidth()-30, 0, 20, 720, 3, 10);
+		
+		
+		
+		
 		
 		//stageHell();
 		//level_p();
 	//strip();
-		hand_bonus();
-		//stageSimple();
+		//hand_bonus();
+		stageSimple();
 		//createLevel(x, y, width, height, total_hor_tiles, total_ver_tiles, block_gap_x, block_gap_y);
 
 		//stageWaterMelon();
@@ -621,6 +645,7 @@ public class Main   implements Runnable,KeyListener{
 		//stageHell();
 		//createLevel(200,50,200,40,3,2,40,50);
 	}
+		
 		
 			 
 	  private void hand_bonus() {

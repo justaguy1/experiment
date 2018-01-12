@@ -47,6 +47,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	static Image [] ballI;
 	static Image [] powersI;
 	static Image [] powerUp;
+	static Image [] player1block;
+	static Image [] player2block;
 	String name;
 	int powerLevel=1;
 	
@@ -83,6 +85,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	{
 		block=new Image[7];
 		blockR=new Image[6];
+		player1block=new Image[4];
+		player2block=new Image[4];
 		
 		
 		try 
@@ -91,6 +95,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		{
 			block[i]=new ImageIcon(getClass().getResource(Main.blockImgPath[i])).getImage();
 			blockR[i]=new ImageIcon(getClass().getResource(Main.blockRImgPath[i])).getImage();
+		}
+		
+		for(int i=1;i<4;i++)
+		{
+			player1block[i]=new ImageIcon(getClass().getResource(Main.player1blocks[i])).getImage();
+			player2block[i]=new ImageIcon(getClass().getResource(Main.player2blocks[i])).getImage();
 		}
 	
 		}
@@ -442,9 +452,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 
 			if(obj.id==5 && id ==0)  // this is set only when ball collides with chest 
 			{
-				sp.gainRandomPower();
-				obj.sp.canGetPowers=sp.canGetPowers;
-				obj.sp.powerIsOn=sp.powerIsOn;
+				if(sp.canGetPowers==true)
+				{
+					sp.gainRandomPower();
+					obj.sp.canGetPowers=sp.canGetPowers;
+					obj.sp.powerIsOn=sp.powerIsOn;
+				}
 				
 				
 				
