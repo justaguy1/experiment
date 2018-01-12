@@ -47,7 +47,7 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents bullet2[];
 	static GameComponents powerUp[];
 	
-	static String player1ImgPath ="icons\\player.png";
+	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
 	static String ballImgPaths="icons\\green_ball.png";
 	
@@ -105,7 +105,7 @@ public class Main   implements Runnable,KeyListener{
 		blockRImgPath[4] = "icons\\block_lg_r.png";
 		blockRImgPath[5] = "icons\\block_b_r.png";
 		
-		playerImgPath[1]= "icons\\player.png";
+		playerImgPath[1]= "icons\\player1.png";
 		playerImgPath[2]="icons\\player2.png";
 		playerImgPath[3]="icons\\Player_frozen.png";
 		
@@ -121,10 +121,10 @@ public class Main   implements Runnable,KeyListener{
 		powersImgPath[4]="icons\\green_ball_clone.png";
 		powersImgPath[5]="icons\\green_ball_clone.png";
 		
-		powerUps[1]="icons\\fire.png";
-		powerUps[2]="icons\\ice.png";
+		powerUps[1]="icons\\slow.png";
+		powerUps[2]="icons\\fast.png";
 		powerUps[3]="icons\\slow.png";
-		powerUps[4]="icons\\slow_ball.png";
+		powerUps[4]="icons\\fire.png";
 		powerUps[5]="icons\\three_ball.png";
 		powerUps[6]="icons\\what.png";
 		powerUps[7]="icons\\what_grey.png";
@@ -344,11 +344,13 @@ public class Main   implements Runnable,KeyListener{
 				{
 					powerUp[i].x--;
 					powerUp[i].calculateCollision(player_01);
+					powerUp[i].calculateCollision(player_02);
 				}
 				else if(GameComponents.playerNo==2)
 					{
 						powerUp[i].x++;
 						powerUp[i].calculateCollision(player_02);
+						powerUp[i].calculateCollision(player_01);
 						
 						if(powerUp[i].x>Main.canvas.getWidth()+10)
 						{
@@ -379,17 +381,17 @@ public class Main   implements Runnable,KeyListener{
 				_DOWN=true;
 			
 			if(e.getKeyCode()==KeyEvent.VK_I)
-				ball.y-=2;
+				ball.y-=10;
 			
 			if(e.getKeyCode()==KeyEvent.VK_J)
-				ball.x-=2;
+				ball.x-=12;
 
 		
 			if(e.getKeyCode()==KeyEvent.VK_K)
-				ball.y+=2;
+				ball.y+=12;
 			
 			if(e.getKeyCode()==KeyEvent.VK_L)
-				ball.x+=2;
+				ball.x+=12;
 			
 			if(e.getKeyCode()==KeyEvent.VK_D)
 				fire1=true;
@@ -606,22 +608,30 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-		//stageHell();
+		//createLevel(200,50,200,40,3,2,40,50);
+		
+		stageHell();
 		
 		
 		
 	
 		//stageSimple();
 		
-		stageWaterMelon();
+		//stageWaterMelon();
+		
+		//createLevel()
 		
 	}
 	  
-	 private void stageWaterMelon() {
+	/* private void stageWaterMelon() {
 		
-	//	createLevel(height, height, height, height, height, height, height, height);
+		createLevel(200, 100, 80, 40, 10, 3, 1, 1);
+		createLevel(280, 220, 80, 40, 8, 2, 1, 1);
+		createLevel(360, 320, 80, 40, 6, 2, 1, 1);
 		
-	}
+		
+		
+	}*/
 
 	private void stageSimple() {
 		  createLevel(240,50,80,40,6, 7,50,50);
@@ -683,7 +693,7 @@ public class Main   implements Runnable,KeyListener{
 		  {
 			  for(int j=0;j<total_ver_tiles;j++)
 			  {
-				  block[block_counter].initProperties(x+(width+block_gap_x)*loop_count, y+(height+block_gap_y)*(j), width, height,rand(2),10 );
+				  block[block_counter].initProperties(x+(width+block_gap_x)*loop_count, y+(height+block_gap_y)*(j), width, height,3,10 );
 				  
 				  block_counter++;
 			  }

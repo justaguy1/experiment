@@ -66,7 +66,8 @@ public class SuperPowers {
 			playerSpeed=10;
 			powerIsOn=false;
 			
-			powerLevelPlayer=1;
+			
+		
 			powerLevelBall=1;
 			
 		
@@ -82,52 +83,36 @@ public class SuperPowers {
 	
 		
 		
-		if(Main.tickTime-timeCounter >100)
+		if(Main.tickTime-timeCounter >10000)
 		{
 			canGetPowers=true;
 			count=0;
+			
 		}
 		
 		if(canGetPowers==true && count ==0)
 		{
 			count++;
+			//powerIsOn=true;
 			timeCounter = System.currentTimeMillis();
 			canGetPowers=false;
 			Random rand = new Random();
 
-			int  n = rand.nextInt(7) + 1;
-			// n=3;
+			int  n = rand.nextInt(6) + 1;
+			n=5;
 			switch(n)
 			{
 			
-				
-					
-				
-				/*case 1:
-					resetAllPowerUps();
-
-					canGetPowers=false;
-					powerIsOn=true;
-					isPlayerPower=true;
-					threeBall=true;
-
-					powerLevelPowers=n;
-					GameComponents.Playsound(ballclone_S);
-					
-					GameComponents.threeBalls();
-					System.out.println("three ball");
-					break;	*/
-				
-					
 					//makes player move very slow
-				case 2:
+				case 1:
 					resetAllPowerUps();
 					Main.powerUp[n].x=Main.ball.x;
 					Main.powerUp[n].y=Main.ball.y;
 					
 					canGetPowers=false;
-					powerIsOn=true;
+					
 					Main.powerUp[n].sp.isPlayerPower=true;
+					Main.powerUp[n].sp.powerIsOn=true;
 					Main.powerUp[n].sp.playerSpeed=5;
 					Main.powerUp[n].sp.powerLevelPowers=n;
 					
@@ -135,7 +120,7 @@ public class SuperPowers {
 					break;
 					
 					//makes player move very fast
-				case 3:
+				case 2:
 					
 					resetAllPowerUps();
 					Main.powerUp[n].x=Main.ball.x;
@@ -143,14 +128,14 @@ public class SuperPowers {
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.playerSpeed=20;
 					Main.powerUp[n].sp.powerLevelPowers=n;
-					
+					Main.powerUp[n].sp.powerIsOn=true;
 					canGetPowers=false;
 					powerIsOn=true;
 					System.out.println("fast player");
 					break;
 					
 					//makes ball move very fast
-				case 4:
+				case 3:
 				
 					resetAllPowerUps();
 					
@@ -169,12 +154,12 @@ public class SuperPowers {
 					
 					break;
 					
-				case 5:
-					Main.powerUp[n].x=Main.ball.x;
-					Main.powerUp[n].y=Main.ball.y;
+				case 4:
+					
 					resetAllPowerUps();
 					
-					//powerIsOn=true;
+					powerIsOn=true;
+					//Main.powerUp[n].sp.powerIsOn=true;
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.powerLevelPowers=n;
 					
@@ -191,7 +176,7 @@ public class SuperPowers {
 					
 					break;
 					
-					case 6:
+					case 5:
 					
 					
 					resetAllPowerUps();
@@ -200,13 +185,15 @@ public class SuperPowers {
 					freeze=true;
 					powerLevelBall=5;
 					powerLevelPlayer=3;
+					
+					
 					powerLevelPowers=n;
 					GameComponents.Playsound(freeze_s);
 					System.out.println("freezed");
 					break;
 			
 					//make ball move very slow
-				case 7:
+				case 6:
 					resetAllPowerUps();
 					canGetPowers=false;
 					powerIsOn=true;
