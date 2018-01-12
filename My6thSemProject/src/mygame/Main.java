@@ -64,7 +64,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	static int block_num=80;
 	static int block_counter=0;
-	static int block_gap=2;
+	//static int block_gap=2;
 	
 	static boolean gameJustStarted=true;
 	
@@ -476,11 +476,12 @@ public class Main   implements Runnable,KeyListener{
 	
 	public static void main(String args[])
 	{
-		if(Main_menu.startgame==false)
-		Main_menu.main_menu();
+		//if(Main_menu.startgame==false)
+		//Main_menu.main_menu();
 		
 		Main obj =new Main(1280,720,"hello");
 		Thread t =new Thread(obj);
+		
 		
 		 GameComponents.can_heigth=canvas.getHeight();
 		 GameComponents.can_width=canvas.getWidth();
@@ -555,9 +556,9 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-		
-	   
 		t.start();
+	   
+		
 		
 
 	}
@@ -576,8 +577,7 @@ public class Main   implements Runnable,KeyListener{
 		 chest[i] =new GameComponents();
 		
 	
-			chest[0].initProperties(800, 600,80, 40,5,"icons\\chest.png");
-			chest[0].start();
+			
 			
 		
 			
@@ -601,21 +601,60 @@ public class Main   implements Runnable,KeyListener{
 		}
 			
 	
-		createLevel(10,0,40,180,1, 4);
-		createLevel(canvas.getWidth()-50,0,40,180,1,4);
-		
-		createLevel(280,100,80,40,8, 1);
-		createLevel(280,500,80,40,8, 1);
-		createLevel(280,160,40,80,1, 4);
-		createLevel(580,160,40,80,1, 4);
-		createLevel(900,160,40,80,1, 4);
+		createLevel(10,0,40,180,1, 4,1,1);
+		createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
 		
 		
 		
+		//stageHell();
+		
+		
+		
+	
+		//stageSimple();
+		
+		stageWaterMelon();
 		
 	}
 	  
-	  int rand(int value)
+	 private void stageWaterMelon() {
+		
+	//	createLevel(height, height, height, height, height, height, height, height);
+		
+	}
+
+	private void stageSimple() {
+		  createLevel(240,50,80,40,6, 7,50,50);
+			
+			chest[0].initProperties(700, 185,100, 40,5,"icons\\chest.png");
+			chest[0].start();
+			
+			
+			chest[1].initProperties(430, 455,100, 40,5,"icons\\chest.png");
+			chest[1].start();
+		
+	}
+
+	private void stageHell() {
+		  createLevel(280,40,40,80,2, 3,100,1);
+			createLevel(320,140,100,40,1, 1,1,1);
+			
+			createLevel(480,140,40,80,1, 3,1,1);
+			createLevel(520,140,100,40,1, 3,1,60);
+			
+			createLevel(320,140,100,40,1, 1,1,1);
+			
+			createLevel(640,200,40,80,1, 3,1,1);
+			chest[0].initProperties(680, 400,100, 40,5,"icons\\chest.png");
+			chest[0].start();
+			
+			createLevel(800,250,40,80,1, 3,1,1);
+			chest[1].initProperties(840, 450,100, 40,5,"icons\\chest.png");
+			chest[1].start();
+		
+	}
+
+	int rand(int value)
 		{
 			Random rand = new Random();
 
@@ -624,7 +663,7 @@ public class Main   implements Runnable,KeyListener{
 			
 		}
 	  
-	  void createLevel(int x, int y,int width, int height,int total_hor_tiles,int total_ver_tiles)
+	  public void createLevel(int x, int y,int width, int height,int total_hor_tiles,int total_ver_tiles,int block_gap_x,int block_gap_y)
 	  {
 		  
 		  System.out.println("block counter : "+block_counter);
@@ -644,7 +683,7 @@ public class Main   implements Runnable,KeyListener{
 		  {
 			  for(int j=0;j<total_ver_tiles;j++)
 			  {
-				  block[block_counter].initProperties(x+(width+block_gap)*loop_count, y+(height+block_gap)*(j), width, height,rand(5),10 );
+				  block[block_counter].initProperties(x+(width+block_gap_x)*loop_count, y+(height+block_gap_y)*(j), width, height,rand(2),10 );
 				  
 				  block_counter++;
 			  }
