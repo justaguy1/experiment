@@ -52,7 +52,7 @@ public class Main_menu {
 			try {
 				
 				currentmouseloc = c.getMousePosition();	
-				System.out.println(currentmouseloc);
+			//	System.out.println(currentmouseloc);
 				
 			if(instruction==false) {
 				
@@ -134,7 +134,7 @@ public class Main_menu {
 				{
 					img[i] = new ImageIcon(getClass().getResource(path[i])).getImage();
 				
-					System.out.println(path[i]+"\t"+img[i]);
+				//	System.out.println(path[i]+"\t"+img[i]);
 				}
 			}
 		catch(Exception e)
@@ -171,7 +171,7 @@ public class Main_menu {
 		while(instruction) {
 			Thread.sleep(80);
 			currentmouseloc = c.getMousePosition();	
-			System.out.println("inside ins"+currentmouseloc);
+		//	System.out.println("inside ins"+currentmouseloc);
 		
 			obj.show(img[8], 750, 20);
 			obj.show(img[9], 50, 100);
@@ -182,7 +182,7 @@ public class Main_menu {
 				 {
 					 obj.show(img[10], 750, 20);
 					 if(m_click) {
-						System.out.println("back to menu");
+						//System.out.println("back to menu");
 						instruction=false;
 						g.clearRect(0, 0, c.getWidth(),c.getHeight());
 						break;
@@ -202,14 +202,14 @@ public class Main_menu {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				m_click=false;
-				System.out.println("mouse staus:"+m_click);
+			//	System.out.println("mouse staus:"+m_click);
 
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				m_click=true;
-				System.out.println("mouse staus:"+m_click);
+			//	System.out.println("mouse staus:"+m_click);
 			}
 			
 			@Override
