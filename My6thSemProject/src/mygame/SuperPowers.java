@@ -36,7 +36,7 @@ public class SuperPowers {
 	File slowdown_S= new File("sounds/slowdown.wav");
 	File speedup_S= new File("sounds/speedup.wav");
 	File ballclone_S= new File("sounds/ball_clone.wav");
-
+	File fireball_S=new File("sounds/fire_shot.wav");
 	
 	void resetAllPowerUps()
 	{
@@ -114,7 +114,8 @@ public class SuperPowers {
 					Main.powerUp[n].sp.powerIsOn=true;
 					Main.powerUp[n].sp.playerSpeed=5;
 					Main.powerUp[n].sp.powerLevelPowers=n;
-					
+					GameComponents.Playsound(slowdown_S);
+
 					System.out.println("slow player");
 					break;
 					
@@ -130,6 +131,8 @@ public class SuperPowers {
 					Main.powerUp[n].sp.powerIsOn=true;
 					canGetPowers=false;
 					powerIsOn=true;
+					GameComponents.Playsound(speedup_S);
+
 					System.out.println("fast player");
 					break;
 					
@@ -169,7 +172,7 @@ public class SuperPowers {
 				
 					
 					
-					GameComponents.Playsound(speedup_S);
+					GameComponents.Playsound(fireball_S);
 
 					System.out.println("bullets");
 					

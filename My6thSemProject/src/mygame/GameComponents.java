@@ -431,6 +431,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				obj.sp.powerIsOn=sp.powerIsOn;
 				if(sp.freeze==true)
 				{
+					Playsound(freeze_s);
+
 					obj.sp.freeze=sp.freeze;
 					obj.sp.powerIsOn=sp.powerIsOn;
 					obj.sp.canGetPowers=sp.canGetPowers;
@@ -685,6 +687,7 @@ public void calculateCollision(GameComponents obj) {
 			{
 				if(Main.fire1==true)
 				{
+					Playsound(fireball_S);
 					sp.bulletCount--;
 					
 					Main.bullet1[sp.bulletCount].x=dx+width;
@@ -732,6 +735,8 @@ public void calculateCollision(GameComponents obj) {
 			{
 				if(Main.fire2==true)
 				{
+					Playsound(fireball_S);
+
 					sp.bulletCount--;
 					Main.bullet2[sp.bulletCount].x=dx-3*width;
 					Main.bullet2[sp.bulletCount].y=dy-20;
