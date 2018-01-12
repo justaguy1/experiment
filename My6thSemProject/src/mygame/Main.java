@@ -620,8 +620,6 @@ public class Main   implements Runnable,KeyListener{
 		}
 			
 	
-		//createLevel(10,0,40,180,1, 4,1,1);
-		//createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
 		
 		player1block=new GameComponents();
 		player2block=new GameComponents();
@@ -631,19 +629,8 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-		
-		
-		//stageHell();
-		//level_p();
-	//strip();
-		//hand_bonus();
-		stageSimple();
-		//createLevel(x, y, width, height, total_hor_tiles, total_ver_tiles, block_gap_x, block_gap_y);
-
-		//stageWaterMelon();
-		
-		//stageHell();
-		//createLevel(200,50,200,40,3,2,40,50);
+		levelSelecter();
+	
 	}
 		
 		
@@ -772,6 +759,42 @@ public class Main   implements Runnable,KeyListener{
 		  //block_counter=p;
 		  System.out.println(block_counter);
 		 
+	  }
+	  
+	  void levelSelecter()
+	  {
+		  int n =rand(6);
+		  
+		  switch(n)
+		  {
+		  case 1:
+			  hand_bonus();
+			  break;
+			  
+		  case 2:
+			  level_p();
+			  break;
+			  
+		  case 3:
+			  strip();
+			  break;
+			  
+		  case 4:
+			  stageWaterMelon();
+			  break;
+			  
+		  case 5:
+			  stageSimple();
+			  break;
+			  
+		  case 6:
+			  stageHell();
+			  break;
+			  
+		   default:
+			   hand_bonus();
+			  
+		  }
 	  }
 
 }
