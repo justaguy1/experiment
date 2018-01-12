@@ -456,6 +456,9 @@ public class Main   implements Runnable,KeyListener{
 		
 			
 		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_ESCAPE)
+			System.exit(0);
 
 	}
 		
@@ -495,8 +498,8 @@ public class Main   implements Runnable,KeyListener{
 	
 	public static void main(String args[])
 	{
-		//if(Main_menu.startgame==false)
-		//Main_menu.main_menu();
+		if(Main_menu.startgame==false)
+		Main_menu.main_menu();
 		
 		Main obj =new Main(1280,720,"hello");
 		Thread t =new Thread(obj);
