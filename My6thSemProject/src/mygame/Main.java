@@ -606,8 +606,8 @@ public class Main   implements Runnable,KeyListener{
 		
 		//stageHell();
 		//level_p();
-	strip();
-		//hand_bonus();
+	//strip();
+		hand_bonus();
 		//stageSimple();
 		//createLevel(x, y, width, height, total_hor_tiles, total_ver_tiles, block_gap_x, block_gap_y);
 
