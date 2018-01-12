@@ -2,10 +2,12 @@ package mygame;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,16 +25,18 @@ public class Main_menu {
 		"icons\\start_active.png",
 		"icons\\option_active.png",
 		"icons\\exit_active.png",
+		
 		"icons\\go_back.png",
 		"icons\\how_to_play.png",
-		"icons\\main_menu_bk.png"
+		"icons\\go_back_active.png"
 		}; 
 	static Graphics g;
 	static Canvas c;	
 	static JFrame frame;
 	static Main_menu obj=new Main_menu();
 	static Point currentmouseloc=null;
-
+	static BufferStrategy bs;
+	
 	public static void main_menu() 
 	{	
 		initialize();
@@ -42,16 +46,19 @@ public class Main_menu {
 		obj.mousehandle();
 		
 		while(true&&startgame==false) {
-			try {
+				try {
 		       Thread.sleep(80);
 		      } catch (InterruptedException e) {
 		        e.printStackTrace();
 		      }
 			try {
+				
 				currentmouseloc = c.getMousePosition();	
 				System.out.println(currentmouseloc);
+				
 			if(instruction==false) {
-			//	obj.show(img[10], 0, 0);
+					
+				//obj.show(img[10], 0, 0);
 				if(currentmouseloc.getX()>405 && currentmouseloc.getX()<600) 
 				{ 
 					for(int k=0;k<4;k++) 
@@ -95,9 +102,11 @@ public class Main_menu {
 					for(int i=0;i<4;i++)
 					obj.show(img[i], 400, 100+(i*120));
 							
-				}
+				}	/*bs.show();
+					g.dispose();*/
 			}
-			}catch(Exception e) {System.out.println("mouse outside windows frame");}			
+			}catch(Exception e) {System.out.println("mouse outside windows frame");}		
+		
 		}				
 	}
 	
@@ -117,6 +126,8 @@ public class Main_menu {
 		//c.addKeyListener(this);
 		//c.setFocusable(true);	
 		g=c.getGraphics();
+		
+	
 	}
 		
 	public void iniimg ()
@@ -159,15 +170,29 @@ public class Main_menu {
 	}
 	public void option_funct ()  throws InterruptedException
 	{
+		g.clearRect(0, 0, c.getWidth(),c.getHeight());
 		instruction=true;
+		while(instruction) {
+			Thread.sleep(80);
+			currentmouseloc = c.getMousePosition();	
+			System.out.println("inside ins"+currentmouseloc);
+		
 			obj.show(img[8], 750, 20);
-			obj.show(img[9], 50, 50);
+			obj.show(img[9], 50, 100);
 		
-		
-		if(m_click) 
-		{Thread.sleep(1000);
-			instruction=false;
-		}
+			
+				 if(currentmouseloc.getX()>750 && currentmouseloc.getY()>20
+						&&currentmouseloc.getX()<850&&currentmouseloc.getY()<50) 
+				 {
+					 obj.show(img[10], 750, 20);
+					 if(m_click) {
+						System.out.println("back to menu");
+						instruction=false;
+						g.clearRect(0, 0, c.getWidth(),c.getHeight());
+						break;
+					 }
+				}
+		 }
 			
 	}
 	public void exit_funct()
