@@ -58,7 +58,7 @@ public class Main_menu {
 				
 				if(currentmouseloc.getX()>405 && currentmouseloc.getX()<600) 
 				{ 
-					for(int k=0;k<4;k++) 
+					for(int k=1;k<4;k++) 
 					{
 						if (currentmouseloc.getY()>100+(k*120) && currentmouseloc.getY()<165+(k*120))
 						{
@@ -88,7 +88,7 @@ public class Main_menu {
 						}
 						else
 						{
-							for(int i=0;i<4;i++)
+							for(int i=1;i<4;i++)
 							obj.show(img[i], 400, 100+(i*120));
 									
 						}
@@ -96,7 +96,7 @@ public class Main_menu {
 				}
 				else
 				{
-					for(int i=0;i<4;i++)
+					for(int i=1;i<4;i++)
 					obj.show(img[i], 400, 100+(i*120));
 							
 				}	
@@ -130,7 +130,7 @@ public class Main_menu {
 	{
 		try {
 			
-				for(int i=0;i<11;i++) 
+				for(int i=1;i<11;i++) 
 				{
 					img[i] = new ImageIcon(getClass().getResource(path[i])).getImage();
 				
