@@ -47,11 +47,11 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents bullet2[];
 	static GameComponents powerUp[];
 	
-	static String player1ImgPath ="icons\\player.png";
+	
+	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
 	static String ballImgPaths="icons\\green_ball.png";
-	
-	
+		
 	static String blockImgPath[] =new String[6];
 	static String blockRImgPath[] =new String[6]; 
 	static String playerImgPath[]=new String[4];
@@ -62,7 +62,7 @@ public class Main   implements Runnable,KeyListener{
 	static String backgroundimg="icons\\bk.jpg"; 
 	static long tickTime=0;
 	
-	static int block_num=80;
+	static int block_num=500;
 	static int block_counter=0;
 	//static int block_gap=2;
 	
@@ -105,7 +105,7 @@ public class Main   implements Runnable,KeyListener{
 		blockRImgPath[4] = "icons\\block_lg_r.png";
 		blockRImgPath[5] = "icons\\block_b_r.png";
 		
-		playerImgPath[1]= "icons\\player.png";
+		playerImgPath[1]= "icons\\player1.png";
 		playerImgPath[2]="icons\\player2.png";
 		playerImgPath[3]="icons\\Player_frozen.png";
 		
@@ -604,19 +604,60 @@ public class Main   implements Runnable,KeyListener{
 		createLevel(10,0,40,180,1, 4,1,1);
 		createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
 		
-		
-		
 		//stageHell();
-		
-		
-		
-	
+		//level_p();
+	strip();
+		//hand_bonus();
 		//stageSimple();
-		
-		stageWaterMelon();
+		//createLevel(x, y, width, height, total_hor_tiles, total_ver_tiles, block_gap_x, block_gap_y);
+
+		//stageWaterMelon();
 		
 	}
+	 
+	  private void hand_bonus() {
+		  int x=530,y=30;
+		  createLevel(530, 48, 45, 70, 4, 3, 40, 5);
+		  
+		  createLevel(390, 250, 55, 65, 1, 1, 0, 0);
+		  createLevel(420, 315, 61, 60, 1, 1, 0, 0);
+		  
+		  createLevel(x-50, y+240, 71, 65, 5, 1, 0, 0);
+		  createLevel(x-50, y+300, 71, 70, 5, 1, 0, 0);
+		  createLevel(x+5, y+370, 71, 70, 4, 1, 0, 0);
+		  createLevel(x+40, y+440, 71, 70, 3, 1, 0, 0);
+			  
+		  createLevel(610, 540, 40, 80, 3, 1, 1, 1);
+	}
+
+	private void level_p() {
+		  int x=500,y=130;
+		  createLevel(x+50, y, 51, 50, 1, 1, 0, 0);
+		  createLevel(x+25, y+50, 51, 50, 2, 1, 0, 0);
+		  createLevel(x, y+100, 51, 50, 3, 1, 0, 0);
+
+		  createLevel(x-25, y+150, 51, 50, 4, 1, 0, 0);
+		  createLevel(x-50, y+200, 51, 50, 5, 1, 0, 0);
+		  
+		  createLevel(x-360, y+265, 100, 20, 4, 1, 0, 0);
+		  createLevel(x+130, y+265, 100, 20, 4, 1, 0, 0);
 	  
+		  createLevel(x-50, y+300, 51, 50, 5, 1, 0, 0);
+		  createLevel(x-25, y+350, 51, 50, 4, 1, 0, 0);
+
+		  createLevel(x, y+400, 51, 50, 3, 1, 0, 0);
+		  createLevel(x+25, y+450, 51, 50, 2, 1, 0, 0);
+		  createLevel(x+50, y+500, 51, 50, 1, 1, 0, 0);
+		  
+		  chest[0].initProperties(x+40, (y+255), 90,40,5,"icons\\chest.png");
+			chest[0].start();
+	  }
+	  
+	  private void strip() {
+		  createLevel(240, 180, 80, 30, 10, 5, 0, 50);
+		  chest[0].initProperties(600, 290,90, 50,5,"icons\\chest.png");
+			chest[0].start();
+	  }
 	 private void stageWaterMelon() {
 		
 	//	createLevel(height, height, height, height, height, height, height, height);
