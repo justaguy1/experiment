@@ -50,7 +50,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	String name;
 	int powerLevel=1;
 	
-	static int playerNo=2;
+	static int playerNo=getRandom(1,2);
 	
 	 SuperPowers sp=new SuperPowers();
 	File bounce = new File("sounds/bounce.wav");
@@ -101,10 +101,10 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	}
 	public void setPlayerImage()
 	{
-		playerI=new Image[4];
+		playerI=new Image[5];
 		try 
 		{
-		for(int i=1;i<4;i++)
+		for(int i=1;i<5;i++)
 		playerI[i]=new ImageIcon(getClass().getResource(Main.playerImgPath[i])).getImage();
 	
 		}
@@ -342,7 +342,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 if(id==1 || id==2)
 		 {
 			 if(sp.freeze==true)
+			 {
+				 if(id==1)
 				 sp.powerLevelPlayer=3;
+				 
+				 else if(id==2)
+					 sp.powerLevelPlayer=4;
+			 }
 			 
 			 else
 			 {

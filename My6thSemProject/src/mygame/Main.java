@@ -21,7 +21,7 @@ public class Main   implements Runnable,KeyListener{
 	public static Canvas canvas;
 	 static Graphics2D g;
 	 BufferStrategy bs;
-	int playerNo =0;
+	
 		
 	static boolean _DOWN=false,_UP=false,DOWN=false,UP=false;
 	static boolean fire1=false,fire2=false;
@@ -46,6 +46,8 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents bullet1[];
 	static GameComponents bullet2[];
 	static GameComponents powerUp[];
+	static GameComponents player1block[];
+	static GameComponents player2block[];
 	
 	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
@@ -54,7 +56,7 @@ public class Main   implements Runnable,KeyListener{
 	
 	static String blockImgPath[] =new String[6];
 	static String blockRImgPath[] =new String[6]; 
-	static String playerImgPath[]=new String[4];
+	static String playerImgPath[]=new String[5];
 	static String ballImgPath[]=new String[6];
 	static String powersImgPath[]=new String[6];
 	static String powerUps[]=new String[8];
@@ -107,7 +109,9 @@ public class Main   implements Runnable,KeyListener{
 		
 		playerImgPath[1]= "icons\\player1.png";
 		playerImgPath[2]="icons\\player2.png";
-		playerImgPath[3]="icons\\Player_frozen.png";
+		playerImgPath[3]="icons\\Player1_frozen.png";
+		playerImgPath[4]="icons\\Player2_frozen.png";
+		
 		
 		ballImgPath[1]="icons\\green_ball.png";
 		ballImgPath[2]="icons\\green_ball_light.png";
@@ -396,7 +400,7 @@ public class Main   implements Runnable,KeyListener{
 			if(e.getKeyCode()==KeyEvent.VK_D)
 				fire1=true;
 			
-			if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
+			if(e.getKeyCode()==KeyEvent.VK_LEFT)
 				fire2=true;
 		
 			if(e.getKeyCode()==KeyEvent.VK_E)
@@ -464,7 +468,7 @@ public class Main   implements Runnable,KeyListener{
 	    if(e.getKeyCode()==KeyEvent.VK_D)
 			fire1=false;
 		
-		if(e.getKeyCode()==KeyEvent.VK_NUMPAD0)
+		if(e.getKeyCode()==KeyEvent.VK_LEFT)
 			fire2=false;
 	}
 
@@ -693,7 +697,7 @@ public class Main   implements Runnable,KeyListener{
 		  {
 			  for(int j=0;j<total_ver_tiles;j++)
 			  {
-				  block[block_counter].initProperties(x+(width+block_gap_x)*loop_count, y+(height+block_gap_y)*(j), width, height,3,10 );
+				  block[block_counter].initProperties(x+(width+block_gap_x)*loop_count, y+(height+block_gap_y)*(j), width, height,rand(5),10 );
 				  
 				  block_counter++;
 			  }
