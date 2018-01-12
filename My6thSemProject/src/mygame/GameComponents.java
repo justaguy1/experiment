@@ -370,7 +370,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		
 		
 		
-		if((obj.id ==1 || obj.id==2)  )  // this happens when ball or power collides with player
+		if((obj.id ==1 || obj.id==2) && id==20 )  // this happens when ball or power collides with player
 		{
 			
 			if(obj.sp.powerIsOn==false)
@@ -383,13 +383,27 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				obj.sp.playerSpeed=sp.playerSpeed;
 				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
 				obj.sp.bulletCount=sp.bulletCount;
+				obj.sp.bulletReload=sp.bulletReload;
+			}
+			
+			
+			
+			
+		}
+		
+		if(id==0 && (obj.id==1 || obj.id==2))
+		{
+			if(obj.sp.powerIsOn==false)
+			{
+				obj.sp.powerIsOn=sp.powerIsOn;
+				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+				obj.sp.freeze=sp.freeze;
 			}
 			
 			if(obj.id==1)
 				playerNo=1;
 			if(obj.id==2)
 				playerNo=2;
-			
 			
 		}
 		
@@ -564,7 +578,7 @@ public void calculateCollision(GameComponents obj) {
 				colTime = System.currentTimeMillis();
 				col=true;
 				}
-		 if(timeNow -colTime >=300)
+		 if(timeNow -colTime >=100)
 			{
 				count=0;
 				col=false;
@@ -624,7 +638,7 @@ public void calculateCollision(GameComponents obj) {
 				}
 			}
 			
-			if(sp.bulletCount>0)
+			if(sp.bulletReload>0)
 			{
 				if(Main.fire1==true)
 				{
@@ -641,6 +655,11 @@ public void calculateCollision(GameComponents obj) {
 						
 						
 					}
+				}
+				if(sp.bulletCount<1)
+				{
+					sp.bulletCount=5;
+					sp.bulletReload--;
 				}
 			}
 		}
@@ -666,7 +685,7 @@ public void calculateCollision(GameComponents obj) {
 				}
 			}
 			
-			if(sp.bulletCount>0)
+			if(sp.bulletReload>0)
 			{
 				if(Main.fire2==true)
 				{
@@ -679,6 +698,11 @@ public void calculateCollision(GameComponents obj) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
+				if(sp.bulletCount<1)
+				{
+					sp.bulletCount=5;
+					sp.bulletReload--;
 				}
 			}
 		}

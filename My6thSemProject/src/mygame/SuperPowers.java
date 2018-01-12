@@ -26,6 +26,7 @@ public class SuperPowers {
 	int powerLevelBall=1;
 	int powerLevelPowers=1;
 	int bulletCount =0;
+	int bulletReload=0;
 	boolean threeBall=false;
 	
 	static long timeCounter=0;
@@ -71,6 +72,7 @@ public class SuperPowers {
 		
 			powerLevelPowers=1;
 			bulletCount=0;
+			bulletReload=0;
 			
 			
 	}
@@ -80,7 +82,7 @@ public class SuperPowers {
 	
 		
 		
-		if(Main.tickTime-timeCounter >10000)
+		if(Main.tickTime-timeCounter >100)
 		{
 			canGetPowers=true;
 			count=0;
@@ -128,6 +130,7 @@ public class SuperPowers {
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.playerSpeed=5;
 					Main.powerUp[n].sp.powerLevelPowers=n;
+					
 					System.out.println("slow player");
 					break;
 					
@@ -171,14 +174,14 @@ public class SuperPowers {
 					Main.powerUp[n].y=Main.ball.y;
 					resetAllPowerUps();
 					
-					powerIsOn=true;
+					//powerIsOn=true;
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.powerLevelPowers=n;
 					
 					
 					canGetPowers=false;
 					Main.powerUp[n].sp.bulletCount=5;
-					
+					Main.powerUp[n].sp.bulletReload=5;
 				
 					
 					
