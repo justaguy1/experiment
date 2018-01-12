@@ -647,7 +647,7 @@ public class Main   implements Runnable,KeyListener{
 	}
 		
 		
-	 
+			 
 	  private void hand_bonus() {
 		  int x=530,y=30;
 		  createLevel(530, 48, 45, 70, 4, 3, 40, 5);
