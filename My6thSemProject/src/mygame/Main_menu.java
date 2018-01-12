@@ -2,7 +2,6 @@ package mygame;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -41,8 +40,6 @@ public class Main_menu {
 	{	
 		initialize();
 		obj.iniimg();
-		/*for(int i=0;i<4;i++)
-		obj.show(img[i], 400, 100+(i*120));*/
 		obj.mousehandle();
 		
 		while(true&&startgame==false) {
@@ -57,8 +54,7 @@ public class Main_menu {
 				System.out.println(currentmouseloc);
 				
 			if(instruction==false) {
-					
-				//obj.show(img[10], 0, 0);
+				
 				if(currentmouseloc.getX()>405 && currentmouseloc.getX()<600) 
 				{ 
 					for(int k=0;k<4;k++) 
@@ -102,8 +98,7 @@ public class Main_menu {
 					for(int i=0;i<4;i++)
 					obj.show(img[i], 400, 100+(i*120));
 							
-				}	/*bs.show();
-					g.dispose();*/
+				}	
 			}
 			}catch(Exception e) {System.out.println("mouse outside windows frame");}		
 		
@@ -145,11 +140,10 @@ public class Main_menu {
 		{
 		
 			System.out.println("\nimage ini ma kai error vayo | \n");
-			//System.out.println("no image found at path "+path);
+		
 			System.exit(1);
 		}
-		//System.out.println(path);
-								
+										
 	}
 	
 	public void show (Image img,int x,int y) 
@@ -167,6 +161,7 @@ public class Main_menu {
 	{
 		startgame=true;
 		System.out.println(startgame);
+		
 	}
 	public void option_funct ()  throws InterruptedException
 	{
