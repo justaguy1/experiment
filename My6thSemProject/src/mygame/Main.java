@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -249,8 +249,8 @@ public class Main   implements Runnable,KeyListener{
 		g.setColor(Color.BLUE);
 		
 		
-		g.drawString("player 1 : "+player_01.score, 400, 40);
-		g.drawString("player 2 : "+player_02.score,800, 40);
+		//g.drawString("player 1 : "+player_01.score, 400, 40);
+		//g.drawString("player 2 : "+player_02.score,800, 40);
 		
 		
 		g.setFont(new Font("Arial",Font.BOLD,60));
@@ -565,7 +565,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-		blocks =new ArrayList<GameComponents>();
+		//blocks =new ArrayList<GameComponents>();
 		
 		//obj.blocks.add(obj.ball);
 		
@@ -651,6 +651,9 @@ public class Main   implements Runnable,KeyListener{
 		  createLevel(x+40, y+440, 71, 70, 3, 1, 0, 0);
 			  
 		  createLevel(610, 540, 40, 80, 3, 1, 1, 1);
+		  
+		  chest[0].initProperties(600, 300,80, 80,5,"icons\\chest.png");
+			chest[0].start();
 	}
 
 	private void level_p() {
@@ -686,7 +689,10 @@ public class Main   implements Runnable,KeyListener{
 		createLevel(200, 100, 80, 40, 10, 3, 1, 1);
 		createLevel(280, 220, 80, 40, 8, 2, 1, 1);
 		createLevel(360, 320, 80, 40, 6, 2, 1, 1);
-		
+		createLevel(440, 400, 80, 40, 4, 1, 1, 1);
+		createLevel(480,440,80,40,3,1,1,1);
+		chest[0].initProperties(560, 480,80, 40,5,"icons\\chest.png");
+		chest[0].start();
 		
 		
 	}
@@ -719,6 +725,8 @@ public class Main   implements Runnable,KeyListener{
 			createLevel(800,250,40,80,1, 3,1,1);
 			chest[1].initProperties(840, 450,100, 40,5,"icons\\chest.png");
 			chest[1].start();
+			
+		
 		
 	}
 
@@ -767,7 +775,7 @@ public class Main   implements Runnable,KeyListener{
 	  void levelSelecter()
 	  {
 		  int n =rand(6);
-		  
+		 // n=1;
 		  switch(n)
 		  {
 		  case 1:

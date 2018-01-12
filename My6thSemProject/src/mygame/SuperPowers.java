@@ -94,7 +94,7 @@ public class SuperPowers {
 			count++;
 			//powerIsOn=true;
 			timeCounter = System.currentTimeMillis();
-			canGetPowers=false;
+			//canGetPowers=false;
 			Random rand = new Random();
 
 			int  n = rand.nextInt(6) + 1;
@@ -109,6 +109,7 @@ public class SuperPowers {
 					Main.powerUp[n].y=Main.ball.y;
 					
 					canGetPowers=false;
+					powerIsOn=true;
 					
 					Main.powerUp[n].sp.isPlayerPower=true;
 					Main.powerUp[n].sp.powerIsOn=true;

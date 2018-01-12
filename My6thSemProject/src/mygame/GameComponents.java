@@ -410,7 +410,18 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			{
 				System.out.println("enter");
 			//	if(sp.powerIsOn==true)
+				if(sp.playerSpeed==5)
+				{
+					// slowdown sound
+				}
+				
+				if(sp.playerSpeed==20)
+				{
+					// fast sound
+				}
 				obj.sp.powerIsOn=sp.powerIsOn;
+				
+				
 				
 				obj.sp.freeze=sp.freeze;
 				obj.sp.playerSpeed=sp.playerSpeed;
