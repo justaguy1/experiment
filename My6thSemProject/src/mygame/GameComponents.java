@@ -61,6 +61,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	File enemy_N= new File("sounds/enemy_normal_bounce.wav");
 	File destroy_S=new File("sounds/break.wav");
 	File fireball_S=new File("sounds/fire_shot.wav");
+	File slowdown_S= new File("sounds/slowdown.wav");
+	File speedup_S= new File("sounds/speedup.wav");
 		
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
@@ -412,12 +414,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			//	if(sp.powerIsOn==true)
 				if(sp.playerSpeed==5)
 				{
-					// slowdown sound
+					Playsound(slowdown_S);		// slowdown sound
 				}
 				
 				if(sp.playerSpeed==20)
 				{
-					// fast sound
+					Playsound(speedup_S);		// fast sound
 				}
 				obj.sp.powerIsOn=sp.powerIsOn;
 				
