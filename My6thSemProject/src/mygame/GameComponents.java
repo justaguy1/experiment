@@ -58,6 +58,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	File enemy_H= new File("sounds/enemy_hard_bounce.wav");
 	File enemy_N= new File("sounds/enemy_normal_bounce.wav");
 	File destroy_S=new File("sounds/break.wav");
+	File fireball_S=new File("sounds/fire_shot.wav");
 		
 	public void initProperties(int x, int y, int width, int height,int id,String ImagePath)
 	{
