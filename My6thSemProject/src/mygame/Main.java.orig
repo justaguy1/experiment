@@ -47,7 +47,10 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents bullet2[];
 	static GameComponents powerUp[];
 	
-	static String player1ImgPath ="icons\\player1.png";
+<<<<<<< HEAD
+	
+=======
+>>>>>>> 24a7ec3357eee2b02ae486eb0fdc0c05622e2aba
 	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
 	static String ballImgPaths="icons\\green_ball.png";
@@ -606,20 +609,35 @@ public class Main   implements Runnable,KeyListener{
 		createLevel(10,0,40,180,1, 4,1,1);
 		createLevel(canvas.getWidth()-50,0,40,180,1,4,1,1);
 		
+<<<<<<< HEAD
 		//stageHell();
 		//level_p();
 	//strip();
 		hand_bonus();
+=======
+		
+		
+		//createLevel(200,50,200,40,3,2,40,50);
+		
+		stageHell();
+		
+		
+		
+	
+>>>>>>> 24a7ec3357eee2b02ae486eb0fdc0c05622e2aba
 		//stageSimple();
 		//createLevel(x, y, width, height, total_hor_tiles, total_ver_tiles, block_gap_x, block_gap_y);
 
 		//stageWaterMelon();
 		
-		//stageHell();
-		//createLevel(200,50,200,40,3,2,40,50);
-	}
+<<<<<<< HEAD
+=======
+		//stageWaterMelon();
 		
-		stageHell();
+		//createLevel()
+		
+>>>>>>> 24a7ec3357eee2b02ae486eb0fdc0c05622e2aba
+	}
 	 
 	  private void hand_bonus() {
 		  int x=530,y=30;
@@ -648,6 +666,7 @@ public class Main   implements Runnable,KeyListener{
 		  createLevel(x-360, y+265, 100, 20, 4, 1, 0, 0);
 		  createLevel(x+130, y+265, 100, 20, 4, 1, 0, 0);
 	  
+<<<<<<< HEAD
 		  createLevel(x-50, y+300, 51, 50, 5, 1, 0, 0);
 		  createLevel(x-25, y+350, 51, 50, 4, 1, 0, 0);
 
@@ -665,6 +684,9 @@ public class Main   implements Runnable,KeyListener{
 			chest[0].start();
 	  }
 	 private void stageWaterMelon() {
+=======
+	/* private void stageWaterMelon() {
+>>>>>>> 24a7ec3357eee2b02ae486eb0fdc0c05622e2aba
 		
 		createLevel(200, 100, 80, 40, 10, 3, 1, 1);
 		createLevel(280, 220, 80, 40, 8, 2, 1, 1);
@@ -672,7 +694,7 @@ public class Main   implements Runnable,KeyListener{
 		
 		
 		
-	}
+	}*/
 
 	private void stageSimple() {
 		  createLevel(240,50,80,40,6, 7,50,50);

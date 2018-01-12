@@ -15,3 +15,17 @@ public class readme {
 //	bullet 2 id =7;
 //	blocks id =10;
 //	powerUp id =20;
+
+
+/* 
+ 
+case 1 : slow player speed
+ 
+case 2 : fast player speed
+case 3 : fast ball speed
+case 4 : bullets
+case 5 : freeze
+case 6 : slow ball speed
+
+*
+*/

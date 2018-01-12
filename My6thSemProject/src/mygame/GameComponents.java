@@ -308,7 +308,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		 if(this.id !=4)
 		 removePower();
 		 
-		 if(this.id==5)
+		 if(id==5)
 		 {
 			
 			 
@@ -317,6 +317,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			 else
 				 this.img=this.initializeImage("icons\\chest_grey.png");
 			 
+			 
+			 System.out.println(sp.canGetPowers);
 			 
 		 }
 		 
@@ -336,13 +338,29 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			 }
 		 }
 		 
+		 if(id==1 || id==2)
+		 {
+			 if(sp.freeze==true)
+				 sp.powerLevelPlayer=3;
+			 
+			 else
+			 {
+				 if(id==1)
+					 Main.player_01.sp.powerLevelPlayer=1;
+				 else if(id==2)
+					Main.player_02.sp.powerLevelPlayer=2;
+			 }
+		
+		 }
+		 
+		 
 		 
 		 Thread.sleep(17);
 	}
 	 
-	 private void removePower() {
+	 private synchronized void removePower() {
 		
-		// System.out.println("i am "+name);
+		
 
 		
 		if(this.sp.powerIsOn==false)
@@ -352,15 +370,14 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 					
 		//	Playsound(freeze_s);
 		//alu						
-			sp.powerTime=System.currentTimeMillis();
+			this.sp.powerTime=System.currentTimeMillis();
 			
 		}
 		
-		if(timeNow -sp.powerTime >=10000)
+		if(timeNow -this.sp.powerTime >=10000)
 		{
 			this.sp.resetAllPowerUps();
-			if(id==5)
-				System.out.println("chest");
+		
 		}
 
 	}
@@ -375,12 +392,12 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			if(obj.sp.powerIsOn==false)
 			{
 				System.out.println("enter");
-				if(sp.powerIsOn==true)
+			//	if(sp.powerIsOn==true)
 				obj.sp.powerIsOn=sp.powerIsOn;
 				
 				obj.sp.freeze=sp.freeze;
 				obj.sp.playerSpeed=sp.playerSpeed;
-				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
+				
 				obj.sp.bulletCount=sp.bulletCount;
 				obj.sp.bulletReload=sp.bulletReload;
 			}
@@ -395,8 +412,13 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 			if(obj.sp.powerIsOn==false)
 			{
 				obj.sp.powerIsOn=sp.powerIsOn;
-				obj.sp.powerLevelPlayer=sp.powerLevelPlayer;
-				obj.sp.freeze=sp.freeze;
+				if(sp.freeze==true)
+				{
+					obj.sp.freeze=sp.freeze;
+					obj.sp.powerIsOn=sp.powerIsOn;
+					obj.sp.canGetPowers=sp.canGetPowers;
+					
+				}
 			}
 			
 			if(obj.id==1)
@@ -416,6 +438,8 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				sp.gainRandomPower();
 				obj.sp.canGetPowers=sp.canGetPowers;
 				obj.sp.powerIsOn=sp.powerIsOn;
+				
+				
 				
 				
 				//threeBalls();
