@@ -98,7 +98,7 @@ public class SuperPowers {
 			Random rand = new Random();
 
 			int  n = rand.nextInt(6) + 1;
-			n=5;
+			//n=5;
 			switch(n)
 			{
 			
