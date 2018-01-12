@@ -268,8 +268,7 @@ public class Main   implements Runnable,KeyListener{
 	private void gameOver(Graphics2D g2) {
 		if(ball.x<=10 )
 		{
-			g.drawString("gameOver player 2 wins ", 250, 400);
-			
+			g.drawImage(player_01.trophyimg, 0, 0,canvas.getWidth(),canvas.getHeight(),null);
 			ballIsMoving=false;
 			GameComponents.ballIsMoving=false;
 			gameJustStarted=false;
@@ -281,7 +280,8 @@ public class Main   implements Runnable,KeyListener{
 		
 		if(ball.x>canvas.getWidth()-30)
 		{
-			g.drawString("gameOver player 1 wins ", 250, 400);
+			
+			g.drawImage(player_02.trophyimg, 0, 0,canvas.getWidth(),canvas.getHeight(),null);
 			ballIsMoving=false;
 			GameComponents.ballIsMoving=false;
 			gameJustStarted=false;
@@ -527,17 +527,19 @@ public class Main   implements Runnable,KeyListener{
 		
 
 		player_01 =new GameComponents();
-		player_01.initProperties(100, 600, 20, 80,1, player1ImgPath);
+		player_01.initProperties(100, 600, 15, 120,1, player1ImgPath);
 		player_01.initializeSpeed(10, 0);
 		player_01.setName("Player 1");
-		player_01.sp.bulletCount=4;
+		//player_01.sp.bulletCount=4;
+		player_01.trophyimg=player_01.initializeImage("icons\\player1_winner.png");
 		player_01.start();
 		
 	
 		player_02 =new GameComponents();
-		player_02.initProperties(1120, 100, 20, 80,2, player2ImgPath);
+		player_02.initProperties(1120, 100, 15, 120,2, player2ImgPath);
 		player_02.initializeSpeed(10, 0);
 		player_02.setName("Player 2");
+		player_02.trophyimg=player_02.initializeImage("icons\\\\player2_winner.png");
 		player_02.start();
 		
 		
@@ -775,7 +777,7 @@ public class Main   implements Runnable,KeyListener{
 	  void levelSelecter()
 	  {
 		  int n =rand(6);
-		 // n=1;
+		 //l n=1;
 		  switch(n)
 		  {
 		  case 1:

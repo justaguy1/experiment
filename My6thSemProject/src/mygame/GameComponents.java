@@ -32,7 +32,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 	int dx,dy; // variable that sets coordinates to center
 	
    // static int ballSpeed=4;
-	
+	Image trophyimg=null;
 	
 	
 	
@@ -329,7 +329,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 				 this.img=this.initializeImage("icons\\chest_grey.png");
 			 
 			 
-			 System.out.println(sp.canGetPowers);
+			// System.out.println(sp.canGetPowers);
 			 
 		 }
 		 
