@@ -36,6 +36,7 @@ public class Main_menu {
 	static Point currentmouseloc=null;
 	static BufferStrategy bs;
 	
+	
 	public static void main_menu() 
 	{	
 		initialize();

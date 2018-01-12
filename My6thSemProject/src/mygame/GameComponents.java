@@ -69,8 +69,7 @@ public class GameComponents implements Runnable {		//test push for DISCORD notif
 		this.id=id;
 		dx=width/2+this.x;
 		dy=height/2+this.y;
-		
-		
+				
 		initializeImage(ImagePath);
 		
 	}

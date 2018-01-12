@@ -16,8 +16,7 @@ public class SuperPowers {
 	
 	// time used to check amount of time passed after user get power
 	long powerTime=0;
-	
-	
+		
 	int playerSpeed =10;
 	
 	int bXSpeed=4;
