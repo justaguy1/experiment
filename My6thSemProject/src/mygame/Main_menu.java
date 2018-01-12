@@ -1,6 +1,6 @@
 package mygame;
+
 import java.awt.Canvas;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Main_menu {
-	static boolean m_click=false,startgame=false;
-	static Image img[]=new Image[8];
+	static boolean m_click=false,startgame=false,instruction = false;;
+	static Image img[]=new Image[11];
 	static String[] path = 
 		{
 		"icons\\resume.png",
@@ -22,7 +22,10 @@ public class Main_menu {
 		"icons\\resume_active.png",
 		"icons\\start_active.png",
 		"icons\\option_active.png",
-		"icons\\exit_active.png"
+		"icons\\exit_active.png",
+		"icons\\go_back.png",
+		"icons\\how_to_play.png",
+		"icons\\main_menu_bk.png"
 		}; 
 	static Graphics g;
 	static Canvas c;	
@@ -31,25 +34,26 @@ public class Main_menu {
 	static Point currentmouseloc=null;
 
 	public static void main_menu() 
-	{
-	
+	{	
 		initialize();
 		obj.iniimg();
-		for(int i=0;i<4;i++)
-		obj.show(img[i], 400, 100+(i*120));
+		/*for(int i=0;i<4;i++)
+		obj.show(img[i], 400, 100+(i*120));*/
 		obj.mousehandle();
 		
 		while(true&&startgame==false) {
 			try {
-		       Thread.sleep(100);
+		       Thread.sleep(80);
 		      } catch (InterruptedException e) {
 		        e.printStackTrace();
 		      }
 			try {
 				currentmouseloc = c.getMousePosition();	
 				System.out.println(currentmouseloc);
+			if(instruction==false) {
+			//	obj.show(img[10], 0, 0);
 				if(currentmouseloc.getX()>405 && currentmouseloc.getX()<600) 
-				{
+				{ 
 					for(int k=0;k<4;k++) 
 					{
 						if (currentmouseloc.getY()>100+(k*120) && currentmouseloc.getY()<165+(k*120))
@@ -86,9 +90,17 @@ public class Main_menu {
 						}
 					}
 				}
+				else
+				{
+					for(int i=0;i<4;i++)
+					obj.show(img[i], 400, 100+(i*120));
+							
+				}
+			}
 			}catch(Exception e) {System.out.println("mouse outside windows frame");}			
 		}				
 	}
+	
 	static void initialize (){
 		frame =new JFrame();
 		frame.setSize(1000,700);
@@ -111,7 +123,7 @@ public class Main_menu {
 	{
 		try {
 			
-				for(int i=0;i<8;i++) 
+				for(int i=0;i<11;i++) 
 				{
 					img[i] = new ImageIcon(getClass().getResource(path[i])).getImage();
 				
@@ -145,11 +157,18 @@ public class Main_menu {
 		startgame=true;
 		System.out.println(startgame);
 	}
-	public void option_funct()
+	public void option_funct ()  throws InterruptedException
 	{
-		g.clearRect(0,0,c.getWidth(),c.getHeight());
-		g.setFont(new Font("Arial", Font.BOLD, 100));
-		g.drawString("hello", 50, 90);
+		instruction=true;
+			obj.show(img[8], 750, 20);
+			obj.show(img[9], 50, 50);
+		
+		
+		if(m_click) 
+		{Thread.sleep(1000);
+			instruction=false;
+		}
+			
 	}
 	public void exit_funct()
 	{
