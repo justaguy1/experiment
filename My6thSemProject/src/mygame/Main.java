@@ -50,7 +50,6 @@ public class Main   implements Runnable,KeyListener{
 	static GameComponents player2block[];
 	
 	static String player1ImgPath ="icons\\player1.png";
-	static String player1ImgPath ="icons\\player1.png";
 	static String player2ImgPath="icons\\player2.png";
 	static String ballImgPaths="icons\\green_ball.png";
 		
@@ -623,8 +622,7 @@ public class Main   implements Runnable,KeyListener{
 		//createLevel(200,50,200,40,3,2,40,50);
 	}
 		
-		stageHell();
-	 
+			 
 	  private void hand_bonus() {
 		  int x=530,y=30;
 		  createLevel(530, 48, 45, 70, 4, 3, 40, 5);
